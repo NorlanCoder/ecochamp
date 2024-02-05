@@ -21,20 +21,36 @@ class RegisterController extends Controller
          /* 
         Validation
         */
+        dd($request);
         $request->validate([
-            'name' => 'required',
+            'prenom' => 'required',
+            'nom' => 'required',
+            'sexe' => 'required',
+            'phone' => 'required',
+            'interventions'=> 'required', 
+            'statut' => 'required',
+            'accept' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:8',
         ]);
+
+
 
         /*
         Database Insert
         */
         $user = User::create([
-            'name' => $request->name,
+            'firstname' => $request->prenom,
+            'lastname' => $request->nom,
+            'sexe' => $request->sexe,
+            'phone' => $request->phone,
+            'intervations' => $request->intervations,
+            'statut' => $request->statut,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        //dd($user);
 
         Auth::login($user);
 

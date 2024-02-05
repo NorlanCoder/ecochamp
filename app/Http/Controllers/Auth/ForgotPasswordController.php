@@ -12,6 +12,11 @@ use Illuminate\Support\Str;
 class ForgotPasswordController extends Controller
 {
    
+    public function create()
+    {
+        return view('auth.forgotPassword');
+    }
+
     public function store(Request $request)
     {
         $request->validate([

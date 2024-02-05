@@ -17,14 +17,15 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
+Route::get('/home', function () {
+    return view('layouts.index');
 });
 
-Route::get('/register', [RegisterController::class, 'create']);
-Route::post('/register', [RegisterController::class, 'store']);
-Route::get('/login', [LoginController::class, 'create']);
-Route::post('/login', [LoginController::class, 'store']);
-Route::post('/forgot-password', [ForgotPasswordController::class, 'store']);
-Route::post('/logout', [Logoutcontroller::class, 'destroy'])
+Route::get('/register', [RegisterController::class, 'create'])->name('register.create');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::get('/login', [LoginController::class, 'create'])->name('login.create');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('forgot.create');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('forgot.store');
+Route::post('/logout', [Logoutcontroller::class, 'destroy'])->name('logout')
     ->middleware('auth');
