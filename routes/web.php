@@ -18,7 +18,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/register', [RegisterController::class, 'create']);
