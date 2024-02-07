@@ -25,7 +25,7 @@
               </div>
           </div>
           @error('email')
-            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+            <div class="text-danger" role="alert">{{ $message }}</div>
           @enderror
           <!-- password -->
           <div>
@@ -35,7 +35,7 @@
             </div>
           </div>
           @error('password')
-            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+            <div class="text-danger" role="alert">{{ $message }}</div>
           @enderror
 
           <div class="flex items-center justify-between">

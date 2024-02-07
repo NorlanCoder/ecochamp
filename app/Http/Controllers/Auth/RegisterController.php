@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +13,7 @@ class RegisterController extends Controller
 {
     public function create()
     {
+
         return view('auth.register');
     }
 
@@ -21,7 +22,7 @@ class RegisterController extends Controller
          /* 
         Validation
         */
-        dd($request);
+        //dd($request);
         $request->validate([
             'prenom' => 'required',
             'nom' => 'required',
@@ -39,14 +40,16 @@ class RegisterController extends Controller
         /*
         Database Insert
         */
+        $profile = "/images/avatars/avatar.png";
         $user = User::create([
             'firstname' => $request->prenom,
             'lastname' => $request->nom,
             'sexe' => $request->sexe,
             'phone' => $request->phone,
-            'intervations' => $request->intervations,
+            'intervations' => $request->interventions,
             'statut' => $request->statut,
             'email' => $request->email,
+            'profile' => $profile,
             'password' => Hash::make($request->password),
         ]);
 

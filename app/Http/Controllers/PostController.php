@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -27,7 +29,30 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        
+        $request->validate([
+            'activite' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        
+        if(!empty($request->image)){
+            // $imageName = $request->file('image')->getClientOriginalName();  
+            
+            $imageName = $request->file('image')->store('public/images');
+        }
+        
+
+        Post::create([
+            'activite' => $request->activite,
+            'description' => $request->description,
+            'image1' => $imageName,
+            'user_id' => $user->id,
+        ]);
+
+        return redirect()->back()->with('status',"Post créée avec success!");
+
     }
 
     /**

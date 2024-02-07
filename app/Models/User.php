@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -28,7 +29,6 @@ class User extends Authenticatable
         'intervations',
         'profile',
         'statut',
-        'password',
     ];
 
     /**
@@ -51,21 +51,24 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-
-    public function activites(): HasMany
+    public function activites(): MorphMany
     {
-        return $this->hasMany(Activite::class);
+        return $this->morphMany(Activite::class, 'activitable');
     }
 
-
-    public function posts(): HasMany
+    public function posts(): MorphMany
     {
-        return $this->hasMany(Post::class);
+        return $this->morphMany(Post::class, 'postable');
     }
 
-    public function alerts(): HasMany
+    public function alerts(): MorphMany
     {
-        return $this->hasMany(Alert::class);
+        return $this->morphMany(Alert::class, 'alertable');
     }
+
+    // public function posts(): HasMany
+    // {
+    //     return $this->hasMany(Post::class);
+    // }
 
 }

@@ -22,7 +22,7 @@
             <div>
                 <label for="email" class="">Nom</label>
                 <div class="mt-2.5">
-                    <input id="last" name="nom" type="text" placeholder="Last name" required="" class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5"> 
+                    <input id="last" name="nom" type="text" placeholder="Nom" required="" class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5"> 
                 </div>
             </div>
             
@@ -34,7 +34,7 @@
                 </div>
             </div>
             @error('email')
-                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                <div class="text-danger" role="alert">{{ $message }}</div>
             @enderror
             <!-- phone -->
             <div class="col-span-2">
@@ -78,7 +78,7 @@
             <div >
                 <label for="statut" class="">Statut</label>
                 <div className="mt-2.5">
-                    <select required class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5" value={data.statut}  name="statut" id="statut">
+                    <select required class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5" name="statut" id="statut">
                         <option value="">---</option>
                         <option value="Activiste">Activiste</option>
                         <option value="OSC">OSC</option>
@@ -93,7 +93,7 @@
                 </div>
             </div>
             @error('password')
-                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                <div class="text-danger" role="alert">{{ $message }}</div>
             @enderror
 
             <!-- Confirm Password -->
@@ -104,7 +104,7 @@
                 </div>
             </div>
             @error('password_confirmation')
-                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                <div class="text-danger" role="alert">{{ $message }}</div>
             @enderror
 
             <div class="col-span-2">
@@ -116,7 +116,7 @@
             
             </div>
             @error('accept-terms')
-                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                <div class="text-danger" role="alert">{{ $message }}</div>
             @enderror
 
 

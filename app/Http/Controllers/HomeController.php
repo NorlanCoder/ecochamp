@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alert;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,15 +12,12 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
-    //
-
     // Accueil Page
     public function index() {
         $user = Auth::user();
-
-        // return Inertia::render('Accueil',[
-        //     'user' => $user,
-        // ]);
+        $alerts = Alert::paginate(15);
+        $postes = Post::paginate(15);
+        return view('layouts.index', compact('user', 'alerts', 'postes'));
     }
 
     // Login Page

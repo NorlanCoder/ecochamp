@@ -19,15 +19,26 @@
     {{-- @include('navigations.chat') --}}
 
 
-    <!-- post preview modal --> 
-    {{-- @include('navigations.post_create') --}}
+    {{-- <!-- post preview modal --> 
+    @include('navigations.post_create') --}}
 
-    <!-- create status -->
-    {{-- @include('navigations.status_create') --}}
+    <!-- create post -->
+    @include('navigations.post_create')
 
 
-    <!-- create story -->
-    {{-- @include('navigations.story_create') --}}
+    <!-- create activity -->
+    @include('navigations.activity_create')
 
+    <!-- create alert -->
+    @include('navigations.alert_create')
+
+    <!-- show post -->
+    @include('navigations.post_show')
+
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
 
 @endsection
