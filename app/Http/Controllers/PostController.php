@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alert;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $alerts = Alert::paginate(5);
+        $postes = Post::paginate(5);
+        return view('layouts.index', compact('user', 'alerts', 'postes'));
+
     }
 
     /**

@@ -2,10 +2,10 @@
 
     <!-- post heading -->
     <div class="flex gap-3 sm:p-4 p-2.5 text-sm font-medium">
-        <a href="timeline.html"> <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="w-9 h-9 rounded-full"> </a> 
+        <a href="{{route('profile')}}"> <img src={{asset($item->user->profile)}} alt="" class="w-9 h-9 rounded-full"> </a> 
         <div class="flex-1">
-            <a href="timeline.html"> <h4 class="text-black dark:text-white"> John Michael </h4> </a> 
-            <div class="text-xs text-gray-500 dark:text-white/80"> 2 hours ago</div>
+            <a href="{{route('profile')}}"> <h4 class="text-black dark:text-white"> {{$item->user->lastname }} {{$item->user->firstname }} </h4> </a> 
+            <div class="text-xs text-gray-500 dark:text-white/80"> {{date('j F Y H:i', strtotime($item->created_at)) }}</div>
         </div>
 
         <div class="-mr-1">
@@ -24,7 +24,7 @@
     </div>
     
     <div class="sm:px-4 p-2.5 pt-0">
-        <p class="font-normal"> Photography is the art of capturing light with a camera. It can be used to create images that tell stories, express emotions, or document reality. it can be fun, challenging, or rewarding. It can also be a hobby, a profession, or a passion. 📷 </p>
+        <p class="font-normal"> {{$item->description}}</p>
     </div> 
 
     <!-- post icons -->
@@ -60,23 +60,23 @@
     <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40"> 
 
         <div class="flex items-start gap-3 relative">
-            <a href="timeline.html"> <img src={{asset("images/avatars/avatar-2.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
+            <a href="{{route('profile')}}"> <img src={{asset("images/avatars/avatar-2.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
             <div class="flex-1">
-                <a href="timeline.html" class="text-black font-medium inline-block dark:text-white"> Steeve </a>
+                <a href="{{route('profile')}}" class="text-black font-medium inline-block dark:text-white"> Steeve </a>
                 <p class="mt-0.5"> I love taking photos of nature and animals. 🌳🐶</p>
             </div>
         </div>
         <div class="flex items-start gap-3 relative">
-            <a href="timeline.html"> <img src={{asset("images/avatars/avatar-3.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
+            <a href="{{route('profile')}}"> <img src={{asset("images/avatars/avatar-3.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
             <div class="flex-1">
-                <a href="timeline.html" class="text-black font-medium inline-block dark:text-white"> Monroe </a>
+                <a href="{{route('profile')}}" class="text-black font-medium inline-block dark:text-white"> Monroe </a>
                 <p class="mt-0.5">  I enjoy people and emotions. 😊😢 </p>
             </div>
         </div> 
         <div class="flex items-start gap-3 relative">
-            <a href="timeline.html"> <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
+            <a href="{{route('profile')}}"> <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
             <div class="flex-1">
-                <a href="timeline.html" class="text-black font-medium inline-block dark:text-white"> Jesse </a>
+                <a href="{{route('profile')}}" class="text-black font-medium inline-block dark:text-white"> Jesse </a>
                 <p class="mt-0.5">  Photography is my passion. 🎨📸   </p>
             </div>
         </div>

@@ -29,6 +29,7 @@ class User extends Authenticatable
         'intervations',
         'profile',
         'statut',
+        'password',
     ];
 
     /**
@@ -51,24 +52,34 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function activites(): MorphMany
+    public function activities(): MorphMany
     {
         return $this->morphMany(Activite::class, 'activitable');
     }
 
-    public function posts(): MorphMany
+    public function postes(): MorphMany
     {
         return $this->morphMany(Post::class, 'postable');
     }
 
-    public function alerts(): MorphMany
+    public function alertys(): MorphMany
     {
         return $this->morphMany(Alert::class, 'alertable');
     }
 
-    // public function posts(): HasMany
-    // {
-    //     return $this->hasMany(Post::class);
-    // }
+    public function alerts(): HasMany
+    {
+        return $this->hasMany(Alert::class);
+    }
+
+    public function activites(): HasMany
+    {
+        return $this->hasMany(Activite::class);
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
 
 }

@@ -3,7 +3,7 @@
 
     <div>
         <h2 class="text-2xl font-semibold mb-1.5"> S'inscrire pour commencer </h2>
-        <p class="text-sm text-gray-700 font-normal">Vous avez déjà un compte ? <a href="{{route('login.create')}}" class="text-blue-700">Se connecter ici!</a></p>
+        <p class="text-sm text-gray-700 font-normal">Vous avez déjà un compte ? <a href="{{route('login')}}" class="text-blue-700">Se connecter ici!</a></p>
     </div>
 
     <!-- form -->

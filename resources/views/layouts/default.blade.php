@@ -32,13 +32,5 @@
     <!-- create alert -->
     @include('navigations.alert_create')
 
-    <!-- show post -->
-    @include('navigations.post_show')
-
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
 
 @endsection

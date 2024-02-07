@@ -387,7 +387,7 @@
                             @if($user->profile == "")
                                 <img src="{{asset("/images/avatars/avatar.png")}}" alt="photo de profile" class="sm:w-9 sm:h-9 w-7 h-7 rounded-full shadow shrink-0"> 
                             @else
-                                <img src="{{asset($user->profile)}}" alt="photo de profile" class="sm:w-9 sm:h-9 w-7 h-7 rounded-full shadow shrink-0"> 
+                                <img src="{{asset(Storage::url($user->profile))}}" alt="photo de profile" class="sm:w-9 sm:h-9 w-7 h-7 rounded-full shadow shrink-0"> 
                             @endif
                         </div>
                         <div  class="hidden bg-white rounded-lg drop-shadow-xl dark:bg-slate-700 w-64 border2"
@@ -398,7 +398,7 @@
                                     @if($user->profile == "")
                                         <img src="{{asset("/images/avatars/avatar.png")}}" alt="photo de profile" class="sm:w-9 sm:h-9 w-7 h-7 rounded-full shadow shrink-0"> 
                                     @else
-                                        <img src="{{asset($user->profile)}}" alt="photo de profile" class="sm:w-9 sm:h-9 w-7 h-7 rounded-full shadow shrink-0"> 
+                                        <img src="{{asset(Storage::url($user->profile))}}" alt="photo de profile" class="sm:w-9 sm:h-9 w-7 h-7 rounded-full shadow shrink-0"> 
                                     @endif
                                     <div class="flex-1">
                                         <h4 class="text-sm font-medium text-black">{{$user->firstname}}</h4>
@@ -447,7 +447,7 @@
 
                         {{-- <div class="flex items-center gap-2 hidden">
 
-                            <img src={{asset($user->profile)}} alt="photo de profile" class="w-9 h-9 rounded-full shadow">
+                            <img src={{asset(Storage::url($user->profile))}} alt="photo de profile" class="w-9 h-9 rounded-full shadow">
 
                             <div class="w-20 font-semibold text-gray-600"> Hamse </div>
 

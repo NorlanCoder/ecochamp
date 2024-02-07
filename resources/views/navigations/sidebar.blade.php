@@ -6,75 +6,37 @@
     <div class="box p-5 px-6">
 
         <div class="flex items-baseline justify-between text-black dark:text-white">
-            <h3 class="font-bold text-base"> People you may know </h3>
-            <a href="#" class="text-sm text-blue-500">See all</a>
+            <h3 class="font-bold text-base"> Alert </h3>
+            <a href="{{url('alert')}}" class="text-sm text-blue-500">Voir plus</a>
         </div>
 
         <div class="side-list">
 
-            <div class="side-list-item">
-                <a href="timeline.html">
-                    <img src={{asset("images/avatars/avatar-2.jpg")}} alt="" class="side-list-image rounded-full">
-                </a>
-                <div class="flex-1">
-                    <a href="timeline.html"><h4 class="side-list-title">  John Michael </h4></a>
-                    <div class="side-list-info"> 125k Following </div>
-                </div>
-                <button class="button bg-primary-soft text-primary dark:text-white">follow</button>
-            </div>
+            @foreach($alerts as $alert)
 
-            <div class="side-list-item">
-                <a href="timeline.html">
-                    <img src={{asset("images/avatars/avatar-3.jpg")}} alt="" class="side-list-image rounded-full">
-                </a>
-                <div class="flex-1">
-                    <a href="timeline.html"><h4 class="side-list-title"> Monroe Parker </h4></a>
-                    <div class="side-list-info"> 320k Following </div>
+                <div class="side-list-item">
+                    <a href="{{url('profile', $alert->user->id)}}">
+                        <img src={{asset($alert->user->profile)}} alt="" class="side-list-image rounded-full">
+                    </a>
+                    <div class="flex-1">
+                        <a href="timeline.html"><h4 class="side-list-title">  {{$item->user->lastname }} {{$item->user->firstname }} </h4></a>
+                        <div class="side-list-info"> 125k Following </div>
+                    </div>
+                    <a href="{{url('alert', $alert->id)}}">
+                        <button class="button bg-primary-soft text-primary dark:text-white">voir</button>
+                    </a>
                 </div>
-                <button class="button bg-primary-soft text-primary dark:text-white">follow</button>
-            </div>  
-            
-            <div class="side-list-item">
-                <a href="timeline.html">
-                    <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="side-list-image rounded-full">
-                </a>
-                <div class="flex-1">
-                    <a href="timeline.html"><h4 class="side-list-title"> James Lewis</h4></a>
-                    <div class="side-list-info"> 125k Following </div>
-                </div>
-                <button class="button bg-primary-soft text-primary dark:text-white">follow</button>
-            </div>
-            
-            <div class="side-list-item">
-                <a href="timeline.html">
-                    <img src={{asset("images/avatars/avatar-6.jpg")}} alt="" class="side-list-image rounded-full">
-                </a>
-                <div class="flex-1">
-                    <a href="timeline.html"><h4 class="side-list-title">  Alexa stella </h4></a>
-                    <div class="side-list-info"> 192k Following </div>
-                </div>
-                <button class="button bg-primary-soft text-primary dark:text-white">follow</button>
-            </div>
 
-            <div class="side-list-item">
-                <a href="timeline.html">
-                    <img src={{asset("images/avatars/avatar-2.jpg")}} alt="" class="side-list-image rounded-full">
-                </a>
-                <div class="flex-1">
-                    <a href="timeline.html"><h4 class="side-list-title"> John Michael </h4></a>
-                    <div class="side-list-info"> 320k Following </div>
-                </div>
-                <button class="button bg-primary-soft text-primary dark:text-white">follow</button>
-            </div>  
-            
-            <button class="bg-secondery button w-full mt-2 hidden">See all</button>
+            @endforeach
+
+            {{-- <button class="bg-secondery button w-full mt-2 hidden">See all</button> --}}
 
         </div>
 
     </div>
 
     <!-- peaple you might know -->
-    <div class="box p-5 px-6 border1 dark:bg-dark2 hidden">
+    {{-- <div class="box p-5 px-6 border1 dark:bg-dark2 hidden">
                     
         <div class="flex justify-between text-black dark:text-white">
             <h3 class="font-bold text-base"> Peaple You might know </h3>
@@ -135,11 +97,11 @@
             </div>
         </div>
 
-    </div>
+    </div> --}}
 
 
     <!-- latest marketplace items -->
-    <div class="box p-5 px-6 border1 dark:bg-dark2">
+    {{-- <div class="box p-5 px-6 border1 dark:bg-dark2">
         
         <div class="flex justify-between text-black dark:text-white">
             <h3 class="font-bold text-base"> Premium Photos </h3>
@@ -201,10 +163,10 @@
         </div>
 
 
-    </div>
+    </div> --}}
     
     <!-- online friends -->
-    <div class="box p-5 px-6 border1 dark:bg-dark2">
+    {{-- <div class="box p-5 px-6 border1 dark:bg-dark2">
         
         <div class="flex justify-between text-black dark:text-white">
             <h3 class="font-bold text-base"> Online Friends </h3>
@@ -253,10 +215,10 @@
         </div>
 
         
-    </div>
+    </div> --}}
 
     <!-- Pro Members -->
-    <div class="box p-5 px-6 border1 dark:bg-dark2">
+    {{-- <div class="box p-5 px-6 border1 dark:bg-dark2">
         
         <div class="flex justify-between text-black dark:text-white">
             <h3 class="font-bold text-base"> Pro Members </h3>
@@ -324,7 +286,7 @@
         </div>
 
 
-    </div>
+    </div> --}}
 
     <!-- Trends -->
     <div class="box p-5 px-6 border1 dark:bg-dark2">

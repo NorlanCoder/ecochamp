@@ -20,6 +20,11 @@
     </head>
     <body >
 
+        @isset ($status)
+            <div class="alert alert-success" role="alert">
+                {{ $status }}
+            </div>
+        @endisset
 
         {{-- <div id="app" data-page="{{ json_encode($page) }}"></div> --}}
         @yield('content')
@@ -28,5 +33,6 @@
         <script src="{{asset('js/uikit.min.js')}}"></script>
         <script src="{{asset('js/simplebar.js')}}"></script>
         <script src="{{asset('js/script.js')}}"></script>
+
     </body>
 </html>

@@ -2,10 +2,10 @@
 
     <!-- post heading -->
     <div class="flex gap-3 sm:p-4 p-2.5 text-sm font-medium">
-        <a href="timeline.html"> <img src={{asset("images/avatars/avatar-3.jpg")}} alt="" class="w-9 h-9 rounded-full"> </a>  
+        <a href="timeline.html"> <img src={{asset(Storage::url('app/'.$item->image1))}} alt="" class="w-9 h-9 rounded-full"> </a>  
         <div class="flex-1">
-            <a href="timeline.html"> <h4 class="text-black dark:text-white"> Monroe Parker </h4> </a>  
-            <div class="text-xs text-gray-500 dark:text-white/80"> 2 hours ago</div>
+            <a href="timeline.html"> <h4 class="text-black dark:text-white"> {{$item->user->lastname}} {{$item->user->firstname}} </h4> </a>  
+            <div class="text-xs text-gray-500 dark:text-white/80"> {{date('j F Y H:i', strtotime($item->created_at)) }} </div>
         </div>
 
         <div class="-mr-1">
@@ -29,17 +29,17 @@
         <ul class="uk-slideshow-items overflow-hidden rounded-xl" uk-lightbox="animation: fade"> 
             <li class="w-full">
                 <a class="inline" href="../../getuikit.com/docs/images/photo3.jpg" data-caption="Caption 1"> 
-                    <img src={{asset("images/post/img-2.jpg")}} alt="" class="w-full h-full absolute object-cover insta-0">
+                    <img src={{asset(Storage::url('app/'.$item->image2))}} alt="" class="w-full h-full absolute object-cover insta-0">
                 </a>
             </li>
             <li class="w-full">
                 <a class="inline" href="../../getuikit.com/docs/images/photo2.jpg" data-caption="Caption 2"> 
-                    <img src={{asset("images/post/img-3.jpg")}} alt="" class="w-full h-full absolute object-cover insta-0">
+                    <img src={{asset(Storage::url('app/'.$item->image3))}} alt="" class="w-full h-full absolute object-cover insta-0">
                 </a>
             </li>
             <li class="w-full">
                 <a class="inline" href="../../getuikit.com/docs/images/photo.jpg" data-caption="Caption 3"> 
-                    <img src={{asset("images/post/img-4.jpg")}} alt="" class="w-full h-full absolute object-cover insta-0">
+                    <img src={{asset(Storage::url('app/'.$item->image4))}} alt="" class="w-full h-full absolute object-cover insta-0">
                 </a>
             </li> 
         </ul>
@@ -48,6 +48,10 @@
         <a class="nav-next right-6" href="#" uk-slideshow-item="next"> <ion-icon name="chevron-forward" class="text-2xl"></ion-icon></a>
     
     </div>
+
+    <div class="sm:px-4 p-2.5 pt-0">
+        <p class="font-normal"> {{$item->description}}</p>
+    </div> 
 
     <!-- post icons -->
     <div class="sm:p-4 p-2.5 flex items-center gap-4 text-xs font-semibold">

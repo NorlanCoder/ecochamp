@@ -1,4 +1,4 @@
-<div class="hidden lg:p-20 max-lg:!items-start" id="show-post" uk-modal="">
+<div class="hidden lg:p-20 max-lg:!items-start" id="show-post{{$item->id}}" uk-modal="">
         
     <div class="uk-modal-dialog tt relative mx-auto overflow-hidden shadow-xl rounded-lg lg:flex items-center ax-w-[86rem] w-full lg:h-[80vh]">
     
@@ -6,7 +6,7 @@
         <div class="lg:h-full lg:w-[calc(100vw-400px)] w-full h-96 flex justify-center items-center relative">
             
             <div class="relative z-10 w-full h-full">
-                <img src={{asset("images/post/post-1.jpg")}} alt="" class="w-full h-full object-cover absolute">
+                <img src={{asset(Storage::url($item->image1))}} alt="" class="w-full h-full object-cover absolute">
             </div>
 
             <!-- close button -->
@@ -25,10 +25,10 @@
 
                 <!-- story heading -->
                 <div class="flex gap-3 text-sm font-medium">
-                    <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="w-9 h-9 rounded-full">
+                    <img src={{asset($item->user->profile)}} alt="" class="w-9 h-9 rounded-full">
                     <div class="flex-1">
-                        <h4 class="text-black font-medium dark:text-white"> Steeve </h4>
-                        <div class="text-gray-500 text-xs dark:text-white/80"> 2 hours ago</div>
+                        <h4 class="text-black font-medium dark:text-white"> {{$item->user->lastname }} {{$item->user->firstname }} </h4>
+                        <div class="text-gray-500 text-xs dark:text-white/80"> {{date('j F Y H:i', strtotime($item->created_at)) }}</div>
                     </div>
 
                     <!-- dropdown -->
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <p class="font-normal text-sm leading-6 mt-4"> Photography is the art of capturing light with a camera.  it can be fun, challenging. It can also be a hobby, a passion. 📷 </p>
+                <p class="font-normal text-sm leading-6 mt-4"> {{$item->description}}</p>
 
                 <div class="shadow relative -mx-5 px-5 py-3 mt-3">
                     <div class="flex items-center gap-4 text-xs font-semibold">
@@ -57,7 +57,11 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <button type="button" class="button__ico bg-slate-100 dark:bg-slate-700"> <ion-icon class="text-lg" name="chatbubble-ellipses"></ion-icon> </button>
-                            <span>260</span>
+                            @if(!empty($item->comment))
+                                <span>{{count($item->comment)}}</span>  
+                            @else    
+                                <span>0</span>     
+                            @endif
                         </div>
                         <button type="button" class="button__ico ml-auto"> <ion-icon class="text-xl" name="share-outline"></ion-icon> </button>
                         <button type="button" class="button__ico"> <ion-icon class="text-xl" name="bookmark-outline"></ion-icon> </button>

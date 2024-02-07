@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activite;
 use App\Models\Alert;
 use App\Models\Post;
 use App\Models\User;
@@ -15,9 +16,11 @@ class HomeController extends Controller
     // Accueil Page
     public function index() {
         $user = Auth::user();
-        $alerts = Alert::paginate(15);
-        $postes = Post::paginate(15);
-        return view('layouts.index', compact('user', 'alerts', 'postes'));
+        $alerts = Alert::paginate(4);
+        $postes = Post::paginate(4);
+        $activities = Activite::paginate(4);
+        //dd(count($postes->comment));
+        return view('layouts.index', compact('user', 'alerts', 'postes', 'activities'));
     }
 
     // Login Page

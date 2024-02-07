@@ -15,9 +15,15 @@
                             <span> Accueil </span> 
                         </a>
                     </li>
+                    <li >
+                        <a href="{{url('/poste')}}">
+                            <img src={{asset("images/icons/group.png")}} alt="post" class="w-6">
+                            <span> Post </span> 
+                        </a>
+                    </li>
                     <li>
                         <a href="{{url('/activity')}}">
-                            <img src={{asset("images/icons/message.png")}} alt="activity" class="w-5">
+                            <img src={{asset("images/icons/event.png")}} alt="activity" class="w-5">
                             <span> Activité </span> 
                         </a>
                     </li> 

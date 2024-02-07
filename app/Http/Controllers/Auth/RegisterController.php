@@ -40,7 +40,7 @@ class RegisterController extends Controller
         /*
         Database Insert
         */
-        $profile = "/images/avatars/avatar.png";
+        //$profile = "/images/avatars/avatar.png";
         $user = User::create([
             'firstname' => $request->prenom,
             'lastname' => $request->nom,
@@ -49,7 +49,7 @@ class RegisterController extends Controller
             'intervations' => $request->interventions,
             'statut' => $request->statut,
             'email' => $request->email,
-            'profile' => $profile,
+            //'profile' => $profile,
             'password' => Hash::make($request->password),
         ]);
 

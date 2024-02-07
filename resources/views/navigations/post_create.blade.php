@@ -36,13 +36,13 @@
                 <div>  
                     <div class="w-full h-72 relative border1 rounded-lg overflow-hidden bg-[url('../images/ad_pattern.html')] bg-repeat">
                     
-                        <label for="createStatusUrl" class="flex flex-col justify-center items-center absolute -translate-x-1/2 left-1/2 bottom-0 z-10 w-full pb-6 pt-10 cursor-pointer bg-gradient-to-t from-gray-700/60">
-                            <input id="createStatusUrl" type="file" class="hidden" name="image"/>
+                        <label for="createpostusUrl" class="flex flex-col justify-center items-center absolute -translate-x-1/2 left-1/2 bottom-0 z-10 w-full pb-6 pt-10 cursor-pointer bg-gradient-to-t from-gray-700/60">
+                            <input id="createpostusUrl" type="file" class="hidden" name="image"/>
                             <ion-icon name="image" class="text-3xl text-teal-600"></ion-icon>
                             <span class="text-white mt-2">Parcourir pour télécharger l'image </span>
                         </label>
     
-                        <img id="createStatusImage" src="#" alt="Uploaded Image" accept="image/png, image/jpeg, image/jpg" style="display:none;" class="w-full h-full absolute object-cover">
+                        <img id="createpostImage" alt="Uploaded Image" style="display:none;" class="w-full h-full absolute object-cover">
     
                     </div>
     

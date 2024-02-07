@@ -24,4 +24,12 @@ class UserController extends Controller
         // $postes = Posts::where($user->id)->paginate(15);
         return view('pages.profil', compact('user'));
     }
+
+    public function show(string $id)
+    {
+        $user = User::where('id', "=", $id);
+
+        return view('pages.profil', compact('user'));
+    }
+    
 }
