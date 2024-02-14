@@ -19,13 +19,17 @@
         </div>
 
         <!-- right sidebar -->
-        <div class="lg:w-[400px] w-full bg-white h-full relative  overflow-y-auto shadow-xl dark:bg-dark2 flex flex-col justify-between">
+        <div class="lg:w-[400px] w-full bg-white h-full relative  overflow-y-auto shadow-xl dark:bg-dark2 flex flex-col justify-between" id="post">
             
             <div class="p-5 pb-0">
 
                 <!-- story heading -->
                 <div class="flex gap-3 text-sm font-medium">
-                    <img src={{asset($item->user->profile)}} alt="" class="w-9 h-9 rounded-full">
+                    @if(empty($item->user->profile))
+                        <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-9 h-9 rounded-full"> 
+                    @else
+                        <img src={{asset(Storage::url($item->user->profile))}} alt="" class="w-9 h-9 rounded-full"> 
+                    @endif
                     <div class="flex-1">
                         <h4 class="text-black font-medium dark:text-white"> {{$item->user->lastname }} {{$item->user->firstname }} </h4>
                         <div class="text-gray-500 text-xs dark:text-white/80"> {{date('j F Y H:i', strtotime($item->created_at)) }}</div>
@@ -52,13 +56,27 @@
                 <div class="shadow relative -mx-5 px-5 py-3 mt-3">
                     <div class="flex items-center gap-4 text-xs font-semibold">
                         <div class="flex items-center gap-2.5">
-                            <button type="button" class="button__ico text-red-500 bg-red-100 dark:bg-slate-700"> <ion-icon class="text-lg" name="heart"></ion-icon> </button>
-                            <a href="#">1,300</a>
+                            <form action="{{ route('liked_post.store') }}" method="POST" enctype="multipart/form-data" id="form-data-post{{$item->id}}">
+                                @csrf
+                                <div class="flex items-center gap-2.5">
+                                    <input id="post_id" type="text" class="hidden" name="post_id" value="{{$item->id}}"/>
+                
+                                    <button type="button" class="button-icon text-red-500 bg-red-100 dark:bg-slate-700 submit-form" id="create_new"> 👍 </button>
+                                    {{-- <ion-icon class="text-lg" name="heart"> </ion-icon> --}}
+                                    <a href="#" id="liked-post">
+                                        @if(count($item->postLikeds) >= 100)
+                                            {{count($item->postLikeds) / 100}} k
+                                        @else
+                                            {{count($item->postLikeds)}}
+                                        @endif
+                                    </a>
+                                </div>
+                            </form>
                         </div>
                         <div class="flex items-center gap-3">
                             <button type="button" class="button__ico bg-slate-100 dark:bg-slate-700"> <ion-icon class="text-lg" name="chatbubble-ellipses"></ion-icon> </button>
-                            @if(!empty($item->comment))
-                                <span>{{count($item->comment)}}</span>  
+                            @if(!empty($item->comments))
+                                <span>{{count($item->comments)}}</span>  
                             @else    
                                 <span>0</span>     
                             @endif
@@ -73,114 +91,53 @@
             <div class="p-5 h-full overflow-y-auto flex-1">
 
                 <!-- comment list -->
-                <div class="relative text-sm font-medium space-y-5"> 
-            
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-2.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> Steeve </a>
-                            <p class="mt-0.5">What a beautiful, I love it. 😍 </p>
+                <div class="relative text-sm font-medium space-y-5" id="addComment-post"> 
+                    @foreach($item->comments as $comment)
+
+                        <div class="flex items-start gap-3 relative">
+                            @if(empty($comment->user->profile))
+                                <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-6 h-6 mt-1 rounded-full"> 
+                            @else
+                                <img src={{asset(Storage::url($comment->user->profile))}} alt="" class="w-6 h-6 mt-1 rounded-full"> 
+                            @endif
+
+                            <div class="flex-1">
+                                <a href="#" class="text-black font-medium inline-block dark:text-white"> {{$comment->user->lastname}} {{$comment->user->firstname}} </a>
+                                <p class="mt-0.5">{{$comment->comment}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-3.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> Monroe </a>
-                            <p class="mt-0.5">   You captured the moment.😎 </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-7.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> Alexa </a>
-                            <p class="mt-0.5"> This photo is amazing!   </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-4.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> John  </a>
-                            <p class="mt-0.5"> Wow, You are so talented 😍 </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> Michael </a>
-                            <p class="mt-0.5"> I love taking photos   🌳🐶</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-3.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> Monroe </a>
-                            <p class="mt-0.5">  Awesome. 😊😢 </p>
-                        </div>
-                    </div> 
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> Jesse </a>
-                            <p class="mt-0.5"> Well done 🎨📸   </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-2.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> Steeve </a>
-                            <p class="mt-0.5">What a beautiful, I love it. 😍 </p>
-                        </div>
-                    </div> 
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-7.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> Alexa </a>
-                            <p class="mt-0.5"> This photo is amazing!   </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-4.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> John  </a>
-                            <p class="mt-0.5"> Wow, You are so talented 😍 </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> Michael </a>
-                            <p class="mt-0.5"> I love taking photos   🌳🐶</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <img src={{asset("images/avatars/avatar-3.jpg")}} alt="" class="w-6 h-6 mt-1 rounded-full">
-                        <div class="flex-1">
-                            <a href="#" class="text-black font-medium inline-block dark:text-white"> Monroe </a>
-                            <p class="mt-0.5">  Awesome. 😊😢 </p>
-                        </div>
-                    </div>  
+                    @endforeach
+                </div>
+
+            </div>
+
+            <form action="{{route('comment.store')}}" method="POST" enctype="multipart/form-data" id="form-data-post-comment{{$item->id}}">
+                @csrf
+
+                <div class="bg-white p-3 text-sm font-medium flex items-center gap-2">
+                                
+                    @if(empty($item->user->profile))
+                        <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-6 h-6 rounded-full"> 
+                    @else
+                        <img src={{asset(Storage::url($item->user->profile))}} alt="" class="w-6 h-6 rounded-full"> 
+                    @endif
                     
-                </div>
+                   
+                        <textarea placeholder="ajouter un commentaire...." rows="1" name="comment" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent" id="text_new"></textarea>
 
-            </div>
+                        {{-- <div class="flex items-center gap-2 absolute bottom-0.5 right-0 m-3">
+                            <ion-icon class="text-xl flex text-blue-700" name="image"></ion-icon> 
+                            <ion-icon class="text-xl flex text-yellow-500" name="happy"></ion-icon> 
+                        </div> --}}
+                        <input id="post_id" type="text" class="hidden" name="post_id" value="{{$item->id}}"/>
 
-            <div class="bg-white p-3 text-sm font-medium flex items-center gap-2">
-                            
-                <img src={{asset("images/avatars/avatar-2.jpg")}} alt="" class="w-6 h-6 rounded-full">
+                  
+
+                    <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery submit-form" id="create_new"> Envoyer</button>
                 
-                <div class="flex-1 relative overflow-hidden ">
-                    <textarea placeholder="Add Comment...." rows="1" class="w-full resize-  px-4 py-2 focus:!border-transparent focus:!ring-transparent resize-y"></textarea>
-
-                    <div class="flex items-center gap-2 absolute bottom-0.5 right-0 m-3">
-                        <ion-icon class="text-xl flex text-blue-700" name="image"></ion-icon> 
-                        <ion-icon class="text-xl flex text-yellow-500" name="happy"></ion-icon> 
-                    </div>
-
                 </div>
 
-                <button type="submit" class="hidden text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Replay</button>
-            
-            </div>
+            </form>
 
         </div>
 

@@ -7,6 +7,14 @@
 
             <div class="max-w-[680px] mx-auto">
 
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                @include('composants.activity')
+
                 <!-- stories -->
                 {{-- <div class="mb-8">
 
@@ -112,6 +120,16 @@
 
                 </div> --}}
                 <!-- feed story -->
+
+                <div class="sm:my-6 my-3 flex items-center justify-between border-t pt-3 dark:border-slate-800">
+                    <div>
+                        <h1  class="text-xl font-semibold text-black"> Postes </h1>
+                    </div>
+                    <div class="flex items-center gap-2 [&:has(a.uk-invisible)][&*>a]:bg-red-600">
+                        <a href="{{url('/poste')}}" class="text-blue-500 sm:block hidden text-sm"> Voir tous </a>
+                    </div>
+                </div>
+
                 <div class="md:max-w-[580px] mx-auto flex-1 xl:space-y-6 space-y-3">
 
                     <!-- add story -->
@@ -140,6 +158,7 @@
                         </div>
                         
                     </div> --}}
+
                     @foreach ($postes as $item)
                     
                         @empty($item->image2)

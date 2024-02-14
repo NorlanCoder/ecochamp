@@ -36,9 +36,16 @@
                   <label for="" class="text-base">Date de fin de l'activité </label>
                   <input type="date"  class="w-full mt-3" required="" name="fin">
                 </div>
-                <div> 
-                    <label for="" class="text-base">Type d'activité </label>
-                    <input type="text"  class="w-full mt-3" required="" name="activite_type">
+                <div >
+                    <label for="localite" class="">Type d'activité </label>
+                    <div class="mt-2.5">
+                        <select required class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5"  name="activite_type" id="localite">
+                            <option value="">---</option>
+                            <option value="Campagne">Campagne</option>
+                            <option value="Evénement">Evénement</option>
+                            <option value="Activité">Activité</option>
+                        </select>
+                    </div>
                 </div>
                 <div >
                     <label for="description" class="text-base">Description</label>
@@ -49,20 +56,20 @@
                     {{-- <label for="" class="text-base">Besoin </label> --}}
                     <div class="control">
                         <label class="checkbox">
-                        <input type="checkbox" name="partenaire" value="1" wire:model.defer="state.football">
-                            Partenaire
+                            <input type="checkbox" name="partenaire" value="1" wire:model.defer="state.football">
+                                Partenaire
                         </label>
                         <label class="checkbox">
-                        <input type="checkbox" name="benevolat" value="1">
-                            Bénévolat
+                            <input type="checkbox" name="benevolat" value="1">
+                                Bénévolat
                         </label>
                         <label class="checkbox">
-                        <input type="checkbox" name="sponsor" value="1">
-                            Sponsor
+                            <input type="checkbox" name="sponsor" value="1">
+                                Sponsor
                         </label>    
                         <label class="checkbox">
                             <input type="checkbox" name="participant" value="1">
-                            Participant
+                                Participant
                         </label>                   
                     </div>
                     <div >

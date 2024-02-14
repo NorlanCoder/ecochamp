@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alert;
+use App\Models\Alertfollow;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,9 +15,10 @@ class AlertController extends Controller
      */
     public function index()
     {
+        $page = "alert";
         $user = Auth::user();
         $alerts = Alert::paginate(15);
-        return view('pages.alert', compact('user', 'alerts'));
+        return view('pages.alert', compact('user', 'alerts', 'page'));
     }
 
     /**
@@ -69,7 +72,23 @@ class AlertController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = Auth::user();
+        $alert = Alert::where('id', $id)->firstorfail();
+
+        $vus = Alertfollow::where("user_id", $user->id)->where("alert_id", $id)->get();
+
+        if($vus){
+            foreach ($vus as $item){
+                $item->delete();
+            }
+        }
+
+        Alertfollow::create([
+            'user_id' => $user->id, 
+            'alert_id' => $id,
+        ]);
+
+        return view('pages.alert_detail', compact('user', 'alert'));
     }
 
     /**

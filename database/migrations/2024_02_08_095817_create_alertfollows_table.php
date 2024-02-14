@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('alertfollows', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
-            $table->string('activite');
-            $table->string('image1')->nullable();
-            $table->string('image2')->nullable();
-            $table->string('image3')->nullable();
-            $table->string('image4')->nullable();
+            $table->boolean('follow');
             $table->foreignId('user_id')
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+            $table->foreignId('alert_id')
                     ->constrained()
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //  Schema::dropIfExists('posts');
+        // Schema::dropIfExists('alertfollows');
     }
 };

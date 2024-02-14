@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Alert extends Model
@@ -40,4 +41,15 @@ class Alert extends Model
     {
         return $this->morphTo();
     }
+
+    public function alertfollows(): HasMany
+    {
+        return $this->hasMany(Alertfollow::class);
+    }
+    
+    public function comments(): HasMany
+    {
+        return $this->hasMany(alertComment::class);
+    }
+    
 }

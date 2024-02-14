@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activite;
+use App\Models\Activityjoin;
 use App\Models\Alert;
 use App\Models\Post;
 use App\Models\User;
@@ -15,12 +16,26 @@ class HomeController extends Controller
 {
     // Accueil Page
     public function index() {
+        $page = "home";
         $user = Auth::user();
         $alerts = Alert::paginate(4);
         $postes = Post::paginate(4);
-        $activities = Activite::paginate(4);
-        //dd(count($postes->comment));
-        return view('layouts.index', compact('user', 'alerts', 'postes', 'activities'));
+        $activities_campagne = Activite::where('activite_type', 'Campagne')->paginate(5);
+        $activities_evenement = Activite::where('activite_type', 'Evénement')->paginate(5);
+        $activities_activite = Activite::where('activite_type', 'Activite')->paginate(5);
+        $joins = [];
+        if($user){
+            $activityJoins = Activityjoin::where('user_id', $user->id)->get();
+            foreach ($activityJoins as $item)
+            {
+                array_push($joins, $item->activite->id);
+                // dd($item->activite->id);
+            }
+            // dd($joins);
+        }
+
+        return view('layouts.index', compact('user', 'alerts', 'postes', 'activities_campagne',
+         'activities_evenement', 'activities_activite', 'joins', 'page'));
     }
 
     // Login Page

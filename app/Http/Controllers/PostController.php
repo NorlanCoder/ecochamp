@@ -14,10 +14,12 @@ class PostController extends Controller
      */
     public function index()
     {
+        $page = 'post';
         $user = Auth::user();
         $alerts = Alert::paginate(5);
         $postes = Post::paginate(5);
-        return view('layouts.index', compact('user', 'alerts', 'postes'));
+        //dd($postes[2]->postLikeds);
+        return view('pages.post', compact('user', 'alerts', 'postes', 'page'));
 
     }
 

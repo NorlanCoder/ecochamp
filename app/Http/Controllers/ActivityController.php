@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activite;
+use App\Models\Activityjoin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class ActivityController extends Controller
 {
@@ -13,9 +15,29 @@ class ActivityController extends Controller
      */
     public function index()
     {
+        $page = "activite";
         $user = Auth::user();
-        $activities = Activite::paginate(15);
-        return view('pages.activity', compact('user', 'activities'));
+        $activities_sugestion = Activite::where('debut', '>=', date('Y-m-d H:i:s'))->orderby('debut', 'desc')->paginate(10);
+        $activities_pop = Activite::where('debut', 'desc')->paginate(10);
+        // dd($activities_pop);
+        $activities_campagne = Activite::where('activite_type', 'Campagne')->get();
+        $activities_evenement = Activite::where('activite_type', 'Evénement')->get();
+        $activities_activite = Activite::where('activite_type', 'Activite')->get();
+
+        $joins = [];
+        $activities_my = [];
+        if($user){
+            $activityJoins = Activityjoin::where('user_id', $user->id)->get();
+            foreach ($activityJoins as $item)
+            {
+                array_push($joins, $item->activite->id);
+                // dd($item->activite->id);
+            }
+            // dd($joins);
+            $activities_myactivityJoins = Activite::where('user_id', $user->id)->paginate(10);
+        }
+
+        return view('pages.activity', compact('user', 'activities_campagne', 'activities_evenement', 'activities_activite', 'activities_pop', 'activities_sugestion', 'activities_my', 'page', 'joins'));
     }
 
     /**
@@ -26,7 +48,7 @@ class ActivityController extends Controller
         //
     }
 
-    /**
+    /**join
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -51,16 +73,16 @@ class ActivityController extends Controller
         
         $besoin = "";
         if (!empty($request->partenaire)){
-            $besoin .= "partenaire,";
+            $besoin .= "Partenaire,";
         }
         if (!empty($request->benevolat)){
-            $besoin .= "bénévolat,";
+            $besoin .= "Bénévolat,";
         }
         if (!empty($request->sponsor)){
-            $besoin .= "sponsor,";
+            $besoin .= "Sponsor,";
         }
         if (!empty($request->participant)){
-            $besoin .= "participant,";
+            $besoin .= "Participant,";
         }
         // dd($besoin);
          $activite = Activite::create([
@@ -83,7 +105,22 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = Auth::user();
+        $activite = Activite::where('id', $id)->firstOrFail();
+
+        list($annee, $mois, $jour) = explode('-', $activite->debut); 
+        
+        $besoin = preg_split('/\s*,\s*/', $activite->besoin);
+        // dd($besoin);
+        $participant = Activite::where('id', $id)->firstOrFail()->activityJoins->where("participation", "!=", "");
+        
+        $user_joint = [];
+        $est = [];
+        if($user){
+            $user_joint = Activite::where('id', $id)->first()->activityJoins->where("user_id", $user->id)->first();
+            if($user_joint)$est = preg_split('/\s*,\s*/', $user_joint->participation);
+        }
+        return view('pages.activite_detail', compact('user', 'activite', 'jour', 'besoin', "participant", "user_joint", 'est'));
     }
 
     /**
@@ -109,4 +146,5 @@ class ActivityController extends Controller
     {
         //
     }
+
 }

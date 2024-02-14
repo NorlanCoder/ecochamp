@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('sexe')->nullable();
             $table->string('intervations')->nullable();
             $table->string('profile')->nullable();
+            $table->string('couverture')->nullable();
             $table->string('statut');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -34,7 +35,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        // Schema::dropIfExists('users');
         
     }
 };

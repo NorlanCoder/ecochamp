@@ -16,11 +16,21 @@
 
                 <div class="side-list-item">
                     <a href="{{url('profile', $alert->user->id)}}">
-                        <img src={{asset($alert->user->profile)}} alt="" class="side-list-image rounded-full">
+                        @if(empty($alert->user->profile))
+                            <img src={{asset("/images/avatars/avatar.png")}} alt="" class="side-list-image rounded-full"> 
+                        @else
+                            <img src={{asset(Storage::url($alert->user->profile))}} alt="" class="side-list-image rounded-full"> 
+                        @endif
                     </a>
                     <div class="flex-1">
                         <a href="timeline.html"><h4 class="side-list-title">  {{$item->user->lastname }} {{$item->user->firstname }} </h4></a>
-                        <div class="side-list-info"> 125k Following </div>
+                        <div class="side-list-info">  
+                            @if(count($alert->alertfollows) >= 100)
+                                {{count($alert->alertfollows) / 100}} K vues
+                            @else
+                                {{count($alert->alertfollows)}} vues
+                            @endif  
+                        </div>
                     </div>
                     <a href="{{url('alert', $alert->id)}}">
                         <button class="button bg-primary-soft text-primary dark:text-white">voir</button>

@@ -1,8 +1,8 @@
-<div class="bg-white rounded-xl shadow-sm text-sm font-medium border1 dark:bg-dark2">
+<div class="bg-white rounded-xl shadow-sm text-sm font-medium border1 dark:bg-dark2" id="post">
 
     <!-- post heading -->
     <div class="flex gap-3 sm:p-4 p-2.5 text-sm font-medium">
-        <a href="timeline.html"> 
+        <a href="{{url('/prifile')}}"> 
             @if(empty($item->user->profile))
                 <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-9 h-9 rounded-full"> 
             @else
@@ -10,7 +10,7 @@
             @endif
         </a>  
         <div class="flex-1">
-            <a href="timeline.html"> <h4 class="text-black dark:text-white"> {{$item->user->lastname }} {{$item->user->firstname }}</h4> </a>  
+            <a href="{{url('/prifile')}}"> <h4 class="text-black dark:text-white"> {{$item->user->lastname }} {{$item->user->firstname }}</h4> </a>  
             <div class="text-xs text-gray-500 dark:text-white/80"> {{date('j F Y H:i', strtotime($item->created_at)) }}</div>
         </div>
 
@@ -36,32 +36,42 @@
     <!-- post image -->
     <a href="#show-post{{$item->id}}" uk-toggle>
         <div class="relative w-full lg:h-96 h-full sm:px-4">
-            <img src={{asset(Storage::url($item->image1))}} alt="{{asset(Storage::url($item->image1))}}" class="sm:rounded-lg w-full h-full object-cover">
+            <img src={{asset(Storage::url($item->image1))}} alt="" class="sm:rounded-lg w-full h-full object-cover">
         </div>
     </a>
     
     <!-- post icons -->
     <div class="sm:p-4 p-2.5 flex items-center gap-4 text-xs font-semibold">
         <div>
-            <div class="flex items-center gap-2.5">
-                <button type="button" class="button-icon text-red-500 bg-red-100 dark:bg-slate-700"> <ion-icon class="text-lg" name="heart"></ion-icon> </button>
-                <a href="#">
-                    1,300
-                </a>
-            </div>
-            <div    class="p-1 px-2 bg-white rounded-full drop-shadow-md w-[212px] dark:bg-slate-700 text-2xl"
-                    uk-drop="offset:10;pos: top-left; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-bottom-left"> 
-                
-                <div class="flex gap-2"  uk-scrollspy="target: > button; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
-                    <button type="button" class="text-red-600 hover:scale-125 duration-300"> <span> 👍 </span></button>
-                    <button type="button" class="text-red-600 hover:scale-125 duration-300"> <span> ❤️ </span></button>
-                    <button type="button" class="text-red-600 hover:scale-125 duration-300"> <span> 😂 </span></button>
-                    <button type="button" class="text-red-600 hover:scale-125 duration-300"> <span> 😯 </span></button>
-                    <button type="button" class="text-red-600 hover:scale-125 duration-300"> <span> 😢 </span></button>
+            <form action="{{ route('liked_post.store') }}" method="POST" enctype="multipart/form-data" id="form-data-post{{$item->id}}">
+                @csrf
+                <div class="flex items-center gap-2.5">
+                    <input id="post_id" type="text" class="hidden" name="post_id" value="{{$item->id}}"/>
+
+                    <button type="button" class="button-icon text-red-500 bg-red-100 dark:bg-slate-700 submit-form" id="create_new"> 👍 </button>
+                    {{-- <ion-icon class="text-lg" name="heart"> </ion-icon> --}}
+                    <a href="#" id="liked-post">
+                        @if(count($item->postLikeds) >= 100)
+                            {{count($item->postLikeds) / 100}} K
+                        @else
+                            {{count($item->postLikeds)}}
+                        @endif
+                    </a>
                 </div>
+            </form>
+            {{-- <div    class="p-1 px-2 bg-white rounded-full drop-shadow-md w-[212px] dark:bg-slate-700 text-2xl"
+                    uk-drop="offset:10;pos: top-left; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-bottom-left">  --}}
                 
-                <div class="w-2.5 h-2.5 absolute -bottom-1 left-3 bg-white rotate-45 hidden"></div>
-            </div>
+                {{-- <div class="flex gap-2"  uk-scrollspy="target: > button; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
+                    <button type="button" class="text-red-600 hover:scale-125 duration-300"> <span> 👍 </span></button> --}}
+                    {{-- <button type="button" class="text-red-600 hover:scale-125 duration-300"> <span> ❤️ </span></button> --}}
+                    {{-- <button type="button" class="text-red-600 hover:scale-125 duration-300"> <span> 😂 </span></button>
+                    <button type="button" class="text-red-600 hover:scale-125 duration-300"> <span> 😯 </span></button>
+                    <button type="button" class="text-red-600 hover:scale-125 duration-300"> <span> 😢 </span></button> --}}
+                {{-- </div> --}}
+                
+                {{-- <div class="w-2.5 h-2.5 absolute -bottom-1 left-3 bg-white rotate-45 hidden"></div>
+            </div> --}}
         </div>
         <div class="flex items-center gap-3">
             <button type="button" class="button-icon bg-slate-200/70 dark:bg-slate-700"> <ion-icon class="text-lg" name="chatbubble-ellipses"></ion-icon> </button>
@@ -78,10 +88,10 @@
     </div>
 
     <!-- comments -->
-    <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40"> 
-        @foreach($item->comments as $comment)
+    <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40" id="addComment"> 
+        @foreach($item->comments as $x => $comment)
             <div class="flex items-start gap-3 relative">
-                <a href="timeline.html"> 
+                <a href="{{url('/profile', $comment->user->id)}}"> 
                     @if(empty($comment->user->profile))
                         <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-6 h-6 mt-1 rounded-full"> 
                     @else
@@ -89,11 +99,11 @@
                     @endif
                 </a>
                 <div class="flex-1">
-                    <a href="timeline.html" class="text-black font-medium inline-block dark:text-white"> {{$comment->user->lastname}} {{$comment->user->firstname}} </a>
+                    <a href="{{url('/profile', $comment->user->id)}}" class="text-black font-medium inline-block dark:text-white"> {{$comment->user->lastname}} {{$comment->user->firstname}} </a>
                     <p class="mt-0.5">{{$comment->comment}}</p>
                 </div>
             </div>
-            @if($comment->id == 2)
+            @if($x == 0)
                 @break
             @endif
         @endforeach
@@ -101,19 +111,19 @@
     </div>
 
     <!-- add comment -->
-    <form action="{{ route('comment.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('comment.store') }}" method="POST" enctype="multipart/form-data" id="form-data-post-comment{{$item->id}}">
         @csrf
         <div class="sm:px-4 sm:py-3 p-2.5 border-t border-gray-100 flex items-center gap-1 dark:border-slate-700/40">
             
-            @if(empty($item->user->profile))
+            @if(empty($user->profile))
                 <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-6 h-6 rounded-full"> 
             @else
-                <img src={{asset(Storage::url($item->user->profile))}} alt="" class="w-6 h-6 rounded-full"> 
+                <img src={{asset(Storage::url($user->profile))}} alt="" class="w-6 h-6 rounded-full"> 
             @endif
         
             <div class="flex-1 relative overflow-hidden h-10">
                 
-                <textarea placeholder="ajouter un commentaire...." rows="1" name="comment" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent"></textarea>
+                <textarea placeholder="ajouter un commentaire...." rows="1" name="comment" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent" id="text_new"></textarea>
 
                 {{-- <div class="!top-2 pr-2" uk-drop="pos: bottom-right; mode: click">
                     <div class="flex items-center gap-2" uk-scrollspy="target: > svg; cls: uk-animation-slide-right-small; delay: 100 ;repeat: true">
@@ -128,10 +138,10 @@
                 <input id="post_id" type="text" class="hidden" name="post_id" value="{{$item->id}}"/>
 
             </div>
-            
 
-            <button type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery"> Envoyer</button>
+            <button type="button" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery submit-form" id="create_new"> Envoyer</button>
         </div> 
     </form>
 
 </div>
+

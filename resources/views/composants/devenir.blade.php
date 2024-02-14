@@ -1,9 +1,10 @@
-<div class="hidden lg:p-20" id="create-post" uk-modal="">
+@isset($besoin)
+<div class="hidden lg:p-20" id="create-devenir" uk-modal="">
 
     <div class="uk-modal-dialog tt relative overflow-hidden mx-auto bg-white p-7 shadow-xl rounded-lg md:w-[520px] w-full dark:bg-dark2">
 
         <div class="text-center py-3 border-b -m-7 mb-0 dark:border-slate-700">
-            <h2 class="text-sm font-medium"> Créer un poste </h2>
+            <h2 class="text-sm font-medium"> Participer à l'activité en tant que </h2>
 
             <!-- close button -->
             <button type="button" class="button__ico absolute top-0 right-0 m-2.5 uk-modal-close">
@@ -13,13 +14,13 @@
             </button>
 
         </div>
- 
-        <form action="{{ route('poste.store') }}" method="POST" enctype="multipart/form-data">
+
+        <form action="{{ url('/activite/devenir') }}" method="POST" enctype="multipart/form-data" id="form-data-{{$besoin[0]}}">
             @csrf
 
             <div class="space-y-5 mt-7">
 
-                <div> 
+                {{-- <div> 
                     <label for="" class="text-base">Activité </label>
                     <input type="text"  class="w-full mt-3" required="" name="activite">
                 </div>
@@ -42,17 +43,28 @@
     
                     </div>
     
-                </div>
+                </div> --}}
+                <input id="activite_id" type="text" class="hidden" name="activite_id" value="{{$activite->id}}"/>
+                {{-- <label class="label is-small">Besoin:</label> --}}
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+
+                        @foreach ($besoin as $x => $item)
+
+                            @if ($item != "")
+
+                                <input type="checkbox" name="{{$item}}" class="btn-check" id="btnradio{{$x}}" autocomplete="off" value="{{$item}}" @if (in_array($item, $est)) checked @endif>
+                                <label class="btn btn-outline-primary" for="btnradio{{$x}}">{{$item}}</label>
+                    
+                            @endif
+                            
+                        @endforeach
+                       
+                    </div>
                 
                 <div class="flex justify-between items-center">
     
-                    <div class="flex items-start gap-2">
-                        {{-- <ion-icon name="time-outline" class="text-3xl text-sky-600  rounded-full bg-blue-50 dark:bg-transparent"></ion-icon>
-                        <p class="text-sm text-gray-500 font-medium"> Your Status will be available <br> for <span class="text-gray-800"> 24 Hours</span> </p> --}}
-                    </div>
-    
-                    <button type="submit" class="button bg-blue-500 text-white px-8"> Créer</button>
-    
+                    <button type="button" class="button bg-blue-500 text-white px-8 submit-form" id="create_new"> Devenir </button>
+                    
                 </div>
             
 
@@ -63,3 +75,4 @@
     </div>
 
 </div>
+@endisset

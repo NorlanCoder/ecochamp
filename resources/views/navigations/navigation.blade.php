@@ -14,7 +14,7 @@
                         <ion-icon name="close-outline" class="hidden text-2xl group-aria-expanded:block"></ion-icon>
                 </button>
                 <div id="logo">
-                    <a href="feed.html"> 
+                    <a href="{{url('/home')}}"> 
                         <img src={{asset("images/logo.png")}} alt="" class="w-28 md:block hidden dark:!hidden">
                         <img src={{asset("images/logo-light.png")}} alt="" class="dark:md:block hidden">
                         <img src={{asset("images/logo-mobile.png")}} class="hidden max-md:block w-20 dark:!hidden" alt="">
@@ -461,7 +461,7 @@
                 @endauth
 
                 @guest
-                    <a href="{{route("login.create")}}">
+                    <a href="{{route("login")}}">
                         <div class="flex items-center sm:gap-4 gap-2 absolute right-5 top-1/2 -translate-y-1/2 text-black"> 
                             <button type="button" class="button text-white bg-primary"> Connexion </button>
                         </div>

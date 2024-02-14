@@ -10,15 +10,15 @@
 
                 <div class="page-heading">
                     
-                    <h1 class="page-title"> Events </h1>
+                    <h1 class="page-title"> Activités </h1>
     
                     <nav class="nav__underline">
     
                         <ul uk-tab class="group" uk-switcher="connect: #ttabs ; animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium"> 
                        
                             <li> <a href="#"> Suggestions  </a> </li>
-                            <li> <a href="#"> Popular </a> </li>
-                            <li> <a href="#"> My events </a> </li>
+                            <li> <a href="#"> Populaire </a> </li>
+                            <li> <a href="#"> Mes événements </a> </li>
                             
                         </ul> 
     
@@ -26,152 +26,178 @@
     
                 </div>
                 
-                <!-- event feautred -->
-                <div class="relative" tabindex="-1" uk-slider="finite:true">
-        
-                    <div class="uk-slider-container pb-1">
-                    
-                        <ul class="uk-slider-items grid-small">
-                           
-                            <li class="lg:w-1/4 sm:w-1/3 w-1/2">
-                                <div class="card">
-                                    <a href="timeline-event.html">
-                                        <div class="card-media h-32">
-                                            <img src="assets/images/events/img-3.jpg" alt="">
-                                            <div class="card-overly"></div>
-                                        </div>
-                                    </a>
-                                    <div class="card-body">
-                                        <p class="text-xs font-medium text-blue-600 mb-1"> Next week </p> 
-                                        <a href="timeline-event.html"><h4 class="card-title text-sm"> About Safety and Flight  </h4> </a>
-                                        <a href="#"> <p class="card-text text-black mt-2"> Dubai </p> </a> 
-                                        <div class="card-list-info text-xs mt-1">
-                                            <div> 26 Intersted</div>
-                                            <div class="md:block hidden">·</div>
-                                            <div> 8 Going</div>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <button type="button" class="button bg-primary text-white flex-1">Intersted</button>
-                                            <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li> 
-                            <li class="lg:w-1/4 sm:w-1/3 w-1/2">
-                                <div class="card">
-                                    <a href="timeline-event.html">
-                                        <div class="card-media h-32">
-                                            <img src="assets/images/events/img-2.jpg" alt="">
-                                            <div class="card-overly"></div>
-                                        </div>
-                                    </a>
-                                    <div class="card-body">
-                                        <p class="text-xs font-semibold text-teal-600 mb-1">Opening</p>
-                                        <a href="timeline-event.html"><h4 class="card-title text-sm"> Wedding trend Ideas  </h4> </a>
-                                        <a href="#"> <p class="card-text text-black mt-2"> Turkey </p></a> 
-                                        <div class="card-list-info text-xs mt-1">
-                                            <div> 20 Intersted</div>
-                                            <div class="md:block hidden">·</div>
-                                            <div> 16 Going</div>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <button type="button" class="button bg-primary text-white flex-1">Intersted</button>
-                                            <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
-                                        </div>
+                <!-- group list tabs -->
+                <div class="uk-switcher" id="ttabs">
+                    <!-- card layout 1 -->
+                    <div class="relative" tabindex="-1" uk-slider="finite:true">
                 
-                                    </div>
-                                </div>
-                            </li> 
-                            <li class="lg:w-1/4 sm:w-1/3 w-1/2">
-                                <div class="card">
-                                    <a href="timeline-event.html">
-                                        <div class="card-media h-32">
-                                            <img src="assets/images/events/img-1.jpg" alt="">
-                                            <div class="card-overly"></div>
+                        <div class="uk-slider-container pb-1">
+                        
+                            <ul class="uk-slider-items grid-small">
+
+                                @foreach ($activities_sugestion as $item)
+                                    <li class="lg:w-1/4 sm:w-1/3 w-1/2">
+                                        <div class="card">
+                                            <a href="{{url('/activite', $item->id)}}">
+                                                <div class="card-media h-32">
+                                                    <img src={{asset(Storage::url($item->couverture))}} alt="">
+                                                    <div class="card-overly"></div>
+                                                </div>
+                                            </a>
+                                            <div class="card-body">
+                                                <p class="text-xs font-medium text-blue-600 mb-1"> {{date('l j F Y', strtotime($item->debut)) }} </p> 
+                                                <a href="{{url('/activite', $item->id)}}"><h4 class="card-title text-sm"> {{$item->non}}  </h4> </a>
+                                                <a href="#"> <p class="card-text text-black mt-2"> {{$item->localite}} </p> </a> 
+                                                <div class="card-list-info text-xs mt-1">
+                                                    <div> {{count($item->activityJoins)}} Intéressé</div>
+                                                    <div class="md:block hidden">·</div>
+                                                    <div> {{count($item->activityJoins->where("participation", "!=", ""))}} participant</div>
+                                                </div>
+                                                <div class="flex gap-2">
+                                                    @if(!in_array($item->id, $joins))
+                                                        <form action="{{ url('/activite/join') }}" method="POST" enctype="multipart/form-data" id="form-data-join-activite{{$item->id}}">
+                                                            @csrf
+                                                            <input id="activite_id" type="text" class="hidden" name="activite_id" value="{{$item->id}}"/>
+                                                            <button type="button" class="button bg-primary text-white flex-1">Intéressé</button>
+                                                        </form>
+                                                    @else
+                                                        <a href="{{url('/activite', $item->id)}}"> <button type="button" class="button bg-primary text-white flex-1">  Voir  </button> </a>
+                                                    @endif
+                                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/activity') }}" target="_blank">
+                                                        <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </a>
-                                    <div class="card-body">
-                                        <p class="text-xs font-medium text-red-600 mb-1"> WED JUL 10,2024 AT 10PM </p> 
-                                        <a href="timeline-event.html"><h4 class="card-title text-sm"> The global creative  </h4> </a>
-                                        <a href="#"> <p class="card-text text-black mt-2"> Japan </p> </a> 
-                                        <div class="card-list-info text-xs mt-1">
-                                            <div> 15 Intersted</div>
-                                            <div class="md:block hidden">·</div>
-                                            <div> 2 Going</div>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <button type="button" class="button bg-primary text-white flex-1">Intersted</button>
-                                            <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>  
-                            <li class="lg:w-1/4 sm:w-1/3 w-1/2">
-                                <div class="card">
-                                    <a href="timeline-event.html">
-                                        <div class="card-media h-32">
-                                            <img src="assets/images/events/img-4.jpg" alt="">
-                                            <div class="card-overly"></div>
-                                        </div>
-                                    </a>
-                                    <div class="card-body">
-                                        <p class="text-xs font-semibold text-teal-600 mb-1">Opening</p>
-                                        <a href="timeline-event.html"><h4 class="card-title text-sm"> Perspective is everything  </h4> </a>
-                                        <a href="#"> <p class="card-text text-black mt-2"> London </p></a> 
-                                        <div class="card-list-info text-xs mt-1">
-                                            <div> 20 Intersted</div>
-                                            <div class="md:block hidden">·</div>
-                                            <div> 16 Going</div>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <button type="button" class="button bg-primary text-white flex-1">Intersted</button>
-                                            <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
-                                        </div>
-                
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="lg:w-1/4 sm:w-1/3 w-1/2">
-                                <div class="card">
-                                    <a href="timeline-event.html">
-                                        <div class="card-media h-32">
-                                            <img src="assets/images/events/img-3.jpg" alt="">
-                                            <div class="card-overly"></div>
-                                        </div>
-                                    </a>
-                                    <div class="card-body">
-                                        <p class="text-xs font-medium text-blue-600 mb-1"> Next week </p> 
-                                        <a href="timeline-event.html"><h4 class="card-title text-sm"> About Safety and Flight  </h4> </a>
-                                        <a href="#"> <p class="card-text text-black mt-2"> Dubai </p> </a> 
-                                        <div class="card-list-info text-xs mt-1">
-                                            <div> 26 Intersted</div>
-                                            <div class="md:block hidden">·</div>
-                                            <div> 8 Going</div>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <button type="button" class="button bg-primary text-white flex-1">Intersted</button>
-                                            <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                                    </li> 
+                                @endforeach
+                                
                             
-                        </ul>
-                
-                    </div>
-                
-                    <!-- slide nav icons -->
-                    <a class="nav-prev !top-20" href="#" uk-slider-item="previous"> <ion-icon name="chevron-back" class="text-2xl"></ion-icon> </a>
-                    <a class="nav-next !top-20" href="#" uk-slider-item="next"> <ion-icon name="chevron-forward" class="text-2xl"></ion-icon></a>
+                            </ul>
+                            
+                        </div>
                     
+                        <!-- slide nav icons -->
+                        <a class="nav-prev !top-20" href="#" uk-slider-item="previous"> <ion-icon name="chevron-back" class="text-2xl"></ion-icon> </a>
+                        <a class="nav-next !top-20" href="#" uk-slider-item="next"> <ion-icon name="chevron-forward" class="text-2xl"></ion-icon></a>
+                        
+                    </div>
+                    <!-- card layout 2 -->
+                    <div class="relative" tabindex="-1" uk-slider="finite:true">
+                
+                        <div class="uk-slider-container pb-1">
+                        
+                            <ul class="uk-slider-items grid-small">
+
+                                @foreach ($activities_sugestion as $item)
+                                    <li class="lg:w-1/4 sm:w-1/3 w-1/2">
+                                        <div class="card">
+                                            <a href="{{url('/activite', $item->id)}}">
+                                                <div class="card-media h-32">
+                                                    <img src={{asset(Storage::url($item->couverture))}} alt="">
+                                                    <div class="card-overly"></div>
+                                                </div>
+                                            </a>
+                                            <div class="card-body">
+                                                <p class="text-xs font-medium text-blue-600 mb-1"> {{date('l j F Y', strtotime($item->debut)) }} </p> 
+                                                <a href="{{url('/activite', $item->id)}}"><h4 class="card-title text-sm"> {{$item->non}}  </h4> </a>
+                                                <a href="#"> <p class="card-text text-black mt-2"> {{$item->localite}} </p> </a> 
+                                                <div class="card-list-info text-xs mt-1">
+                                                    <div> {{count($item->activityJoins)}} Intéressé</div>
+                                                    <div class="md:block hidden">·</div>
+                                                    <div> {{count($item->activityJoins->where("participation", "!=", ""))}} participant</div>
+                                                </div>
+                                                <div class="flex gap-2">
+                                                    @if(!in_array($item->id, $joins))
+                                                        <form action="{{ url('/activite/join') }}" method="POST" enctype="multipart/form-data" id="form-data-join-activite{{$item->id}}">
+                                                            @csrf
+                                                            <input id="activite_id" type="text" class="hidden" name="activite_id" value="{{$item->id}}"/>
+                                                            <button type="button" class="button bg-primary text-white flex-1">Intéressé</button>
+                                                        </form>
+                                                    @else
+                                                        <a href="{{url('/activite', $item->id)}}"> <button type="button" class="button bg-primary text-white flex-1">  Voir  </button> </a>
+                                                    @endif
+                                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/activity') }}" target="_blank">
+                                                        <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li> 
+                                @endforeach
+                                
+                            
+                            </ul>
+                            
+                        </div>
+                    
+                        <!-- slide nav icons -->
+                        <a class="nav-prev !top-20" href="#" uk-slider-item="previous"> <ion-icon name="chevron-back" class="text-2xl"></ion-icon> </a>
+                        <a class="nav-next !top-20" href="#" uk-slider-item="next"> <ion-icon name="chevron-forward" class="text-2xl"></ion-icon></a>
+                        
+                    </div>
+                    <!-- card layout 3 -->
+                    <div class="relative" tabindex="-1" uk-slider="finite:true">
+                
+                        <div class="uk-slider-container pb-1">
+                        
+                            <ul class="uk-slider-items grid-small">
+
+                                @foreach ($activities_sugestion as $item)
+                                    <li class="lg:w-1/4 sm:w-1/3 w-1/2">
+                                        <div class="card">
+                                            <a href="{{url('/activite', $item->id)}}">
+                                                <div class="card-media h-32">
+                                                    <img src={{asset(Storage::url($item->couverture))}} alt="">
+                                                    <div class="card-overly"></div>
+                                                </div>
+                                            </a>
+                                            <div class="card-body">
+                                                <p class="text-xs font-medium text-blue-600 mb-1"> {{date('l j F Y', strtotime($item->debut)) }} </p> 
+                                                <a href="{{url('/activite', $item->id)}}"><h4 class="card-title text-sm"> {{$item->non}}  </h4> </a>
+                                                <a href="#"> <p class="card-text text-black mt-2"> {{$item->localite}} </p> </a> 
+                                                <div class="card-list-info text-xs mt-1">
+                                                    <div> {{count($item->activityJoins)}} Intéressé</div>
+                                                    <div class="md:block hidden">·</div>
+                                                    <div> {{count($item->activityJoins->where("participation", "!=", ""))}} participant</div>
+                                                </div>
+                                                <div class="flex gap-2">
+                                                    @if(!in_array($item->id, $joins))
+                                                        <form action="{{ url('/activite/join') }}" method="POST" enctype="multipart/form-data" id="form-data-join-activite{{$item->id}}">
+                                                            @csrf
+                                                            <input id="activite_id" type="text" class="hidden" name="activite_id" value="{{$item->id}}"/>
+                                                            <button type="button" class="button bg-primary text-white flex-1">Intéressé</button>
+                                                        </form>
+                                                    @else
+                                                        <a href="{{url('/activite', $item->id)}}"> <button type="button" class="button bg-primary text-white flex-1">  Voir  </button> </a>
+                                                    @endif
+                                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/activity') }}" target="_blank">
+                                                        <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li> 
+                                @endforeach
+                                
+                            
+                            </ul>
+                            
+                        </div>
+                    
+                        <!-- slide nav icons -->
+                        <a class="nav-prev !top-20" href="#" uk-slider-item="previous"> <ion-icon name="chevron-back" class="text-2xl"></ion-icon> </a>
+                        <a class="nav-next !top-20" href="#" uk-slider-item="next"> <ion-icon name="chevron-forward" class="text-2xl"></ion-icon></a>
+                        
+                    </div>
                 </div>
     
                 <div class="sm:my-6 my-3 flex items-center justify-between md:mt-10">
                     <div>
-                        <h2 class="text-xl font-semibold"> Lists You May Like </h2>
-                        <p class="font-normal text-sm text-gray-500 leading-6"> Find a group by browsing top categories. </p>
+                        <h2 class="text-xl font-semibold"> Listes que vous pourriez aimer </h2>
+                        {{-- <p class="font-normal text-sm text-gray-500 leading-6"> Find a group by browsing top categories. </p> --}}
                     </div>
-                    <a href="#" class="text-blue-500 sm:block hidden text-sm"> See all </a>
+                    {{-- <a href="#" class="text-blue-500 sm:block hidden text-sm"> Voir tous </a> --}}
                 </div>
     
                 <!-- listing  slider -->
@@ -180,85 +206,21 @@
                     <div class="uk-slider-container pb-1">
                        
                         <ul class="uk-slider-items grid-small">
-                            
-                            <li class="md:w-1/5 sm:w-1/3 w-1/2">
-                                <a href="#">
-                                    <div class="relative rounded-lg overflow-hidden">
-                                        <img src="assets/images/events/listing-1.jpg" alt="" class="h-36 w-full object-cover">
-                                        <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-10">
-                                            <div class="text-white p-5">
-                                                <div class="text-sm font-light"> Miami  </div>
-                                                <div class="text-lg leading-3 mt-1.5"> Hotels </div> 
+                            @foreach ($activities_sugestion as $item)
+                                <li class="md:w-1/5 sm:w-1/3 w-1/2">
+                                    <a href="#">
+                                        <div class="relative rounded-lg overflow-hidden">
+                                            <img src={{asset(Storage::url($item->couverture))}} alt="" class="h-36 w-full object-cover">
+                                            <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-10">
+                                                <div class="text-white p-5">
+                                                    <div class="text-sm font-light"> {{$item->localite}}  </div>
+                                                    <div class="text-lg leading-3 mt-1.5"> {{$item->nom}} </div> 
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li> 
-                            <li class="md:w-1/5 sm:w-1/3 w-1/2">
-                                <a href="#">
-                                    <div class="relative rounded-lg overflow-hidden">
-                                        <img src="assets/images/events/listing-2.jpg" alt="" class="h-36 w-full object-cover">
-                                        <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-10">
-                                            <div class="text-white p-5">
-                                                <div class="text-sm font-light">  Florida  </div>
-                                                <div class="text-lg leading-3 mt-1.5"> Hotels </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li> 
-                           <li class="md:w-1/5 sm:w-1/3 w-1/2">
-                                <a href="#">
-                                    <div class="relative rounded-lg overflow-hidden">
-                                        <img src="assets/images/events/listing-3.jpg" alt="" class="h-36 w-full object-cover">
-                                        <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-10">
-                                            <div class="text-white p-5">
-                                                <div class="text-sm font-light">   London  </div>
-                                                <div class="text-lg leading-3 mt-1.5"> Hotels </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li> 
-                            <li class="md:w-1/5 sm:w-1/3 w-1/2">
-                                <a href="#">
-                                    <div class="relative rounded-lg overflow-hidden">
-                                        <img src="assets/images/events/listing-4.jpg" alt="" class="h-36 w-full object-cover">
-                                        <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-10">
-                                            <div class="text-white p-5">
-                                                <div class="text-sm font-light">   Dubai  </div>
-                                                <div class="text-lg leading-3 mt-1.5"> Hotels </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li> 
-                            <li class="md:w-1/5 sm:w-1/3 w-1/2">
-                                <a href="#">
-                                    <div class="relative rounded-lg overflow-hidden">
-                                        <img src="assets/images/events/listing-5.jpg" alt="" class="h-36 w-full object-cover">
-                                        <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-10">
-                                            <div class="text-white p-5">
-                                                <div class="text-sm font-light"> Turkey </div>
-                                                <div class="text-lg leading-3 mt-1.5"> Resturent </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li> 
-                            <li class="md:w-1/5 sm:w-1/3 w-1/2">
-                                <a href="#">
-                                    <div class="relative rounded-lg overflow-hidden">
-                                        <img src="assets/images/events/listing-1.jpg" alt="" class="h-36 w-full object-cover">
-                                        <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-10">
-                                            <div class="text-white p-5">
-                                                <div class="text-sm font-light"> Miami  </div>
-                                                <div class="text-lg leading-3 mt-1.5"> Hotels </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li> 
+                                    </a>
+                                </li> 
+                            @endforeach
                         </ul>
                 
                     </div>
@@ -270,106 +232,47 @@
                 </div>
     
                 <div class="flex items-center justify-between text-black dark:text-white py-3 mt-6">
-                    <h3 class="text-xl font-semibold"> Upcomming Events </h3>
-                    <a href="#" class="text-sm text-blue-500">See all</a>
+                    <h3 class="text-xl font-semibold"> Activités à venir </h3>
+                    {{-- <a href="#" class="text-sm text-blue-500">Voir tous</a> --}}
                 </div>              
     
                 <!-- event grid -->
                 <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2.5 mt-4">
     
-                    <div class="card">
-                        <a href="timeline-event.html">
-                            <div class="card-media h-32">
-                                <img src="assets/images/events/img-1.jpg" alt="">
-                                <div class="card-overly"></div>
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <p class="text-xs font-medium text-black text-red-600 mb-1"> WED JUL 10,2024 AT 10PM </p> 
-                            <a href="timeline-event.html"><h4 class="card-title text-sm"> The global creative  </h4> </a>
-                            <a href="#"> <p class="card-text text-black mt-2"> Japan </p> </a> 
-                            <div class="card-list-info text-xs mt-1">
-                                <div> 15 Intersted</div>
-                                <div class="md:block hidden">·</div>
-                                <div> 2 Going</div>
-                            </div>
-                            <div class="flex gap-2">
-                                <button type="button" class="button bg-primary text-white flex-1">Intersted</button>
-                                <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <a href="timeline-event.html">
-                            <div class="card-media h-32">
-                                <img src="assets/images/events/img-2.jpg" alt="">
-                                <div class="card-overly"></div>
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <p class="text-xs font-semibold text-teal-600 mb-1">Opening</p>
-                            <a href="timeline-event.html"><h4 class="card-title text-sm"> Wedding trend Ideas  </h4> </a>
-                            <a href="#"> <p class="card-text text-black mt-2"> Turkey </p></a> 
-                            <div class="card-list-info text-xs mt-1">
-                                <div> 20 Intersted</div>
-                                <div class="md:block hidden">·</div>
-                                <div> 16 Going</div>
-                            </div>
-                            <div class="flex gap-2">
-                                <button type="button" class="button bg-primary text-white flex-1">Intersted</button>
-                                <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
-                            </div>
-    
-                        </div>
-                    </div>
-    
-                    <div class="card">
-                        <a href="timeline-event.html">
-                            <div class="card-media h-32">
-                                <img src="assets/images/events/img-3.jpg" alt="">
-                                <div class="card-overly"></div>
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <p class="text-xs font-medium text-black text-red-600 mb-1"> WED JUL 10,2024 AT 10PM </p> 
-                            <a href="timeline-event.html"><h4 class="card-title text-sm"> About Safety and Flight  </h4> </a>
-                            <a href="#"> <p class="card-text text-black mt-2"> Dubai </p> </a> 
-                            <div class="card-list-info text-xs mt-1">
-                                <div> 26 Intersted</div>
-                                <div class="md:block hidden">·</div>
-                                <div> 8 Going</div>
-                            </div>
-                            <div class="flex gap-2">
-                                <button type="button" class="button bg-primary text-white flex-1">Intersted</button>
-                                <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
+                    @foreach ($activities_sugestion as $item)
+                        <div class="card">
+                            <a href="{{url('/activite', $item->id)}}">
+                                <div class="card-media h-32">
+                                    <img src={{asset(Storage::url($item->couverture))}} alt="">
+                                    <div class="card-overly"></div>
+                                </div>
+                            </a>
+                            <div class="card-body">
+                                <p class="text-xs font-medium text-blue-600 mb-1"> {{date('l j F Y', strtotime($item->debut)) }} </p> 
+                                <a href="{{url('/activite', $item->id)}}"><h4 class="card-title text-sm"> {{$item->non}}  </h4> </a>
+                                <a href="#"> <p class="card-text text-black mt-2"> {{$item->localite}} </p> </a> 
+                                <div class="card-list-info text-xs mt-1">
+                                    <div> {{count($item->activityJoins)}} Intéressé</div>
+                                    <div class="md:block hidden">·</div>
+                                    <div> {{count($item->activityJoins->where("participation", "!=", ""))}} participant</div>
+                                </div>
+                                <div class="flex gap-2">
+                                    @if(!in_array($item->id, $joins))
+                                        <form action="{{ url('/activite/join') }}" method="POST" enctype="multipart/form-data" id="form-data-join-activite{{$item->id}}">
+                                            @csrf
+                                            <input id="activite_id" type="text" class="hidden" name="activite_id" value="{{$item->id}}"/>
+                                            <button type="button" class="button bg-primary text-white flex-1">Intéressé</button>
+                                        </form>
+                                    @else
+                                        <a href="{{url('/activite', $item->id)}}"> <button type="button" class="button bg-primary text-white flex-1">  Voir  </button> </a>
+                                    @endif
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/activity') }}" target="_blank">
+                                        <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="card">
-                        <a href="timeline-event.html">
-                            <div class="card-media h-32">
-                                <img src="assets/images/events/img-4.jpg" alt="">
-                                <div class="card-overly"></div>
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <p class="text-xs font-semibold text-teal-600 mb-1">Opening</p>
-                            <a href="timeline-event.html"><h4 class="card-title text-sm"> Perspective is everything  </h4> </a>
-                            <a href="#"> <p class="card-text text-black mt-2"> London </p></a> 
-                            <div class="card-list-info text-xs mt-1">
-                                <div> 20 Intersted</div>
-                                <div class="md:block hidden">·</div>
-                                <div> 16 Going</div>
-                            </div>
-                            <div class="flex gap-2">
-                                <button type="button" class="button bg-primary text-white flex-1">Intersted</button>
-                                <button type="button" class="button bg-secondery !w-auto"> <ion-icon name="arrow-redo" class="text-lg"></ion-icon> </button>
-                            </div>
-    
-                        </div>
-                    </div>
+                    @endforeach
     
                 </div>
                 

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('post_likeds', function (Blueprint $table) {
             $table->id();
+            $table->string('spam')->nullable();
             $table->foreignId('user_id')
                     ->constrained()
                     ->onUpdate('cascade')
@@ -30,7 +31,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_likeds');
+        // Schema::dropIfExists('post_likeds');
     }
 
 };
