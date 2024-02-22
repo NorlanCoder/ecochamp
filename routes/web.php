@@ -46,6 +46,7 @@ Route::get('/poste', [PostController::class, 'index']);
 Route::post('/poste', [PostController::class, 'store'])->name('poste.store');
 Route::get('/profile', [UserController::class, 'profile'])->middleware('auth');
 Route::get('/profile/{id}', [UserController::class, 'show']);
+Route::post('/search', [HomeController::class, 'search']);
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::post('/liked_post', [PostLikedController::class, 'store'])->name('liked_post.store');
 
@@ -55,12 +56,14 @@ Route::middleware(['web'])->group(function () {
     Route::post('/activite/join', [ActivityjoinController::class, 'store']);
     Route::post('/activite/devenir', [ActivityjoinController::class, 'devenir']);
     // Route::get('/alert/{id}', [AlertController::class, 'show']);
-    Route::post('/activite/comment', [CommentsActivitiesController::class, 'store'])->name('comment.activite.store')->middleware('auth');
+    Route::post('/activite/comment', [CommentsActivitiesController::class, 'store'])->name('comment.activite.store');
     Route::get('/parametre', [ParametreController::class, 'index']);
     Route::post('/activity', [ActivityController::class, 'store'])->name('activity.store');
-    Route::post('/alert_comment', [AlertCommentController::class, 'store'])->name('alert_comment.store')->middleware('auth');
+    Route::post('/alert_comment', [AlertCommentController::class, 'store'])->name('alert_comment.store');
     Route::post('/profile-update/{id}', [UserController::class, 'update']);
     Route::post('/profile/reset/{id}', [UserController::class, 'resetPassword']);
+    Route::post('/photo/profile', [UserController::class, 'photoProfile']);
+    Route::post('/photo/couverture', [UserController::class, 'photoCouverture']);
 
 });
 

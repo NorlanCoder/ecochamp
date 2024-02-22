@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 // use Inertia\Inertia;
 
@@ -34,8 +35,11 @@ class HomeController extends Controller
             // dd($joins);
         }
 
+        $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->get();
+        // dd($tendance);
+
         return view('layouts.index', compact('user', 'alerts', 'postes', 'activities_campagne',
-         'activities_evenement', 'activities_activite', 'joins', 'page'));
+         'activities_evenement', 'activities_activite', 'joins', 'page', 'tendance'));
     }
 
     // Login Page
@@ -128,6 +132,42 @@ class HomeController extends Controller
             return to_route('connexion');
         }
 
+    }
 
+
+    public function search(Request $request){
+
+        // $request->validate([
+        //     'search' => 'required'
+        // ]);
+
+        $posts = Post::where("activite", 'LIKE', '%'.$request->search.'%')->paginate(2);
+        $alerts = Alert::where("nom", 'LIKE', '%'.$request->search.'%')->paginate(2);
+        $activites = Activite::where("nom", 'LIKE', '%'.$request->search.'%')->paginate(2);
+
+        $search = [];
+        if($posts){
+            foreach($posts as $post){
+                array_push($search, $post);
+            }
+        }
+
+        if($alerts){
+            foreach($alerts as $alert){
+                array_push($search, $alert);
+            }
+        }
+
+        if($activites){
+            foreach($activites as $activite){
+                array_push($search, $activite);
+            }
+        }
+        // dd($search);
+        return response([
+            'success' => "true",
+            "search" => $search,
+        ]);
+        
     }
 }

@@ -13,33 +13,29 @@
                 </button>
 
             </div>
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
+
         
-            <form action="{{ route('activity.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('activity.store') }}" method="POST" enctype="multipart/form-data" id="form-data-activite_create">
                 @csrf
 
                 <div> 
-                  <label for="" class="text-base">Nom de l'activité </label>
-                  <input type="text"  class="w-full mt-3" required="" name="nom">
+                  <label for="nom" class="text-base">Nom de l'activité </label>
+                  <input type="text" id="nom"  class="w-full mt-3" required="" name="nom">
                 </div>
 
                 <div> 
-                  <label for="" class="text-base">Date de debut de l'activité </label>
-                  <input type="date"  class="w-full mt-3" required="" name="debut">
+                  <label for="date_debut" class="text-base">Date de debut de l'activité </label>
+                  <input type="date" id="date_debut" class="w-full mt-3" required="" name="debut">
                 </div>
 
                 <div> 
-                  <label for="" class="text-base">Date de fin de l'activité </label>
-                  <input type="date"  class="w-full mt-3" required="" name="fin">
+                  <label for="date_fin" class="text-base">Date de fin de l'activité </label>
+                  <input type="date" id="date_fin" class="w-full mt-3" required="" name="fin">
                 </div>
                 <div >
-                    <label for="localite" class="">Type d'activité </label>
+                    <label for="activite_type" class="">Type d'activité </label>
                     <div class="mt-2.5">
-                        <select required class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5"  name="activite_type" id="localite">
+                        <select required class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5"  name="activite_type" id="activite_type">
                             <option value="">---</option>
                             <option value="Campagne">Campagne</option>
                             <option value="Evénement">Evénement</option>
@@ -90,6 +86,14 @@
                     </div>
                 </div>
 
+                <div >
+                    <label for="tags" class="text-base">Tag:</label>
+                    <input class="form-control" id="tags" type="text" data-role="tagsinput" name="tags">
+                    @if ($errors->has('tags'))
+                        <span class="text-danger">{{ $errors->first('tags') }}</span>
+                    @endif
+                </div>
+
                 <ul style="list-style: none;">
                   <li style="display: inline-block; margin-right: 10px">
                     <img alt="" src="mygadgeto/sites/default/files/Polyes-01.jpeg">
@@ -116,7 +120,7 @@
                 </div>     
             
                 <div class="flex justify-between items-center"> 
-                    <button type="submit" class="float-right button bg-blue-500 text-white py-2 px-12 text-[14px]"> Créer</button>
+                    <button type="button" class="float-right button bg-blue-500 text-white py-2 px-12 text-[14px] submit-form-activite"> Créer</button>
                 </div>
             </form>
     

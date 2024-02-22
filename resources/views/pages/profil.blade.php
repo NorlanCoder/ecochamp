@@ -11,7 +11,11 @@
     
                     <!-- cover -->
                     <div class="relative overflow-hidden w-full lg:h-60 h-40">
-                        <img src={{asset(Storage::url($user->couverture))}} alt="" class="h-full w-full object-cover inset-0">
+                        @if(empty($user->couverture))
+                            <img src={{asset("images/demos/beams.jpg")}} alt="" class="h-full w-full object-cover inset-0"> 
+                        @else
+                            <img src={{asset(Storage::url($user->couverture))}} alt="" class="h-full w-full object-cover inset-0"> 
+                        @endif
     
                         <!-- overly -->
                         <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from -black/60 pt-10 z-10"></div>
@@ -35,7 +39,7 @@
     
                             <div class="relative h-20 w-20 mb-4 z-10">
                                 <div class="relative overflow-hidden rounded-full md:border-[2px] border-gray-100 shrink-0 dark:border-slate-900 shadow">
-                                    @if(empty($comment->user->profile))
+                                    @if(empty($user->profile))
                                         <img src={{asset("/images/avatars/avatar.png")}} alt="" class="h-full w-full object-cover inset-0"> 
                                     @else
                                         <img src={{asset(Storage::url($user->profile))}} alt="" class="h-full w-full object-cover inset-0"> 

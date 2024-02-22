@@ -112,7 +112,7 @@
 
                 </div> --}}
                 <!-- feed story -->
-                <div class="md:max-w-[580px] mx-auto flex-1 xl:space-y-6 space-y-3">
+                <div class="md:max-w-[580px] mx-auto flex-1 xl:space-y-6 space-y-3"  style="width: 1000px; max-width: 80%;">
 
                     <!-- add story -->
                     {{-- <div class="bg-white rounded-xl shadow-sm md:p-4 p-2 space-y-4 text-sm font-medium border1 dark:bg-dark2">

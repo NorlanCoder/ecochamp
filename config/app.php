@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Jorenvh\Share\Providers\ShareServiceProvider;
+use Jorenvh\Share\ShareFacade;
 
 return [
 
@@ -159,7 +161,8 @@ return [
         /*
          * Package Service Providers...
          */
-
+        ShareServiceProvider::class,
+        \Conner\Tagging\Providers\TaggingServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -183,6 +186,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Share' => ShareFacade::class,
     ])->toArray(),
 
 ];

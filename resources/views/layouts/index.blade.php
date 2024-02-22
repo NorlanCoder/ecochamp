@@ -1,7 +1,6 @@
 @extends("layouts.default")
 @section("index")
     <main id="site__main" class="2xl:ml-[--w-side]  xl:ml-[--w-side-sm] p-2.5 h-[calc(100vh-var(--m-top))] mt-[--m-top]">
-
         <!-- timeline -->
         <div class="lg:flex 2xl:gap-16 gap-12 max-w-[1065px] mx-auto"  id="js-oversized">
 
@@ -18,11 +17,11 @@
                 <!-- stories -->
                 {{-- <div class="mb-8">
 
-                    <h3 class="font-extrabold text-2xl  text-black dark:text-white hidden"> Stories</h3>
+                    <h3 class="font-extrabold text-2xl  text-black dark:text-white"> Stories</h3>
 
                     <div class="relative" tabindex="-1" uk-slider="auto play: true;finite: true" uk-lightbox="">
 
-                        <div class="py-5 uk-slider-container">
+                        <div class="py-5 uk-slider-container ">
                         
                             <ul class="uk-slider-items w-[calc(100%+14px)]" uk-scrollspy="target: > li; cls: uk-animation-scale-up; delay: 20;repeat:true">
                                 <li class="md:pr-3" uk-scrollspy-class="uk-animation-fade">
@@ -130,7 +129,7 @@
                     </div>
                 </div>
 
-                <div class="md:max-w-[580px] mx-auto flex-1 xl:space-y-6 space-y-3">
+                <div id="addPost" class="md:max-w-[580px] mx-auto flex-1 xl:space-y-6 space-y-3">
 
                     <!-- add story -->
                     {{-- <div class="bg-white rounded-xl shadow-sm md:p-4 p-2 space-y-4 text-sm font-medium border1 dark:bg-dark2">

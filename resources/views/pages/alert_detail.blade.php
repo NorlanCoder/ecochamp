@@ -41,9 +41,10 @@
                             
                         </div>
                         <div class="p-6">
-    
-                            <h1 class="text-xl font-semibold mt-1"> {{$alert->nom}} </h1>
-        
+                            <div class="sm:p-4 p-2.5 flex items-center gap-4 text-xs font-semibold">
+                                <h1 class="text-xl font-semibold mt-1"> {{$alert->nom}} </h1>
+                                <button type="button" class="button-icon ml-auto"> <ion-icon class="text-xl" name="share-social-outline"></ion-icon> </button>
+                            </div>
                             <!-- story heading -->
                             <div class="flex gap-3 text-sm mt-6">
                                 @if(empty($alert->user->profile))
@@ -139,113 +140,33 @@
     
                     <div  class="lg:space-y-6 space-y-4 lg:pb-8 max-lg:grid sm:grid-cols-2 max-lg:gap-6" 
                           uk-sticky="media: 1024; end: #js-oversized; offset: 80">
-
-                        <div class="box p-5 px-6">
-                            
-                            <div class="flex items-baseline justify-between text-black dark:text-white">
-                                <h3 class="font-bold text-base"> Trending Articles</h3>
-                                <a href="#" class="text-sm text-blue-500">See all</a>
-                            </div>
-
-                            <div class="mt-4 space-y-4">
-
-                                <div>
-                                    <a href="blog-read.html"><h4 class="text-sm font-normal text-black dark:text-white duration-200 hover:opacity-80">Interesting javaScript and CSS libraries  you should be learn</h4></a>
-                                    <div class="text-xs text-gray-400 mt-2 flex items-center gap-2">
-                                        <div> 10 Jun 2022 </div>
-                                        <div class="md:block hidden">·</div>
-                                        <div> 156.9K views</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <a href="blog-read.html"><h4 class="text-sm font-normal text-black dark:text-white duration-200 hover:opacity-80"> Interesting javaScript and CSS libraries  you should be learn</h4></a>
-                                    <div class="text-xs text-gray-400 mt-2 flex items-center gap-2">
-                                        <div> 10 Jun 2022 </div>
-                                        <div class="md:block hidden">·</div>
-                                        <div> 156.9K views</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <a href="blog-read.html"><h4 class="text-sm font-normal text-black dark:text-white duration-200 hover:opacity-80">  Interesting JavaScript and CSS libraries should Know About</h4></a>
-                                    <div class="text-xs text-gray-400 mt-2 flex items-center gap-2">
-                                        <div> 10 Jun 2022 </div>
-                                        <div class="md:block hidden">·</div>
-                                        <div> 156.9K views</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <a href="blog-read.html"><h4 class="text-sm font-normal text-black dark:text-white duration-200 hover:opacity-80">Top amazing web demos and experiments should know about</h4></a>
-                                    <div class="text-xs text-gray-400 mt-2 flex items-center gap-2">
-                                        <div> 10 Jun 2022 </div>
-                                        <div class="md:block hidden">·</div>
-                                        <div> 156.9K views</div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-
-                        </div>
     
                         <!-- peaple you might know -->
                         <div class="box p-5 px-6 border1 dark:bg-dark2">
                                         
                             <div class="flex justify-between text-black dark:text-white">
-                                <h3 class="font-bold text-base"> Peaple You might know </h3>
+                                <h3 class="font-bold text-base"> listes des vues </h3>
                                 <button type="button"> <ion-icon name="sync-outline" class="text-xl"></ion-icon> </button>
                             </div>
 
                             <div class="space-y-4 capitalize text-xs font-normal mt-5 mb-2 text-gray-500 dark:text-white/80">
-
-                                <div class="flex items-center gap-3">
-                                    <a href="timeline.html">
-                                        <img src={{asset("images/avatars/avatar-7.jpg")}} alt="" class="bg-gray-200 rounded-full w-10 h-10">
-                                    </a>
-                                    <div class="flex-1">
-                                        <a href="timeline.html"><h4 class="font-semibold text-sm text-black dark:text-white">  Johnson smith</h4></a>
-                                        <div class="mt-0.5"> Suggested For You </div>
+                                
+                                @foreach ($alertfollows as $item)
+                                    <div class="flex items-center gap-3">
+                                        <a href="{{url('/profile', $item->user->id)}}">
+                                            @if(empty($item->user->profile))
+                                                <img src={{asset("/images/avatars/avatar.png")}} alt="" class="bg-gray-200 rounded-full w-10 h-10"> 
+                                            @else
+                                                <img src={{asset(Storage::url($item->user->profile))}} alt="" class="bg-gray-200 rounded-full w-10 h-10"> 
+                                            @endif
+                                        </a>
+                                        <div class="flex-1">
+                                            <a href="{{url('/profile', $item->user->id)}}"><h4 class="font-semibold text-sm text-black dark:text-white">  {{$item->user->lastname}} {{$item->user->firstname}}</h4></a>
+                                            <div class="mt-0.5"> vu {{date('l j F Y', strtotime($item->created_at)) }} </div>
+                                        </div>
                                     </div>
-                                    <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <a href="timeline.html">
-                                        <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="bg-gray-200 rounded-full w-10 h-10">
-                                    </a>
-                                    <div class="flex-1">
-                                        <a href="timeline.html"><h4 class="font-semibold text-sm text-black dark:text-white"> James Lewis</h4></a>
-                                        <div class="mt-0.5"> Followed by Johnson </div>
-                                    </div>
-                                    <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <a href="timeline.html">
-                                        <img src={{asset("images/avatars/avatar-2.jpg")}} alt="" class="bg-gray-200 rounded-full w-10 h-10">
-                                    </a>
-                                    <div class="flex-1">
-                                        <a href="timeline.html"><h4 class="font-semibold text-sm text-black dark:text-white"> John Michael</h4></a>
-                                        <div class="mt-0.5"> Followed by Monroe  </div>
-                                    </div>
-                                    <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <a href="timeline.html">
-                                        <img src={{asset("images/avatars/avatar-3.jpg")}} alt="" class="bg-gray-200 rounded-full w-10 h-10">
-                                    </a>
-                                    <div class="flex-1">
-                                        <a href="timeline.html"><h4 class="font-semibold text-sm text-black dark:text-white">  Monroe Parker</h4></a>
-                                        <div class="mt-0.5"> Suggested For You </div>
-                                    </div>
-                                    <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
-                                </div> 
-                                <div class="flex items-center gap-3">
-                                    <a href="timeline.html">
-                                        <img src={{asset("images/avatars/avatar-4.jpg")}} alt="" class="bg-gray-200 rounded-full w-10 h-10">
-                                    </a>
-                                    <div class="flex-1">
-                                        <a href="timeline.html"><h4 class="font-semibold text-sm text-black dark:text-white">  Martin Gray</h4></a>
-                                        <div class="mt-0.5"> Suggested For You </div>
-                                    </div>
-                                    <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
-                                </div>
+                                @endforeach
+                     
                             </div>
 
                         </div>

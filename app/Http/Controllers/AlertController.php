@@ -15,10 +15,15 @@ class AlertController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $page = "alert";
         $user = Auth::user();
         $alerts = Alert::paginate(15);
-        return view('pages.alert', compact('user', 'alerts', 'page'));
+        $alert_user = [];
+        if($user){
+            $alert_user = Alert::where('user_id', $user->id)->paginate(15);
+        }
+        return view('pages.alert', compact('user', 'alerts', 'page', 'alert_user'));
     }
 
     /**
@@ -42,6 +47,7 @@ class AlertController extends Controller
             'type_alert' => 'required',
             'interventions' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tags' => 'required',
         ]);
         // dd($request);
         if(!empty($request->image)){
@@ -53,7 +59,8 @@ class AlertController extends Controller
 
         // }
         // dd($request);
-        Alert::create([
+        $tags = explode("[,\s\-:]", $request->tags);
+        $alert = Alert::create([
             'nom' => $request->nom,
             'date_remarque' => $request->debut,
             'image_principale' => isset($imageName1) ? $imageName1: "",
@@ -63,7 +70,14 @@ class AlertController extends Controller
             'interventions' => $request->interventions,
             'user_id' => $user->id,
         ]);
-
+        // dd($alert);
+        $alert->tag($tags);
+        // dd($alert->tags);
+        return response(
+            [
+                'success' => "Alert créée avec success!",
+                "data" => $alert,
+            ]);
         return redirect()->back()->with('status',"Alert créée avec success!");
     }
 
@@ -74,21 +88,25 @@ class AlertController extends Controller
     {
         $user = Auth::user();
         $alert = Alert::where('id', $id)->firstorfail();
-
-        $vus = Alertfollow::where("user_id", $user->id)->where("alert_id", $id)->get();
-
+        $vus = [];
+        if($user){
+            $vus = Alertfollow::where("user_id", $user->id)->where("alert_id", $id)->get();
+        }
         if($vus){
             foreach ($vus as $item){
                 $item->delete();
             }
         }
+        if($user){
+            Alertfollow::create([
+                'user_id' => $user->id, 
+                'alert_id' => $id,
+                'follow' => true,
+            ]);
+        }
+        $alertfollows = Alertfollow::where('alert_id', $id)->paginate(20);
 
-        Alertfollow::create([
-            'user_id' => $user->id, 
-            'alert_id' => $id,
-        ]);
-
-        return view('pages.alert_detail', compact('user', 'alert'));
+        return view('pages.alert_detail', compact('user', 'alert', 'alertfollows'));
     }
 
     /**

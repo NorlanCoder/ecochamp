@@ -6,6 +6,7 @@ use App\Models\Alert;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -18,8 +19,9 @@ class PostController extends Controller
         $user = Auth::user();
         $alerts = Alert::paginate(5);
         $postes = Post::paginate(5);
+        $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->get();
         //dd($postes[2]->postLikeds);
-        return view('pages.post', compact('user', 'alerts', 'postes', 'page'));
+        return view('pages.post', compact('user', 'alerts', 'postes', 'page', 'tendance'));
 
     }
 
@@ -42,6 +44,7 @@ class PostController extends Controller
             'activite' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tags' => 'required',
         ]);
         
         if(!empty($request->image)){
@@ -50,15 +53,22 @@ class PostController extends Controller
             $imageName = $request->file('image')->store('public/images');
         }
         
-
-        Post::create([
+        $tags = explode("[,\s\-:]", $request->tags);
+        $post = Post::create([
             'activite' => $request->activite,
             'description' => $request->description,
             'image1' => $imageName,
             'user_id' => $user->id,
         ]);
+        $post->tag($tags);
 
-        return redirect()->back()->with('status',"Post créée avec success!");
+        return response(
+            [
+                'success' => "Poste créé avec success!",
+                "data" => $post,
+            ]);
+
+        return redirect()->back()->with('status',"Poste créé avec success!");
 
     }
 

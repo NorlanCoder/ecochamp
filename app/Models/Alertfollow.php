@@ -13,7 +13,7 @@ class Alertfollow extends Model
     protected $fillable = [
         'user_id',
         'alert_id',
-        'spam',
+        'follow',
     ];
 
 

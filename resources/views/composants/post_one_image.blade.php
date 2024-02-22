@@ -2,7 +2,7 @@
 
     <!-- post heading -->
     <div class="flex gap-3 sm:p-4 p-2.5 text-sm font-medium">
-        <a href="{{url('/prifile')}}"> 
+        <a href="{{url('/profile', $item->user->id)}}"> 
             @if(empty($item->user->profile))
                 <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-9 h-9 rounded-full"> 
             @else
@@ -10,7 +10,7 @@
             @endif
         </a>  
         <div class="flex-1">
-            <a href="{{url('/prifile')}}"> <h4 class="text-black dark:text-white"> {{$item->user->lastname }} {{$item->user->firstname }}</h4> </a>  
+            <a href="{{url('/profile', $item->user->id)}}"> <h4 class="text-black dark:text-white"> {{$item->user->lastname }} {{$item->user->firstname }}</h4> </a>  
             <div class="text-xs text-gray-500 dark:text-white/80"> {{date('j F Y H:i', strtotime($item->created_at)) }}</div>
         </div>
 
@@ -18,12 +18,12 @@
             <button type="button" class="button-icon w-8 h-8"> <ion-icon class="text-xl" name="ellipsis-horizontal"></ion-icon> </button>
             <div  class="w-[245px]" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click"> 
                 <nav> 
-                    <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon>  Add to favorites </a>  
+                    {{-- <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon>  Add to favorites </a>  
                     <a href="#"> <ion-icon class="text-xl shrink-0" name="notifications-off-outline"></ion-icon> Mute Notification </a>  
-                    <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report this post </a>  
-                    <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Share your profile </a>  
-                    <hr>
-                    <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon>  Unfollow </a>  
+                    <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report this post </a>   --}}
+                    <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Partagez votre profile </a>  
+                    {{-- <hr> --}}
+                    {{-- <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon>  Unfollow </a>   --}}
                 </nav>
             </div>
         </div>
@@ -83,8 +83,8 @@
             @endif
 
         </div>
-        <button type="button" class="button-icon ml-auto"> <ion-icon class="text-xl" name="paper-plane-outline"></ion-icon> </button>
-        <button type="button" class="button-icon"> <ion-icon class="text-xl" name="share-outline"></ion-icon> </button>
+        {{-- <button type="button" class="button-icon ml-auto"> <ion-icon class="text-xl" name="paper-plane-outline"></ion-icon> </button> --}}
+        <button type="button" class="button-icon ml-auto"> <ion-icon class="text-xl" name="share-social-outline"></ion-icon> </button>
     </div>
 
     <!-- comments -->

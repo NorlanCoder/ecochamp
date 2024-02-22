@@ -1014,3 +1014,6 @@ input:checked + .switch-button:before {
   overflow-y: hidden;
   overflow-x: scroll;
 }
+a:link {
+  text-decoration: none;
+}

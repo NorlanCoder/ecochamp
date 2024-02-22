@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 // use Inertia\Inertia;
 
@@ -24,6 +25,7 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::user();
+        $user_auth = Auth::user();
         $activities = Activite::where('user_id', "!=" , $user->id)->paginate(5);
         $alerts = Alert::where('user_id', $user->id)->paginate(5);
         $postes = Post::where('user_id', $user->id)->paginate(5);
@@ -37,7 +39,7 @@ class UserController extends Controller
             }
             // dd($joins);
         }
-        return view('pages.profil', compact('user', 'postes', 'activities', 'alerts', 'joins'));
+        return view('pages.profil', compact('user', 'user_auth', 'postes', 'activities', 'alerts', 'joins'));
     }
 
     public function show(string $id)
@@ -105,6 +107,50 @@ class UserController extends Controller
         ]);
         
         return redirect()->back()->with('status',"modification password success");
+    }
+
+    public function photoProfile(Request $request){
+
+        $user = Auth::user();
+        $request->validate([
+            'profile' => 'required'
+        ]);
+        if(!empty($user->profile)){
+            Storage::delete($user->profile);
+        }
+
+        $imageName = $request->file('profile')->store('public/images');
+        $user_update = User::where('id', $user->id)->first();
+        $user_update->update(['profile' => $imageName]);
+
+            return response(
+            [
+                'success' => "true",
+                "entre" => $user_update,
+            ]);
+    }
+
+    public function photoCouverture(Request $request){
+
+        $user = Auth::user();
+        $request->validate([
+            'couverture' => 'required'
+        ]);
+        if(!empty($user->couverture)){
+            Storage::delete($user->couverture);
+        }
+
+        $imageName = $request->file('couverture')->store('public/images');
+        $user_update = User::where('id', $user->id)->first();
+        $user_update->couverture = $imageName;
+
+        $user_update->save();
+
+        return response(
+            [
+                'success' => "true",
+                "entre" => $user_update,
+            ]);
     }
     
 }

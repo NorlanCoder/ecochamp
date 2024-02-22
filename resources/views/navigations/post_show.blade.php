@@ -121,17 +121,9 @@
                     @else
                         <img src={{asset(Storage::url($item->user->profile))}} alt="" class="w-6 h-6 rounded-full"> 
                     @endif
-                    
-                   
+ 
                         <textarea placeholder="ajouter un commentaire...." rows="1" name="comment" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent" id="text_new"></textarea>
-
-                        {{-- <div class="flex items-center gap-2 absolute bottom-0.5 right-0 m-3">
-                            <ion-icon class="text-xl flex text-blue-700" name="image"></ion-icon> 
-                            <ion-icon class="text-xl flex text-yellow-500" name="happy"></ion-icon> 
-                        </div> --}}
                         <input id="post_id" type="text" class="hidden" name="post_id" value="{{$item->id}}"/>
-
-                  
 
                     <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery submit-form" id="create_new"> Envoyer</button>
                 

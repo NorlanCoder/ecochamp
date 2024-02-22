@@ -14,19 +14,27 @@
 
         </div>
  
-        <form action="{{ route('poste.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('poste.store') }}" method="POST" enctype="multipart/form-data" id="form-data-post_create">
             @csrf
 
             <div class="space-y-5 mt-7">
 
                 <div> 
-                    <label for="" class="text-base">Activité </label>
-                    <input type="text"  class="w-full mt-3" required="" name="activite">
+                    <label for="activite" class="text-base">Activité </label>
+                    <input type="text" id="activite"  class="w-full mt-3" required="" name="activite">
                 </div>
 
                 <div >
                     <label for="description" class="text-base">Description</label>
                     <textarea class="w-full mt-3" id="description" rows="3" name="description"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tags" class="text-base">Tag:</label>
+                    <input class="form-control" id="tags" type="text" data-role="tagsinput" name="tags">
+                    @if ($errors->has('tags'))
+                    <span class="text-danger">{{ $errors->first('tags') }}</span>
+                    @endif
                 </div>
     
                 <div>  
@@ -51,7 +59,7 @@
                         <p class="text-sm text-gray-500 font-medium"> Your Status will be available <br> for <span class="text-gray-800"> 24 Hours</span> </p> --}}
                     </div>
     
-                    <button type="submit" class="button bg-blue-500 text-white px-8"> Créer</button>
+                    <button type="button" class="button bg-blue-500 text-white px-8 submit-form-post"> Créer</button>
     
                 </div>
             

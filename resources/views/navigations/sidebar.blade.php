@@ -1,4 +1,4 @@
-<div class="flex-1"> 
+<div class="flex-1" style="max-width: 30%;"> 
                 
     <div class="lg:space-y-4 lg:pb-8 max-lg:grid sm:grid-cols-2 max-lg:gap-6" 
     uk-sticky="media: 1024; end: #js-oversized; offset: 80">
@@ -10,7 +10,7 @@
             <a href="{{url('alert')}}" class="text-sm text-blue-500">Voir plus</a>
         </div>
 
-        <div class="side-list">
+        <div id="addAlert" class="side-list">
 
             @foreach($alerts as $alert)
 
@@ -23,7 +23,7 @@
                         @endif
                     </a>
                     <div class="flex-1">
-                        <a href="timeline.html"><h4 class="side-list-title">  {{$item->user->lastname }} {{$item->user->firstname }} </h4></a>
+                        <a href="{{url('profile', $alert->user->id)}}"><h4 class="side-list-title">  {{$item->user->lastname }} {{$item->user->firstname }} </h4></a>
                         <div class="side-list-info">  
                             @if(count($alert->alertfollows) >= 100)
                                 {{count($alert->alertfollows) / 100}} K vues
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <a href="{{url('alert', $alert->id)}}">
-                        <button class="button bg-primary-soft text-primary dark:text-white">voir</button>
+                        <button class="button bg-primary text-white dark:text-white">voir</button>
                     </a>
                 </div>
 
@@ -56,51 +56,51 @@
         <div class="space-y-4 capitalize text-xs font-normal mt-5 mb-2 text-gray-500 dark:text-white/80">
 
             <div class="flex items-center gap-3">
-                <a href="timeline.html">
+                <a href="{{url('profile', $alert->user->id)}}">
                     <img src={{asset("images/avatars/avatar-7.jpg")}} alt="" class="bg-gray-200 rounded-full w-10 h-10">
                 </a>
                 <div class="flex-1">
-                    <a href="timeline.html"><h4 class="font-semibold text-sm text-black dark:text-white">  Johnson smith</h4></a>
+                    <a href="{{url('profile', $alert->user->id)}}"><h4 class="font-semibold text-sm text-black dark:text-white">  Johnson smith</h4></a>
                     <div class="mt-0.5"> Suggested For You </div>
                 </div>
                 <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
             </div>
             <div class="flex items-center gap-3">
-                <a href="timeline.html">
+                <a href="{{url('profile', $alert->user->id)}}">
                     <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="bg-gray-200 rounded-full w-10 h-10">
                 </a>
                 <div class="flex-1">
-                    <a href="timeline.html"><h4 class="font-semibold text-sm text-black dark:text-white"> James Lewis</h4></a>
+                    <a href="{{url('profile', $alert->user->id)}}"><h4 class="font-semibold text-sm text-black dark:text-white"> James Lewis</h4></a>
                     <div class="mt-0.5"> Followed by Johnson </div>
                 </div>
                 <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
             </div>
             <div class="flex items-center gap-3">
-                <a href="timeline.html">
+                <a href="{{url('profile', $alert->user->id)}}">
                     <img src={{asset("images/avatars/avatar-2.jpg")}} alt="" class="bg-gray-200 rounded-full w-10 h-10">
                 </a>
                 <div class="flex-1">
-                    <a href="timeline.html"><h4 class="font-semibold text-sm text-black dark:text-white"> John Michael</h4></a>
+                    <a href="{{url('profile', $alert->user->id)}}"><h4 class="font-semibold text-sm text-black dark:text-white"> John Michael</h4></a>
                     <div class="mt-0.5"> Followed by Monroe  </div>
                 </div>
                 <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
             </div>
             <div class="flex items-center gap-3">
-                <a href="timeline.html">
+                <a href="{{url('profile', $alert->user->id)}}">
                     <img src={{asset("images/avatars/avatar-3.jpg")}} alt="" class="bg-gray-200 rounded-full w-10 h-10">
                 </a>
                 <div class="flex-1">
-                    <a href="timeline.html"><h4 class="font-semibold text-sm text-black dark:text-white">  Monroe Parker</h4></a>
+                    <a href="{{url('profile', $alert->user->id)}}"><h4 class="font-semibold text-sm text-black dark:text-white">  Monroe Parker</h4></a>
                     <div class="mt-0.5"> Suggested For You </div>
                 </div>
                 <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
             </div> 
             <div class="flex items-center gap-3">
-                <a href="timeline.html">
+                <a href="{{url('profile', $alert->user->id)}}">
                     <img src={{asset("images/avatars/avatar-4.jpg")}} alt="" class="bg-gray-200 rounded-full w-10 h-10">
                 </a>
                 <div class="flex-1">
-                    <a href="timeline.html"><h4 class="font-semibold text-sm text-black dark:text-white">  Martin Gray</h4></a>
+                    <a href="{{url('profile', $alert->user->id)}}"><h4 class="font-semibold text-sm text-black dark:text-white">  Martin Gray</h4></a>
                     <div class="mt-0.5"> Suggested For You </div>
                 </div>
                 <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
@@ -185,37 +185,37 @@
 
         <div class="grid grid-cols-6 gap-3 mt-4">
 
-            <a href="timeline.html"> 
+            <a href="{{url('profile', $alert->user->id)}}"> 
                 <div class="w-10 h-10 relative">
                     <img src={{asset("images/avatars/avatar-2.jpg")}} alt="" class="w-full h-full absolute inset-0 rounded-full">
                     <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
                 </div> 
             </a>
-            <a href="timeline.html"> 
+            <a href="{{url('profile', $alert->user->id)}}"> 
                 <div class="w-10 h-10 relative">
                     <img src={{asset("images/avatars/avatar-3.jpg")}} alt="" class="w-full h-full absolute inset-0 rounded-full">
                     <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
                 </div>
             </a>
-            <a href="timeline.html">  
+            <a href="{{url('profile', $alert->user->id)}}">  
                 <div class="w-10 h-10 relative">
                     <img src={{asset("images/avatars/avatar-4.jpg")}} alt="" class="w-full h-full absolute inset-0 rounded-full">
                     <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
                 </div> 
             </a>
-            <a href="timeline.html"> 
+            <a href="{{url('profile', $alert->user->id)}}"> 
                 <div class="w-10 h-10 relative">
                     <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="w-full h-full absolute inset-0 rounded-full">
                     <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
                 </div> 
             </a>
-            <a href="timeline.html"> 
+            <a href="{{url('profile', $alert->user->id)}}"> 
                 <div class="w-10 h-10 relative">
                     <img src={{asset("images/avatars/avatar-6.jpg")}} alt="" class="w-full h-full absolute inset-0 rounded-full">
                     <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
                 </div> 
             </a>
-            <a href="timeline.html"> 
+            <a href="{{url('profile', $alert->user->id)}}"> 
                 <div class="w-10 h-10 relative">
                     <img src={{asset("images/avatars/avatar-7.jpg")}} alt="" class="w-full h-full absolute inset-0 rounded-full">
                     <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
@@ -241,15 +241,15 @@
                 <ul class="-ml-2 uk-slider-items w-[calc(100%+0.5rem)]">
                     
                     <li class="w-1/2 pr-2">
-                    <a href="timeline.html"> 
+                    <a href="{{url('profile', $alert->user->id)}}"> 
                         <div class="flex flex-col items-center shadow-sm p-2 rounded-xl border1">
-                            <a href="timeline.html"> 
+                            <a href="{{url('profile', $alert->user->id)}}"> 
                                 <div class="relative w-16 h-16 mx-auto mt-2">
                                     <img src={{asset("images/avatars/avatar-5.jpg")}} alt="" class="h-full object-cover rounded-full shadow w-full">
                                 </div>
                             </a>
                             <div class="mt-5 text-center w-full">
-                                <a href="timeline.html"> <h5 class="font-semibold"> Martin Gray</h5> </a>
+                                <a href="{{url('profile', $alert->user->id)}}"> <h5 class="font-semibold"> Martin Gray</h5> </a>
                                 <div class="text-xs text-gray-400 mt-0.5 font-medium"> 12K Followers</div>
                                 <button type="button" class="bg-secondery block font-semibold mt-4 py-1.5 rounded-lg text-sm w-full border1"> Follow </button>
                             </div>
@@ -258,13 +258,13 @@
                     </li>
                     <li class="w-1/2 pr-2">
                         <div class="flex flex-col items-center shadow-sm p-2 rounded-xl border1">
-                            <a href="timeline.html"> 
+                            <a href="{{url('profile', $alert->user->id)}}"> 
                                 <div class="relative w-16 h-16 mx-auto mt-2">
                                     <img src={{asset("images/avatars/avatar-4.jpg")}} alt="" class="h-full object-cover rounded-full shadow w-full">
                                 </div>
                             </a> 
                             <div class="mt-5 text-center w-full">
-                                <a href="timeline.html"> <h5 class="font-semibold"> Alexa Park</h5> </a>
+                                <a href="{{url('profile', $alert->user->id)}}"> <h5 class="font-semibold"> Alexa Park</h5> </a>
                                 <div class="text-xs text-gray-400 mt-0.5 font-medium"> 12K Followers</div>
                                 <button type="button" class="bg-secondery block font-semibold mt-4 py-1.5 rounded-lg text-sm w-full border1"> Follow </button>
                             </div>
@@ -272,13 +272,13 @@
                     </li>
                     <li class="w-1/2 pr-2">
                         <div class="flex flex-col items-center shadow-sm p-2 rounded-xl border1">
-                            <a href="timeline.html"> 
+                            <a href="{{url('profile', $alert->user->id)}}"> 
                                 <div class="relative w-16 h-16 mx-auto mt-2">
                                     <img src={{asset("images/avatars/avatar-4.jpg")}} alt="" class="h-full object-cover rounded-full shadow w-full">
                                 </div>
                             </a> 
                             <div class="mt-5 text-center w-full">
-                                <a href="timeline.html"> <h5 class="font-semibold"> James Lewis</h5> </a>
+                                <a href="{{url('profile', $alert->user->id)}}"> <h5 class="font-semibold"> James Lewis</h5> </a>
                                 <div class="text-xs text-gray-400 mt-0.5 font-medium"> 15K Followers</div>
                                 <button type="button" class="bg-secondery block font-semibold mt-4 py-1.5 rounded-lg text-sm w-full border1"> Follow </button>
                             </div>
@@ -302,23 +302,26 @@
     <div class="box p-5 px-6 border1 dark:bg-dark2">
         
         <div class="flex justify-between text-black dark:text-white">
-            <h3 class="font-bold text-base"> Trends for you </h3>
+            <h3 class="font-bold text-base"> Les tendances pour vous </h3>
             <button type="button"> <ion-icon name="sync-outline" class="text-xl"></ion-icon> </button>
         </div>
 
         <div class="space-y-3.5 capitalize text-xs font-normal mt-5 mb-2 text-gray-600 dark:text-white/80">
-            <a href="#">
-                <div class="flex items-center gap-3 p"> 
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 -mt-2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
-                    </svg>
-                    <div class="flex-1">
-                        <h4 class="font-semibold text-black dark:text-white text-sm">  artificial intelligence </h4>
-                        <div class="mt-0.5"> 1,245,62 post </div>
-                    </div> 
-                </div>
-            </a>
-            <a href="#" class="block">
+            @foreach ($tendance as $item)
+                <a href="#">
+                    <div class="flex items-center gap-3 p"> 
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 -mt-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
+                        </svg>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-black dark:text-white text-sm">  {{$item->name}} </h4>
+                            <div class="mt-0.5"> {{$item->count}} </div>
+                        </div> 
+                    </div>
+                </a>
+            @endforeach
+            
+            {{-- <a href="#" class="block">
                 <div class="flex items-center gap-3">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 -mt-2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
@@ -350,7 +353,7 @@
                         <div class="mt-0.5"> 480 post </div>
                     </div> 
                 </div>
-            </a>
+            </a> --}}
         </div>
 
         

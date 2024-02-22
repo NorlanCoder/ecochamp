@@ -13,22 +13,18 @@
                 </button>
 
             </div>
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
-            <form action="{{ route('alert.store') }}" method="POST" enctype="multipart/form-data">
+
+            <form action="{{ route('alert.store') }}" method="POST" enctype="multipart/form-data" id="form-data-alert_create">
                 @csrf
 
                 <div> 
-                  <label for="" class="text-base">Nom de l'alerte </label>
-                  <input type="text"  class="w-full mt-3" required="" name="nom">
+                  <label for="nom" class="text-base">Nom de l'alerte </label>
+                  <input type="text" id="nom" class="w-full mt-3" required="" name="nom">
                 </div>
 
                 <div> 
-                  <label for="" class="text-base">Date de la remarque</label>
-                  <input type="date"  class="w-full mt-3" required="" name="debut">
+                  <label for="debut" class="text-base">Date de la remarque</label>
+                  <input type="date" id="debut" class="w-full mt-3" required="" name="debut">
                 </div>
 
                 <div> 
@@ -65,6 +61,14 @@
                     <textarea class="w-full mt-3" id="description" rows="3" name="description"></textarea>
                 </div>
 
+                <div class="mb-3">
+                    <label for="tags" class="text-base">Tag:</label>
+                    <input class="form-control" id="tags" type="text" data-role="tagsinput" name="tags">
+                    @if ($errors->has('tags'))
+                    <span class="text-danger">{{ $errors->first('tags') }}</span>
+                    @endif
+                </div>
+
                 <ul style="list-style: none;">
                   <li style="display: inline-block; margin-right: 10px">
                     <img alt="" src="mygadgeto/sites/default/files/Polyes-01.jpeg">
@@ -90,7 +94,7 @@
                     </button> --}}
                 </div>     
                     <div class="flex justify-between items-center"> 
-                        <button type="submit" class="float-right button bg-blue-500 text-white py-2 px-12 text-[14px]"> Créer</button>
+                        <button type="button" class="float-right button bg-blue-500 text-white py-2 px-12 text-[14px] submit-form-alert"> Créer</button>
                     </div>
             </form>
     

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Activite;
 use App\Models\Activityjoin;
+use App\Models\Alertfollow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Jorenvh\Share\Share;
 
 class ActivityController extends Controller
 {
@@ -17,16 +19,22 @@ class ActivityController extends Controller
     {
         $page = "activite";
         $user = Auth::user();
-        $activities_sugestion = Activite::where('debut', '>=', date('Y-m-d H:i:s'))->orderby('debut', 'desc')->paginate(10);
-        $activities_pop = Activite::where('debut', 'desc')->paginate(10);
+        $activities_pops = Activityjoin::where('participation', '>=', 30)->get();
+        $activities_pop = [];
+        foreach ($activities_pops as $item)
+        {
+            array_push($activities_pop, $item->activite);
+        }
         // dd($activities_pop);
         $activities_campagne = Activite::where('activite_type', 'Campagne')->get();
-        $activities_evenement = Activite::where('activite_type', 'Evénement')->get();
+        $activities_evenement = Activite::where('debut', '>=', date('Y-m-d H:i:s'))->where('activite_type', 'Evénement')->orderby('debut', 'desc')->get();
         $activities_activite = Activite::where('activite_type', 'Activite')->get();
 
         $joins = [];
         $activities_my = [];
+        $activities_sugestion = [];
         if($user){
+            $activities_sugestion = Activite::where('debut', '>=', date('Y-m-d H:i:s'))->where('user_id', "!=", $user->id)->orderby('debut', 'desc')->get();
             $activityJoins = Activityjoin::where('user_id', $user->id)->get();
             foreach ($activityJoins as $item)
             {
@@ -34,7 +42,7 @@ class ActivityController extends Controller
                 // dd($item->activite->id);
             }
             // dd($joins);
-            $activities_myactivityJoins = Activite::where('user_id', $user->id)->paginate(10);
+            $activities_my = Activite::where('user_id', $user->id)->paginate(10);
         }
 
         return view('pages.activity', compact('user', 'activities_campagne', 'activities_evenement', 'activities_activite', 'activities_pop', 'activities_sugestion', 'activities_my', 'page', 'joins'));
@@ -64,6 +72,7 @@ class ActivityController extends Controller
             'activite_type' => 'required',
             'interventions' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tags' => 'required',
         ]);
         if(!empty($request->image)){
             // $imageName = $request->file('image')->getClientOriginalName();  
@@ -85,7 +94,8 @@ class ActivityController extends Controller
             $besoin .= "Participant,";
         }
         // dd($besoin);
-         $activite = Activite::create([
+        $tags = explode("[,\s\-:]", $request->tags);
+        $activite = Activite::create([
             'nom' => $request->nom,
             'debut' => $request->debut,
             'fin' => $request->fin,
@@ -96,7 +106,13 @@ class ActivityController extends Controller
             'interventions' => $request->interventions,
             'user_id' => $user->id,
         ]);
+        $activite->tag($tags);
         //dd($activite);
+        return response(
+            [
+                'success' => "Activité créée avec success!",
+                "data" => $activite,
+            ]);
         return redirect()->back()->with('status',"Activité créée avec success!");
     }
 
@@ -120,7 +136,24 @@ class ActivityController extends Controller
             $user_joint = Activite::where('id', $id)->first()->activityJoins->where("user_id", $user->id)->first();
             if($user_joint)$est = preg_split('/\s*,\s*/', $user_joint->participation);
         }
-        return view('pages.activite_detail', compact('user', 'activite', 'jour', 'besoin', "participant", "user_joint", 'est'));
+        $multipleSharing = new Share();
+        $multipleSharing->page(url('/activity', $id), 'activite ecoChamp')
+            ->facebook()
+            ->twitter()
+            ->reddit()
+            ->telegram()
+            ->linkedin('Extra linkedin summary can be passed here')
+            ->whatsapp();
+        $multipleSharingProfile = new Share();
+        $multipleSharingProfile->page(url('/profile', $activite->user->id), 'profile ecoChamp')
+                ->facebook()
+                ->twitter()
+                ->reddit()
+                ->telegram()
+                ->linkedin('Extra linkedin summary can be passed here')
+                ->whatsapp();
+
+        return view('pages.activite_detail', compact('user', 'activite', 'jour', 'besoin', "participant", "user_joint", 'est', 'multipleSharing', 'multipleSharingProfile'));
     }
 
     /**

@@ -34,6 +34,7 @@
 
     <!-- create besoin -->
     @include('composants.devenir')
+    @include('composants.share')
 
 
 @endsection

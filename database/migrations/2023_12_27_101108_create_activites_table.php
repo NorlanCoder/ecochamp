@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('debut');
             $table->date('fin');
             $table->string('couverture');
-            $table->string('description');
+            $table->text('description');
             $table->string('activite_type');
             $table->string('besoin');
             $table->string('link_facebook')->nullable();

@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('image2')->nullable();
             $table->string('image3')->nullable();
             $table->string('image4')->nullable();
-            $table->string('description');
+            $table->text('description');
             $table->string('alert_type');
-            $table->string('solution')->nullable();
+            $table->text('solution')->nullable();
             $table->string('link_facebook')->nullable();
             $table->string('link_linkedin')->nullable();
             $table->string('link_tiktok')->nullable();

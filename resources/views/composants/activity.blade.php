@@ -1,4 +1,3 @@
-
           
     <div class="page-heading">
         
@@ -26,7 +25,7 @@
     <div class="uk-switcher" id="group-tabs">
 
         <!-- card layout 1 -->
-        <div class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-2.5">
+        <div id="addActiviteCamp" class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-2.5">
 
             @isset($activities_campagne)
 
@@ -49,13 +48,14 @@
 
                             <a href="{{url('/activite', $item->id)}}"><h4 class="card-title"> {{$item->user->lastname}} {{$item->user->firstname}}  </h4></a>
                             <div class="card-list-info font-normal mt-1">
-                                <a href="#">  {{substr($item->nom, 0, 8)}}  </a> 
-                                <div class="md:block hidden">·</div>
+                                <a href="{{url('/activite', $item->id)}}">
+                                    {{substr($item->nom, 0, 7)}}...
+                                </a>
                                 <div>
                                     @if(isset($item->activityJoins) && count($item->activityJoins) >= 100)
-                                        {{count($item->activityJoins) / 100}}k membres 
+                                        {{count($item->activityJoins) / 100}}k <ion-icon style="font-size: 1em;" name="people-outline"></ion-icon> 
                                     @else
-                                        {{count($item->activityJoins)}} membres
+                                        {{count($item->activityJoins)}} <ion-icon style="font-size: 1em;" name="people-outline"></ion-icon>
                                     @endif
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
         </div>
 
         <!-- card layout 2 -->
-        <div class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-2.5">
+        <div id="addActiviteEven" class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-2.5">
 
             @isset($activities_evenement)
                 @foreach ($activities_evenement as $item)
@@ -101,14 +101,15 @@
                                 <div class="card-list-info font-normal mt-1">
                                 <div>
                                     @if(isset($item->activityJoins) && count($item->activityJoins) >= 100)
-                                        {{count($item->activityJoins) / 100}}k membres 
+                                        {{count($item->activityJoins) / 100}}k <ion-icon style="font-size: 1em;" name="people-outline"></ion-icon> 
                                     @else
-                                        {{count($item->activityJoins)}} membres
+                                        {{count($item->activityJoins)}} <ion-icon style="font-size: 1em;" name="people-outline"></ion-icon>
                                     @endif
                                 </div>
                                 </div>
-                                    <div class="md:block hidden">·</div>
-                                    <a href="#">  {{substr($item->nom, 0, 8)}} </a> 
+                                    <a href="{{url('/activite', $item->id)}}">
+                                        {{substr($item->nom, 0, 7)}}...
+                                    </a>
                                 </div> 
                                 {{-- <div class="flex items-center gap-3 mt-3">
                                     <div class="flex -space-x-2">
@@ -140,7 +141,7 @@
         </div>
 
         <!-- card layout 3 -->
-        <div class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-2.5">
+        <div id="addActiviteActi" class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-2.5">
             
             @isset($activities_activite)
                 @foreach ($activities_activite as $item)
@@ -153,15 +154,15 @@
                             </div>
                         </a>
                         <div class="card-body">
-                            <a href="{{url('/activite', $item->id)}}"> <h4 class="card-title"> {{substr($item->nom, 0, 8)}} </h4> </a>
+                            <a href="{{url('/activite', $item->id)}}"> <h4 class="card-title"> {{substr($item->nom, 0, 7)}}... </h4> </a>
                             <div class="card-list-info font-normal mt-1"> 
                                 <a href="#">  {{$item->activite_type}} </a> 
-                                <div class="md:block hidden">·</div>
+                                
                                 <div>
                                     @if(isset($item->activityJoins) && count($item->activityJoins) >= 100)
-                                        {{count($item->activityJoins) / 100}}k membres 
+                                        {{count($item->activityJoins) / 100}}k <ion-icon style="font-size: 1em;" name="people-outline"></ion-icon> 
                                     @else
-                                        {{count($item->activityJoins)}} membres
+                                        {{count($item->activityJoins)}} <ion-icon style="font-size: 1em;" name="people-outline"></ion-icon>
                                     @endif
                                 </div>
                             </div>

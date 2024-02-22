@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Post extends Model
 {
     use HasFactory;
+    use \Conner\Tagging\Taggable;
 
     protected $fillable =[
         'description',
