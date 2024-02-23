@@ -16,6 +16,7 @@ use App\Http\Controllers\ParametreController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikedController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,8 @@ Route::get('/profile/{id}', [UserController::class, 'show']);
 Route::post('/search', [HomeController::class, 'search']);
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::post('/liked_post', [PostLikedController::class, 'store'])->name('liked_post.store');
+
+Route::get('/storage/{filename}', [HomeController::class, 'storage']);
 
 Route::middleware(['web'])->group(function () {
     Route::get('/alert/{id}', [AlertController::class, 'show']);

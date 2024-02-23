@@ -314,8 +314,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
                         </svg>
                         <div class="flex-1">
-                            <h4 class="font-semibold text-black dark:text-white text-sm">  {{$item->name}} </h4>
-                            <div class="mt-0.5"> {{$item->count}} </div>
+                            <h4 class="font-semibold text-black dark:text-white text-sm">  {{$item->name}}  <button type="button" class="button-icon text-red-500 bg-red-100 dark:bg-slate-700 "> {{$item->count}} </button> </h4>
+                            {{-- <div class="mt-0.5"> {{$item->count}} </div> --}}
                         </div> 
                     </div>
                 </a>

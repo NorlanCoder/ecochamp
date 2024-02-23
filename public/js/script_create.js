@@ -31,6 +31,7 @@ $(".submit-form-post").click(function(e){
             document.getElementById('description').value = "";
             document.getElementById('createpostusUrl').value = "";
             document.getElementById('tags').value = "";
+            document.location.reload();
         },
     });
 });
@@ -65,6 +66,7 @@ $(".submit-form-activite").click(function(e){
             document.getElementById('description').value = "";
             document.getElementById('image').value = "";
             document.getElementById('tags').value = "";
+            document.location.reload();
         },
     });
 });
@@ -98,6 +100,7 @@ $(".submit-form-alert").click(function(e){
             document.getElementById('description').value = "";
             document.getElementById('image').value = "";
             document.getElementById('tags').value = "";
+            document.location.reload();
         },
     });
 });
@@ -208,13 +211,16 @@ search.oninput = (function () {
             
             search.forEach((element, key) => {
                 if(element.activite){
-                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img src=\"http://localhost:8000/storage/" + element.image1 + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.activite + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> poste </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
+                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.activite + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> poste </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
+                    routeUrlStorage(element.image1, key);
                 }
                 else if(element.image_principale){
-                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img src=\"http://localhost:8000/storage/" + element.image_principale + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.nom + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> alert </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
+                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.nom + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> alert </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
+                    routeUrlStorage(element.image_principale, key);
                 }
                 else{
-                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img src=\"http://localhost:8000/storage/" + element.couverture + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.nom + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> activité </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
+                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.nom + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> activité </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
+                    routeUrlStorage(element.couverture, key)
                 }
                 $('#nav_search').append(aadSearch);
                 // console.log(document.getElementById('seach'+key))
@@ -223,4 +229,29 @@ search.oninput = (function () {
             return aadSearch;
         }
        
+    }
+
+
+    function routeUrlStorage(file, key) {
+        const morceaux = file.split('/');
+        console.log(morceaux[2])
+        fetch('/storage/'+morceaux[2])
+        .then(response => {
+            console.log(response.body)
+            if (!response.ok) {
+                throw new Error('Image non trouvée');
+            }
+            // console.log(base64.decode(response.file))
+            return response.blob();
+        })
+        .then(blob => {
+            const url = URL.createObjectURL(blob);
+            // const url = file;
+            // console.log(document.getElementById('img_'+key))
+            // console.log(document.getElementById('seach'+key))
+            // console.log(url)
+            document.getElementById('img_'+key).src = url;
+            // Utilisez l'URL pour afficher l'image dans votre application
+        })
+        .catch(error => console.error(error));
     }

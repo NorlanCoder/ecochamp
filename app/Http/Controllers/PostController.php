@@ -19,7 +19,7 @@ class PostController extends Controller
         $user = Auth::user();
         $alerts = Alert::paginate(5);
         $postes = Post::paginate(5);
-        $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->get();
+        $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->limit(5)->get();
         //dd($postes[2]->postLikeds);
         return view('pages.post', compact('user', 'alerts', 'postes', 'page', 'tendance'));
 

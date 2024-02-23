@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+
 // use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -35,7 +37,7 @@ class HomeController extends Controller
             // dd($joins);
         }
 
-        $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->get();
+        $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->limit(5)->get();
         // dd($tendance);
 
         return view('layouts.index', compact('user', 'alerts', 'postes', 'activities_campagne',
@@ -169,5 +171,20 @@ class HomeController extends Controller
             "search" => $search,
         ]);
         
+    }
+
+    public function storage(String $filename) {
+        $path = storage_path("app/public/images/".$filename);
+        // $path = asset(Storage::url('app/public/images/'.$filename));
+        // dd(file_exists($path));
+        if (file_exists($path)) {
+            // $data = file_get_contents($path);
+            // $base64 = base64_encode($data);
+            // dd(response()->file($path));
+            return response()->file($path);
+        } else {
+            abort(404);
+           // dd($path);
+        }
     }
 }

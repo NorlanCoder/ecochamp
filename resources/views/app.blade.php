@@ -46,6 +46,12 @@
         <script src="{{ asset('js/profil.js') }}"></script>
         <script src="{{ asset('js/script_create.js') }}"></script>
         <script type="text/javascript">
+            function routeUrlStorage(file) {
+                val routeUrlStorage = "{{url('/storage', "+ file +")}}";
+                return routeUrlStorage;
+            }
+        </script>
+        <script type="text/javascript">
             
             $(".submit-form").click(function(e){
                 e.preventDefault();
