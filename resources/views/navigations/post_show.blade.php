@@ -91,7 +91,7 @@
             <div class="p-5 h-full overflow-y-auto flex-1">
 
                 <!-- comment list -->
-                <div class="relative text-sm font-medium space-y-5" id="addComment-post"> 
+                <div class="relative text-sm font-medium space-y-5" id="addComment_post{{$item->id}}"> 
                     @foreach($item->comments as $comment)
 
                         <div class="flex items-start gap-3 relative">

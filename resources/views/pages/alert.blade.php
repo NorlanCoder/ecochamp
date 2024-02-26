@@ -64,7 +64,8 @@
                     
                                             <div class="flex gap-2 justify-center ">
                                                 <a href="{{url('/alert', $item->id)}}"> <button type="button" class="button bg-secondery !w-auto">Voir</button> </a>
-                                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}" target="_blank"><button type="button" class="button bg-secondery !w-auto">Partager</button></a>
+                                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/alert', $item->id) }}" target="_blank"><button type="button" class="button bg-secondery !w-auto">Partager</button></a>
+                                                {{-- <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}" target="_blank"><button type="button" class="button bg-secondery !w-auto">Partager</button></a> --}}
 
                                             </div>
                                             

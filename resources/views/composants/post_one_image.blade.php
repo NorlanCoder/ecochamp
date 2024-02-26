@@ -21,7 +21,7 @@
                     {{-- <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon>  Add to favorites </a>  
                     <a href="#"> <ion-icon class="text-xl shrink-0" name="notifications-off-outline"></ion-icon> Mute Notification </a>  
                     <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report this post </a>   --}}
-                    <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Partagez votre profile </a>  
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/profile', $item->user->id) }}"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Partagez votre profile </a>  
                     {{-- <hr> --}}
                     {{-- <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon>  Unfollow </a>   --}}
                 </nav>
@@ -84,11 +84,11 @@
 
         </div>
         {{-- <button type="button" class="button-icon ml-auto"> <ion-icon class="text-xl" name="paper-plane-outline"></ion-icon> </button> --}}
-        <button type="button" class="button-icon ml-auto"> <ion-icon class="text-xl" name="share-social-outline"></ion-icon> </button>
+        {{-- <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('/profile', $item->id) }}"> <button type="button" class="button-icon ml-auto"> <ion-icon class="text-xl" name="share-social-outline"></ion-icon> </button> </a> --}}
     </div>
 
     <!-- comments -->
-    <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40" id="addComment"> 
+    <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40" id="addComment_post{{$item->id}}"> 
         @foreach($item->comments as $x => $comment)
             <div class="flex items-start gap-3 relative">
                 <a href="{{url('/profile', $comment->user->id)}}"> 

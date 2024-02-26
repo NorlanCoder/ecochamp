@@ -204,6 +204,9 @@ search.oninput = (function () {
         if(search){
 
             for (let index = 0; index <= 5; index++) {
+                if(document.getElementById('seach_aucun')){
+                    document.getElementById('seach_aucun').remove()
+                }
                 if(document.getElementById('seach'+index)){
                     document.getElementById('seach'+index).remove()
                 }
@@ -213,18 +216,29 @@ search.oninput = (function () {
                 if(element.activite){
                     aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.activite + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> poste </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
                     routeUrlStorage(element.image1, key);
+                    // routeUrlsearch(element, key);
                 }
                 else if(element.image_principale){
                     aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.nom + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> alert </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
                     routeUrlStorage(element.image_principale, key);
+                    routeUrlsearch(element, key);
                 }
                 else{
                     aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.nom + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> activité </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
                     routeUrlStorage(element.couverture, key)
+                    routeUrlsearch(element, key);
                 }
                 $('#nav_search').append(aadSearch);
                 // console.log(document.getElementById('seach'+key))
             });
+
+            if(search.length == []){
+                if(document.getElementById('seach_aucun')){
+                    document.getElementById('seach_aucun').remove()
+                }
+                aadSearch = "<a href=\"#\" id=\"seach_aucun\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\">  <div> Aucun résultat  </div> </a>";
+                $('#nav_search').append(aadSearch);
+            }
            
             return aadSearch;
         }
@@ -252,6 +266,27 @@ search.oninput = (function () {
             // console.log(url)
             document.getElementById('img_'+key).src = url;
             // Utilisez l'URL pour afficher l'image dans votre application
+        })
+        .catch(error => console.error(error));
+    }
+
+    function routeUrlsearch(element, key) {
+        if(element.image_principale){
+            var route = '/alert/'+ element.id
+        }else{
+            var route = '/activite/'+ element.id
+        }
+        fetch(route)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Image non trouvée');
+            }
+            return response.blob();
+        })
+        .then(blob => {
+            const url = URL.createObjectURL(blob);
+            console.log(document.getElementById('seach'+key).href);
+            document.getElementById('seach'+key).href = url;
         })
         .catch(error => console.error(error));
     }

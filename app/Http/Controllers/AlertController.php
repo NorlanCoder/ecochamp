@@ -7,6 +7,7 @@ use App\Models\Alertfollow;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Jorenvh\Share\Share;
 
 class AlertController extends Controller
 {
@@ -23,6 +24,7 @@ class AlertController extends Controller
         if($user){
             $alert_user = Alert::where('user_id', $user->id)->paginate(15);
         }
+
         return view('pages.alert', compact('user', 'alerts', 'page', 'alert_user'));
     }
 
@@ -106,7 +108,12 @@ class AlertController extends Controller
         }
         $alertfollows = Alertfollow::where('alert_id', $id)->paginate(20);
 
-        return view('pages.alert_detail', compact('user', 'alert', 'alertfollows'));
+        $multipleSharingAlert = new Share();
+        $multipleSharingAlert->page(url('/alert', $id), 'alert ecoChamp')
+                ->facebook()
+                ->whatsapp();
+
+        return view('pages.alert_detail', compact('user', 'alert', 'alertfollows', 'multipleSharingAlert'));
     }
 
     /**

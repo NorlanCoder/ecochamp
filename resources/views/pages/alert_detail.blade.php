@@ -43,7 +43,7 @@
                         <div class="p-6">
                             <div class="sm:p-4 p-2.5 flex items-center gap-4 text-xs font-semibold">
                                 <h1 class="text-xl font-semibold mt-1"> {{$alert->nom}} </h1>
-                                <button type="button" class="button-icon ml-auto"> <ion-icon class="text-xl" name="share-social-outline"></ion-icon> </button>
+                                <button type="button" uk-toggle="target: #share-ecochamp" class="button-icon ml-auto"> <ion-icon class="text-xl" name="share-social-outline"></ion-icon> </button>
                             </div>
                             <!-- story heading -->
                             <div class="flex gap-3 text-sm mt-6">

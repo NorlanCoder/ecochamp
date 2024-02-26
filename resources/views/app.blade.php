@@ -59,11 +59,15 @@
                 var comment = '';
                 var test = ''; 
                 var res; 
+                var data;
 
-                for (let i = 0; i < 7; i++) {
-                    console.log(formLike);
+                for (let i = 0; i < 8; i++) {
+                    // console.log(formLike);
                     if (formLike.tagName === "FORM") {
-                        var data = $('#'+formLike.id).serialize();
+                        data = $('#'+formLike.id).serialize();
+                        // var  form = $('#'+formLike.id);
+                        // var data = new FormData(form[0]);
+                        // console.log(data);
                         break;
                     } 
                     formLike = formLike.parentElement
@@ -82,6 +86,7 @@
                     },
                     success: function(response){
                         res = response;
+                        console.log(response);
                         alert(response.success);
                         if(!response.connect){
                             return;
@@ -90,8 +95,11 @@
                         if (response.action === 'addComment') {
                             
                             var comment = formLike.parentElement
-                            $('#'+formLike.id+' #text_new').value="";
+                            // document.getElementById('text_new').value = "";
+                            // $('#'+formLike.id+' #text_new').html("");
                             $('#'+formLike.id+' #create_new').html('Envoyer');
+                            console.log(data.post_id);
+                            console.log($('#addComment_post'+data.post_id))
                             $('#'+comment.id+' #addComment').append(addComment(response.comment));
                         } 
                         if(response.action === 'joinActivity'){
@@ -117,6 +125,7 @@
                     complete: function(response){
                         //alert(response);
                         response = res;
+                        console.log(response)
                         if(response.action){
                             if (response.action === 'addComment') {
                                 $('#'+formLike.id+' #create_new').html('Envoyer');
@@ -131,6 +140,7 @@
                                 $('#'+formLike.id+' #create_new').html('Rejoindre');
                             }
                         }
+                        res = [];
                     }
                 });
             });
