@@ -53,7 +53,7 @@ class AlertCommentController extends Controller
         
         $comment = alertComment::create([
             'comment' => $request->comment,
-            'alert_id' => $request->post_id,
+            'alert_id' => $request->alert_id,
             'user_id' => $user->id,
         ]);
         $addComment = new CommentModel();

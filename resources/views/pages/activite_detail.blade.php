@@ -161,7 +161,7 @@
                         <div class="box p-5 px-6 relative" id="activite{{$activite->id}}">
                             <h3 class="font-semibold text-lg text-black dark:text-white"> Discussions </h3>
     
-                            <div class=" text-sm font-normal space-y-4 relative mt-4" id="addComment"> 
+                            <div class=" text-sm font-normal space-y-4 relative mt-4" id="addComment_activite{{$activite->id}}"> 
                         
                                 @foreach($activite->comments as $comment)
                                     <div class="flex items-start gap-3 relative">
@@ -201,7 +201,7 @@
                                 
                                     <div class="flex-1 relative overflow-hidden h-10">
                                         
-                                        <textarea placeholder="ajouter un commentaire...." rows="1" name="comment" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent" id="tewt_now"></textarea>
+                                        <textarea placeholder="ajouter un commentaire...." rows="1" name="comment" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent" id="text_new"></textarea>
                         
                                         {{-- <div class="!top-2 pr-2" uk-drop="pos: bottom-right; mode: click">
                                             <div class="flex items-center gap-2" uk-scrollspy="target: > svg; cls: uk-animation-slide-right-small; delay: 100 ;repeat: true">

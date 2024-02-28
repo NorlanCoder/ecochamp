@@ -87,19 +87,19 @@
                                     <div class="uk-slider-container pb-1">
                                     
                                         <ul class="uk-slider-items grid-small" uk-scrollspy="target: > li; cls: uk-animation-scale-up , uk-animation-slide-right-small; delay: 20 ;repeat: true">
-                                            <li class="w-28" uk-scrollspy-class="uk-animation-fade">
+                                            <li class="w-28 cursor-pointer" uk-scrollspy-class="uk-animation-fade">
                                                 <div class="p-3 px-4 rounded-lg bg-teal-100/60 text-teal-600 dark:text-white dark:bg-dark4" uk-toggle="target: #create-activity">
                                                     <ion-icon name="book" class="text-2xl drop-shadow-md"></ion-icon>
                                                     <div class="mt-1.5 text-sm font-medium"> Activité </div>
                                                 </div>
                                             </li>   
-                                            <li class="w-28">
+                                            <li class="w-28 cursor-pointer">
                                                 <div class="p-3 px-4 rounded-lg bg-sky-100/60 text-sky-600 dark:text-white dark:bg-dark4" uk-toggle="target: #create-post">
                                                     <ion-icon name="camera" class="text-2xl drop-shadow-md"></ion-icon>
                                                     <div class="mt-1.5 text-sm font-medium"> Post </div>
                                                 </div>
                                             </li> 
-                                            <li class="w-28">
+                                            <li class="w-28 cursor-pointer">
                                                 <div class="p-3 px-4 rounded-lg bg-pink-100/60 text-pink-600 dark:text-white dark:bg-dark4" uk-toggle="target: #create-Alert">
                                                     <ion-icon name="location" class="text-2xl drop-shadow-md"></ion-icon>
                                                     <div class="mt-1.5 text-sm font-medium"> Alerte </div>

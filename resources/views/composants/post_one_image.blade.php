@@ -76,11 +76,13 @@
         <div class="flex items-center gap-3">
             <button type="button" class="button-icon bg-slate-200/70 dark:bg-slate-700"> <ion-icon class="text-lg" name="chatbubble-ellipses"></ion-icon> </button>
            
-            @if(!empty($item->comments))
-                <span>{{count($item->comments)}}</span>  
-            @else    
-                <span>0</span>     
-            @endif
+                <span id="countComment_post{{$item->id}}">
+                    @if(!empty($item->comments))
+                        {{count($item->comments)}}
+                    @else 
+                        0     
+                    @endif
+                </span>  
 
         </div>
         {{-- <button type="button" class="button-icon ml-auto"> <ion-icon class="text-xl" name="paper-plane-outline"></ion-icon> </button> --}}

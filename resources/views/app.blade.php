@@ -60,19 +60,38 @@
                 var test = ''; 
                 var res; 
                 var data;
+                var value_post;
+                var value_alert;
+                var value_activite;
+                var pair;
+                var textarea = document.getElementById('text_new'); 
 
                 for (let i = 0; i < 8; i++) {
-                    // console.log(formLike);
                     if (formLike.tagName === "FORM") {
                         data = $('#'+formLike.id).serialize();
-                        // var  form = $('#'+formLike.id);
-                        // var data = new FormData(form[0]);
-                        // console.log(data);
                         break;
                     } 
                     formLike = formLike.parentElement
                 }
                 console.log(data);
+                
+                var dataArray = data.split('&');
+
+                for (var i = 0; i < dataArray.length; i++) {
+                    pair = dataArray[i].split('=');
+                    if (pair[0] === 'post_id') { 
+                        value_post = pair[1];
+                        console.log('La valeur de la clé spécifiée est : ' + value_post); 
+                    }
+                    if (pair[0] === 'alert_id') { 
+                        value_alert = pair[1];
+                        console.log('La valeur de la clé spécifiée est : ' + decodeURIComponent(value_alert)); 
+                    }
+                    if (pair[0] === 'activite_id') { 
+                        value_activite = pair[1];
+                        console.log('La valeur de la clé spécifiée est : ' + decodeURIComponent(value_activite)); 
+                    }
+                }
 
                 $.ajax({
                     type: formLike.method,
@@ -82,7 +101,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     beforeSend: function(){
-                        $('#'+formLike.id+' #create_new').html('....Please wait');
+                        // $('#'+formLike.id+' #create_new').html('....Veuillez patienter');
                     },
                     success: function(response){
                         res = response;
@@ -95,12 +114,22 @@
                         if (response.action === 'addComment') {
                             
                             var comment = formLike.parentElement
-                            // document.getElementById('text_new').value = "";
-                            // $('#'+formLike.id+' #text_new').html("");
                             $('#'+formLike.id+' #create_new').html('Envoyer');
-                            console.log(data.post_id);
-                            console.log($('#addComment_post'+data.post_id))
-                            $('#'+comment.id+' #addComment').append(addComment(response.comment));
+                            if(pair[0] === 'post_id'){
+                                $('#addComment_post'+value_post).append(addComment(response.comment));
+                                console.log(document.getElementById('countComment_post'+value_post).innerText);
+                                let count = +document.getElementById('countComment_post'+value_post).innerText + 1; 
+                                console.log(count);
+                                $('#'+comment.id+' #countComment_post'+value_post).html(count);
+                            }
+                            if(pair[0] === 'alert_id'){
+                                $('#addComment_alert'+value_alert).append(addComment(response.comment));
+                            }
+                            if(pair[0] === 'activite_id'){
+                                $('#addComment_activite'+value_activite).append(addComment(response.comment));
+                            }
+                            console.log(textarea);
+                            textarea.value = '';
                         } 
                         if(response.action === 'joinActivity'){
                             $('#'+formLike.id+' #create_new').html('<ion-icon name="checkmark-done-sharp"></ion-icon> Jointe');
@@ -141,6 +170,14 @@
                             }
                         }
                         res = [];
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        if (xhr.status === 422){
+                            alert("contenu vide");
+                        }
+                        // alert(xhr.status);
+                        // alert(thrownError);
+                        // document.location.reload();
                     }
                 });
             });

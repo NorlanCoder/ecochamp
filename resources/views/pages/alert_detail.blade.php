@@ -85,26 +85,29 @@
                     <br>
                     
                     <!-- comments -->  
-                    <div class="box p-5 px-6 relative" id="alert">
+                    <div class="box p-5 px-6 relative">
                         <h3 class="font-semibold text-base text-black dark:text-white"> Commentaires </h3>
-
-                        @foreach($alert->comments as $comment)
-                            <div class="flex items-start gap-3 relative">
-                                <a href="{{url('/profile', $comment->user->id)}}"> 
-                                    @if(empty($comment->user->profile))
-                                        <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-6 h-6 mt-1 rounded-full"> 
-                                    @else
-                                        <img src={{asset(Storage::url($comment->user->profile))}} alt="" class="w-6 h-6 mt-1 rounded-full"> 
-                                    @endif
-                                </a>
-                                <div class="flex-1">
-                                    <a href="{{url('/profile', $comment->user->id)}}" class="text-black font-medium inline-block dark:text-white"> {{$comment->user->lastname}} {{$comment->user->firstname}} </a>
-                                    <p class="mt-0.5">{{$comment->comment}}</p>
-                                </div>
-                            </div>
+                        
+                        <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40" id="addComment_alert{{$alert->id}}">
                            
-                        @endforeach
+                            @foreach($alert->comments as $comment)
+                                <div class="flex items-start gap-3 relative">
+                                    <a href="{{url('/profile', $comment->user->id)}}"> 
+                                        @if(empty($comment->user->profile))
+                                            <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-6 h-6 mt-1 rounded-full"> 
+                                        @else
+                                            <img src={{asset(Storage::url($comment->user->profile))}} alt="" class="w-6 h-6 mt-1 rounded-full"> 
+                                        @endif
+                                    </a>
+                                    <div class="flex-1">
+                                        <a href="{{url('/profile', $comment->user->id)}}" class="text-black font-medium inline-block dark:text-white"> {{$comment->user->lastname}} {{$comment->user->firstname}} </a>
+                                        <p class="mt-0.5">{{$comment->comment}}</p>
+                                    </div>
+                                </div>
+                            
+                            @endforeach
 
+                        </div>
 
                         <!-- add comment -->
                         <form action="{{ route('alert_comment.store') }}" method="POST" enctype="multipart/form-data" id="form-data-alert-comment{{$alert->id}}">

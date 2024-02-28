@@ -214,22 +214,20 @@ search.oninput = (function () {
             
             search.forEach((element, key) => {
                 if(element.activite){
-                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.activite + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> poste </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
+                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.activite + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> poste </div>   </div>   </a>";
                     routeUrlStorage(element.image1, key);
-                    // routeUrlsearch(element, key);
                 }
                 else if(element.image_principale){
-                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.nom + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> alert </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
+                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.nom + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> alert </div>   </div>   </a>";
                     routeUrlStorage(element.image_principale, key);
                     routeUrlsearch(element, key);
                 }
                 else{
-                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.nom + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> activité </div>   </div> <ion-icon name=\"close\" class=\"text-base absolute right-3 top-1/2 -translate-y-1/2 \"></ion-icon>  </a>";
+                    aadSearch = "<a href=\"#\" id=\"seach"+ key +"\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\"> <img id=\"img_" + key + "\" class=\"w-9 h-9 rounded-full\"> <div>   <div> " + element.nom + " </div>  <div class=\"text-xs text-blue-500 font-medium mt-0.5\"> activité </div>   </div>   </a>";
                     routeUrlStorage(element.couverture, key)
                     routeUrlsearch(element, key);
                 }
                 $('#nav_search').append(aadSearch);
-                // console.log(document.getElementById('seach'+key))
             });
 
             if(search.length == []){
@@ -255,17 +253,12 @@ search.oninput = (function () {
             if (!response.ok) {
                 throw new Error('Image non trouvée');
             }
-            // console.log(base64.decode(response.file))
             return response.blob();
         })
         .then(blob => {
             const url = URL.createObjectURL(blob);
-            // const url = file;
-            // console.log(document.getElementById('img_'+key))
-            // console.log(document.getElementById('seach'+key))
-            // console.log(url)
+
             document.getElementById('img_'+key).src = url;
-            // Utilisez l'URL pour afficher l'image dans votre application
         })
         .catch(error => console.error(error));
     }
