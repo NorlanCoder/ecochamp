@@ -63,10 +63,13 @@
 
                 <div class="mb-3">
                     <label for="tags" class="text-base">Tag:</label>
-                    <input class="form-control" id="tags" type="text" data-role="tagsinput" name="tags">
+                    {{-- <input class="form-control" id="tags" type="text" data-role="tagsinput" name="tags">
                     @if ($errors->has('tags'))
                     <span class="text-danger">{{ $errors->first('tags') }}</span>
-                    @endif
+                    @endif --}}
+                    <div id="tag_alert">
+
+                    </div>
                 </div>
 
                 <ul style="list-style: none;">

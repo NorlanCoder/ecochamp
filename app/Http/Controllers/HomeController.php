@@ -187,4 +187,15 @@ class HomeController extends Controller
            // dd($path);
         }
     }
+
+    public function ListTag(String $text){
+        
+        $tags = [];
+
+
+        return response([
+            'success' => "true",
+            "tags" => $tags,
+        ]);
+    }
 }

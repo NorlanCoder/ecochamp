@@ -92,5 +92,3 @@ document.getElementById('createpostusUrl').addEventListener('change', function()
                 // }
             });
         });
-
-

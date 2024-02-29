@@ -200,6 +200,31 @@
 
             return addComment;
         }
+
+
+
+        window.addEventListener('resize', function() {
+            // Obtenez la largeur actuelle du document
+            let documentWidth = document.documentElement.clientWidth;
+            // Obtenez la largeur de la fenêtre du navigateur
+            let windowWidth = window.innerWidth;
+            // Comparez les deux largeurs
+            let side = document.getElementById('rezize_responsive');
+
+            if (documentWidth < 600) {
+                // La taille du document a été réduite en mode responsive
+                console.log(documentWidth);
+                console.log('La taille du document a été réduite en mode responsive !');
+                
+                side.style = ""
+                // Effectuez d'autres actions si nécessaire
+            }
+            else{
+                console.log(documentWidth);
+                side.style = "max-width: 30%;"
+            }
+        });
+
         </script>
 
     </body>

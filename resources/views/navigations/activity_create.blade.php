@@ -32,8 +32,10 @@
                   <label for="date_fin" class="text-base">Date de fin de l'activité </label>
                   <input type="date" id="date_fin" class="w-full mt-3" required="" name="fin">
                 </div>
+
                 <div >
                     <label for="activite_type" class="">Type d'activité </label>
+
                     <div class="mt-2.5">
                         <select required class="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5"  name="activite_type" id="activite_type">
                             <option value="">---</option>
@@ -42,12 +44,15 @@
                             <option value="Activité">Activité</option>
                         </select>
                     </div>
+
                 </div>
+
                 <div >
                     <label for="description" class="text-base">Description</label>
                     <textarea class="w-full mt-3" id="description" rows="3" name="description"></textarea>
                 </div>
-                <div class="field">
+                
+
                     <label class="label is-small">Besoin:</label>
                     {{-- <label for="" class="text-base">Besoin </label> --}}
                     <div class="control">
@@ -68,6 +73,7 @@
                                 Participant
                         </label>                   
                     </div>
+
                     <div >
                         <label for="localite" class="">Zones d'interventions</label>
                         <div class="mt-2.5">
@@ -84,14 +90,17 @@
                             </select>
                         </div>
                     </div>
-                </div>
+                
 
                 <div >
                     <label for="tags" class="text-base">Tag:</label>
-                    <input class="form-control" id="tags" type="text" data-role="tagsinput" name="tags">
+                    {{-- <input class="form-control" id="tags" type="text" data-role="tagsinput" name="tags">
                     @if ($errors->has('tags'))
                         <span class="text-danger">{{ $errors->first('tags') }}</span>
-                    @endif
+                    @endif --}}
+                    <div id="tag_activite">
+
+                    </div>
                 </div>
 
                 <ul style="list-style: none;">
@@ -108,11 +117,13 @@
                             type="file" name="image" placeholder="Choisir image" id="image"
                                 class="form-control @error('image') is-invalid @enderror">
                     </button>
+
                     <div>
                         @error('image')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+
                     {{-- <button type="button" class="flex items-center gap-1.5 bg-teal-50 text-teal-600 rounded-full py-1 px-2 border-2 border-teal-100 dark:bg-teal-950 dark:border-teal-900">  
                         <ion-icon name="videocam" class="text-base"></ion-icon>  
                         Video 
@@ -122,6 +133,7 @@
                 <div class="flex justify-between items-center"> 
                     <button type="button" class="float-right button bg-blue-500 text-white py-2 px-12 text-[14px] submit-form-activite"> Créer</button>
                 </div>
+
             </form>
     
     </div>

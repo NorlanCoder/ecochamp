@@ -31,10 +31,22 @@
 
                 <div class="mb-3">
                     <label for="tags" class="text-base">Tag:</label>
-                    <input class="form-control" id="tags" type="text" data-role="tagsinput" name="tags">
-                    @if ($errors->has('tags'))
+
+                    {{-- <input class="form-control" id="tags" type="text" data-role="tagsinput" name="tags"> --}}
+
+
+                    {{-- @if ($errors->has('tags'))
                     <span class="text-danger">{{ $errors->first('tags') }}</span>
-                    @endif
+                    @endif --}}
+
+                    <div id="tag_post">
+
+                        <input type="checkbox" class="btn-check" id="btn-check-tag-1" checked autocomplete="off" name="btn-check-tag-1">
+                        <label  class="btn btn-primary" for="btn-check-tag-1">Checked</label>
+                        <input type="checkbox" class="btn-check" id="btn-check-tag-1" checked autocomplete="off" name="btn-check-tag-2">
+                        <label class="btn btn-primary" for="btn-check-tag-1">Checked</label>
+
+                    </div>
                 </div>
     
                 <div>  

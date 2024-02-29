@@ -235,6 +235,7 @@ search.oninput = (function () {
                     document.getElementById('seach_aucun').remove()
                 }
                 aadSearch = "<a href=\"#\" id=\"seach_aucun\" class=\"relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10\">  <div> Aucun résultat  </div> </a>";
+                
                 $('#nav_search').append(aadSearch);
             }
            
@@ -283,3 +284,52 @@ search.oninput = (function () {
         })
         .catch(error => console.error(error));
     }
+
+    var textareaTag = document.getElementById('description');
+
+    textareaTag.addEventListener('input', function() {
+        console.log(document.getElementById('description'));
+        console.log('ok')
+        for (let index = 0; index <= 5; index++) {
+            if(document.getElementById('seach_aucun')){
+                document.getElementById('seach_aucun').remove()
+            }
+            if(document.getElementById('seach'+index)){
+                document.getElementById('seach'+index).remove()
+            }
+        }
+        var tags = routeTag($(this).text);
+        tags.forEach((element, key) => {
+            aadTag = "<input type=\"checkbox\" class=\"btn-check\" id=\"btn-check-tag-"+ key + " autocomplete=\"off\" name=\"btn-check-tag-" + key + ">";
+            addTag += "<label class=\"btn btn-primary\" for=\"btn-check-tag-" + key +">" + element + "</label>";
+            
+            $('#nav_search').append(addTag);
+        });
+    });
+
+
+    function routeTag(text) {
+
+        const postData = {
+            text: text,
+        };
+        console.log(postData)
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', 
+            },
+            body: JSON.stringify(postData) 
+        };
+
+        fetch('/list/tag/', options)
+        .then(response => {
+            console.log(response)
+            if (!response.ok) {
+                throw new Error('tag non trouvée');
+            }
+            return response.tags;
+        })
+        .catch(error => console.error(error));
+    }
+

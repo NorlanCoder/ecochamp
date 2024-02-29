@@ -67,6 +67,6 @@ Route::middleware(['web'])->group(function () {
     Route::post('/profile/reset/{id}', [UserController::class, 'resetPassword']);
     Route::post('/photo/profile', [UserController::class, 'photoProfile']);
     Route::post('/photo/couverture', [UserController::class, 'photoCouverture']);
-
+    Route::post('/list/tag', [HomeController::class, 'ListTag']);
 });
 
