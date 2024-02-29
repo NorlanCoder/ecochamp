@@ -6,6 +6,7 @@ use App\Models\Activite;
 use App\Models\Activityjoin;
 use App\Models\Alert;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,13 +36,15 @@ class HomeController extends Controller
                 // dd($item->activite->id);
             }
             // dd($joins);
+            $tags = DB::table('tagging_tags')->orderByDesc('id')->limit(5)->get();
         }
-
+        $tags;
         $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->limit(5)->get();
+        // dd(DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->get());
         // dd($tendance);
 
         return view('layouts.index', compact('user', 'alerts', 'postes', 'activities_campagne',
-         'activities_evenement', 'activities_activite', 'joins', 'page', 'tendance'));
+         'activities_evenement', 'activities_activite', 'joins', 'page', 'tendance', 'tags'));
     }
 
     // Login Page

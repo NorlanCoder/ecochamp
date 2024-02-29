@@ -72,7 +72,7 @@ class ActivityController extends Controller
             'activite_type' => 'required',
             'interventions' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'tags' => 'required',
+            // 'tags' => 'required',
         ]);
         if(!empty($request->image)){
             // $imageName = $request->file('image')->getClientOriginalName();  
@@ -94,7 +94,30 @@ class ActivityController extends Controller
             $besoin .= "Participant,";
         }
         // dd($besoin);
-        $tags = explode("[,\s\-:]", $request->tags);
+        // $tags = explode("[,\s\-:]", $request->tags);
+        $tags = [];
+        // for ($i = 0; $i<5; $i++){
+        //     if (!empty($request->btn_check_tag_1)){
+        //         $besoin .= "Partenaire,";
+        //     }
+        //     btn-check-tag-{{$key}}
+        // }
+        if (!empty($request->btn_check_tag_0)){
+            array_push($tags, $request->btn_check_tag_0);
+        }
+        if (!empty($request->btn_check_tag_1)){
+            array_push($tags, $request->btn_check_tag_1);
+        }
+        if (!empty($request->btn_check_tag_2)){
+            array_push($tags, $request->btn_check_tag_2);
+        }
+        if (!empty($request->btn_check_tag_3)){
+            array_push($tags, $request->btn_check_tag_3);
+        }
+        if (!empty($request->btn_check_tag_4)){
+            array_push($tags, $request->btn_check_tag_4);
+        }
+
         $activite = Activite::create([
             'nom' => $request->nom,
             'debut' => $request->debut,

@@ -41,11 +41,15 @@
 
                     <div id="tag_post">
 
-                        <input type="checkbox" class="btn-check" id="btn-check-tag-1" checked autocomplete="off" name="btn-check-tag-1">
-                        <label  class="btn btn-primary" for="btn-check-tag-1">Checked</label>
-                        <input type="checkbox" class="btn-check" id="btn-check-tag-1" checked autocomplete="off" name="btn-check-tag-2">
-                        <label class="btn btn-primary" for="btn-check-tag-1">Checked</label>
+                        @isset($tags)
 
+                            @foreach ($tags as $key => $item)
+                                <input type="checkbox" class="btn-check" id="btn-check-tag-{{$key}}" autocomplete="off" name="btn_check_tag_{{$key}}" value="{{$item->name}}">
+                                <label  class="btn btn-primary" for="btn-check-tag-{{$key}}">{{$item->name}}</label>
+                            @endforeach
+
+                        @endisset
+                    
                     </div>
                 </div>
     

@@ -44,7 +44,7 @@ class PostController extends Controller
             'activite' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'tags' => 'required',
+            // 'tags' => 'required',
         ]);
         
         if(!empty($request->image)){
@@ -53,7 +53,30 @@ class PostController extends Controller
             $imageName = $request->file('image')->store('public/images');
         }
         
-        $tags = explode("[,\s\-:]", $request->tags);
+        // $tags = explode("[,\s\-:]", $request->tags);
+        $tags = [];
+        // for ($i = 0; $i<5; $i++){
+        //     if (!empty($request->btn_check_tag_1)){
+        //         $besoin .= "Partenaire,";
+        //     }
+        //     btn-check-tag-{{$key}}
+        // }
+        // dd($request);
+        if (!empty($request->btn_check_tag_0)){
+            array_push($tags, $request->btn_check_tag_0);
+        }
+        if (!empty($request->btn_check_tag_1)){
+            array_push($tags, $request->btn_check_tag_1);
+        }
+        if (!empty($request->btn_check_tag_2)){
+            array_push($tags, $request->btn_check_tag_2);
+        }
+        if (!empty($request->btn_check_tag_3)){
+            array_push($tags, $request->btn_check_tag_3);
+        }
+        if (!empty($request->btn_check_tag_4)){
+            array_push($tags, $request->btn_check_tag_4);
+        }
         $post = Post::create([
             'activite' => $request->activite,
             'description' => $request->description,
@@ -61,11 +84,11 @@ class PostController extends Controller
             'user_id' => $user->id,
         ]);
         $post->tag($tags);
-
         return response(
             [
                 'success' => "Poste créé avec success!",
                 "data" => $post,
+                "request" => $request,
             ]);
 
         return redirect()->back()->with('status',"Poste créé avec success!");

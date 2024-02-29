@@ -202,7 +202,6 @@
         }
 
 
-
         window.addEventListener('resize', function() {
             // Obtenez la largeur actuelle du document
             let documentWidth = document.documentElement.clientWidth;

@@ -99,7 +99,14 @@
                         <span class="text-danger">{{ $errors->first('tags') }}</span>
                     @endif --}}
                     <div id="tag_activite">
+                        @isset($tags)
 
+                            @foreach ($tags as $key => $item)
+                                <input type="checkbox" class="btn-check" id="btn-check-tag-{{$key}}" autocomplete="off" name="btn_check_tag_{{$key}}" value="{{$item->name}}">
+                                <label  class="btn btn-primary" for="btn-check-tag-{{$key}}">{{$item->name}}</label>
+                            @endforeach
+
+                        @endisset
                     </div>
                 </div>
 

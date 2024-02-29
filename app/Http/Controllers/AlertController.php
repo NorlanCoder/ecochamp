@@ -49,7 +49,7 @@ class AlertController extends Controller
             'type_alert' => 'required',
             'interventions' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'tags' => 'required',
+            // 'tags' => 'required',
         ]);
         // dd($request);
         if(!empty($request->image)){
@@ -61,7 +61,29 @@ class AlertController extends Controller
 
         // }
         // dd($request);
-        $tags = explode("[,\s\-:]", $request->tags);
+        // $tags = explode("[,\s\-:]", $request->tags);
+        $tags = [];
+        // for ($i = 0; $i<5; $i++){
+        //     if (!empty($request->btn_check_tag_1)){
+        //         $besoin .= "Partenaire,";
+        //     }
+        //     btn-check-tag-{{$key}}
+        // }
+        if (!empty($request->btn_check_tag_0)){
+            array_push($tags, $request->btn_check_tag_0);
+        }
+        if (!empty($request->btn_check_tag_1)){
+            array_push($tags, $request->btn_check_tag_1);
+        }
+        if (!empty($request->btn_check_tag_2)){
+            array_push($tags, $request->btn_check_tag_2);
+        }
+        if (!empty($request->btn_check_tag_3)){
+            array_push($tags, $request->btn_check_tag_3);
+        }
+        if (!empty($request->btn_check_tag_4)){
+            array_push($tags, $request->btn_check_tag_4);
+        }
         $alert = Alert::create([
             'nom' => $request->nom,
             'date_remarque' => $request->debut,

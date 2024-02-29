@@ -30,7 +30,7 @@ $(".submit-form-post").click(function(e){
             document.getElementById('activite').value = "";
             document.getElementById('description').value = "";
             document.getElementById('createpostusUrl').value = "";
-            document.getElementById('tags').value = "";
+            // document.getElementById('tags').value = "";
             document.location.reload();
         },
     });
@@ -65,7 +65,7 @@ $(".submit-form-activite").click(function(e){
             document.getElementById('localite').value = "";
             document.getElementById('description').value = "";
             document.getElementById('image').value = "";
-            document.getElementById('tags').value = "";
+            // document.getElementById('tags').value = "";
             document.location.reload();
         },
     });
@@ -99,7 +99,7 @@ $(".submit-form-alert").click(function(e){
             document.getElementById('localite').value = "";
             document.getElementById('description').value = "";
             document.getElementById('image').value = "";
-            document.getElementById('tags').value = "";
+            // document.getElementById('tags').value = "";
             document.location.reload();
         },
     });
