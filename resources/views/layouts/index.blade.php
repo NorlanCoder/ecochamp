@@ -125,7 +125,7 @@
                         <h1  class="text-xl font-semibold text-black"> Postes </h1>
                     </div>
                     <div class="flex items-center gap-2 [&:has(a.uk-invisible)][&*>a]:bg-red-600">
-                        <a href="{{url('/poste')}}" class="text-blue-500 sm:block hidden text-sm"> Voir tous </a>
+                        <a href="{{url('/poste')}}" class="text-blue-500 sm:block hidden text-sm"> voir tout </a>
                     </div>
                 </div>
 

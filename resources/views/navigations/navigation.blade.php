@@ -33,7 +33,8 @@
                     @csrf
                     <div id="search--box" class="xl:w-[680px] sm:w-96 sm:relative rounded-xl overflow-hidden z-20 bg-secondery max-md:hidden w-screen left-0 max-sm:fixed max-sm:top-2 dark:!bg-white/5">
                         <ion-icon name="search" class="absolute left-4 top-1/2 -translate-y-1/2"></ion-icon>
-                        <input id="search" name="search" type="text" placeholder="Recherche d'activité, d'alerte, d'amis ..." class="w-full !pl-10 !font-normal !bg-transparent h-12 !text-sm">
+                        <input id="search" name="search" type="text" autocomplete="off" placeholder="Recherche ..." class="w-full !pl-10 !font-normal !bg-transparent h-12 !text-sm">
+                        <ion-icon name="search" class="absolute right-4 top-1/2 -translate-y-1/2"></ion-icon>
                     </div>  
                     {{-- <button type="submit" class="float-right button bg-blue-500 text-white py-2 px-12 text-[14px] submit-form-activite"> Créer</button> --}}
                 </form>
@@ -60,7 +61,7 @@
                             </nav>
                             <hr class="-mx-2 mt-2 hidden">
                             <div class="flex justify-end pr-2 text-sm font-medium text-red-500 hidden"> 
-                                <a href="#" class="flex hover:bg-red-50 dark:hover:bg-slate-700 p-1.5 rounded"> <ion-icon name="trash" class="mr-2 text-lg"></ion-icon> Clear your history</a> 
+                                {{-- <a href="#" class="flex hover:bg-red-50 dark:hover:bg-slate-700 p-1.5 rounded"> <ion-icon name="trash" class="mr-2 text-lg"></ion-icon> Clear your history</a>  --}}
                             </div>
                         </div>
                         

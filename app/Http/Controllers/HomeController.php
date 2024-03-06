@@ -28,6 +28,7 @@ class HomeController extends Controller
         $activities_evenement = Activite::where('activite_type', 'Evénement')->paginate(5);
         $activities_activite = Activite::where('activite_type', 'Activite')->paginate(5);
         $joins = [];
+        $tags = [];
         if($user){
             $activityJoins = Activityjoin::where('user_id', $user->id)->get();
             foreach ($activityJoins as $item)
@@ -38,7 +39,6 @@ class HomeController extends Controller
             // dd($joins);
             $tags = DB::table('tagging_tags')->orderByDesc('id')->limit(5)->get();
         }
-        $tags;
         $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->limit(5)->get();
         // dd(DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->get());
         // dd($tendance);

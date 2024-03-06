@@ -33,6 +33,12 @@
                             <span> Alert </span> 
                         </a>
                     </li>
+                    <li class="@if(isset($page) && $page == "market") active @endif">
+                        <a href="{{url('/market')}}">
+                            <img src={{asset("images/icons/market.png")}} alt="market" class="w-7 -ml-1">
+                            <span> market </span> 
+                        </a>
+                    </li> 
 
             </ul>
                 

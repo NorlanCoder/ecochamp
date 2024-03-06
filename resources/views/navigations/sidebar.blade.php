@@ -298,6 +298,72 @@
 
     </div> --}}
 
+    <!-- latest marketplace items -->
+    <div class="box p-5 px-6 border1 dark:bg-dark2">
+                        
+        <div class="flex justify-between text-black dark:text-white">
+            <h3 class="font-bold text-base"> Premium Photos </h3>
+            <button type="button"> <ion-icon name="sync-outline" class="text-xl"></ion-icon> </button>
+        </div>
+
+        <div class="relative capitalize font-medium text-sm text-center mt-4 mb-2" tabindex="-1" uk-slider="autoplay: true;finite: true">
+
+            <div class="overflow-hidden uk-slider-container">
+            
+                <ul class="-ml-2 uk-slider-items w-[calc(100%+0.5rem)]">
+                    
+                    <li class="w-1/2 pr-2">
+                       
+                         <a href="#">
+                            <div class="relative overflow-hidden rounded-lg">
+                                <div class="relative w-full h-40">
+                                    <img src={{asset("images/product/product-1.jpg")}} alt="" class="object-cover w-full h-full inset-0">
+                                </div> 
+                                <div class="absolute right-0 top-0 m-2 bg-white/60 rounded-full py-0.5 px-2 text-sm font-semibold dark:bg-slate-800/60"> $12 </div>
+                            </div>
+                            <div class="mt-3 w-full"> Chill Lotion </div>
+                        </a>
+                        
+                    </li>
+                    <li class="w-1/2 pr-2">
+
+                         <a href="#">
+                            <div class="relative overflow-hidden rounded-lg">
+                                <div class="relative w-full h-40">
+                                    <img src={{asset("images/product/product-3.jpg")}} alt="" class="object-cover w-full h-full inset-0">
+                                </div> 
+                                <div class="absolute right-0 top-0 m-2 bg-white/60 rounded-full py-0.5 px-2 text-sm font-semibold dark:bg-slate-800/60"> $18 </div>
+                            </div>
+                            <div class="mt-3 w-full">  Gaming mouse </div>
+                        </a>
+
+                    </li>
+                    <li class="w-1/2 pr-2">
+
+                        <a href="#">
+                            <div class="relative overflow-hidden rounded-lg">
+                                <div class="relative w-full h-40">
+                                    <img src={{asset("images/product/product-5.jpg")}} alt="" class="object-cover w-full h-full inset-0">
+                                </div> 
+                                <div class="absolute right-0 top-0 m-2 bg-white/60 rounded-full py-0.5 px-2 text-sm font-semibold dark:bg-slate-800/60"> $12 </div>
+                            </div>
+                            <div class="mt-3 w-full">  Herbal Shampoo </div>
+                        </a> 
+
+                    </li>
+
+                </ul>
+
+                <button type="button" class="absolute bg-white rounded-full top-16 -left-4 grid w-9 h-9 place-items-center shadow dark:bg-dark3"  uk-slider-item="previous"> <ion-icon name="chevron-back" class="text-2xl"></ion-icon></button>
+                <button type="button" class="absolute -right-4 bg-white rounded-full top-16 grid w-9 h-9 place-items-center shadow dark:bg-dark3" uk-slider-item="next"> <ion-icon name="chevron-forward" class="text-2xl"></ion-icon></button>
+
+            </div>
+        
+        </div>
+
+
+    </div>
+
     <!-- Trends -->
     <div class="box p-5 px-6 border1 dark:bg-dark2">
         
@@ -313,8 +379,9 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 -mt-2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
                         </svg>
-                        <div class="flex-1">
-                            <h4 class="font-semibold text-black dark:text-white text-sm">  {{$item->name}}  <button type="button" class="button-icon text-red-500 bg-red-100 dark:bg-slate-700 "> {{$item->count}} </button> </h4>
+                        <div class="flex-1 flex items-center gap-3">
+                            <h4 class="font-semibold text-black dark:text-white text-sm">  {{$item->name}} </h4>
+                            <button type="button" class="button-icon text-gray-500 bg-gray-100 dark:bg-slate-700 font-bold"> {{$item->count}} </button>
                             {{-- <div class="mt-0.5"> {{$item->count}} </div> --}}
                         </div> 
                     </div>
