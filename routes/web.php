@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\BoutiqueController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentsActivitiesController;
 use App\Http\Controllers\HomeController;
@@ -39,6 +40,9 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->nam
 Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('forgot.store');
 Route::get('/logout', [Logoutcontroller::class, 'destroy'])->name('logout')
     ->middleware('auth');
+
+Route::get('/market', [BoutiqueController::class, 'index']);
+Route::get('/market/{id}', [BoutiqueController::class, 'show']);
 
 Route::get('/activity', [ActivityController::class, 'index']);
 Route::get('/alert', [AlertController::class, 'index']);
