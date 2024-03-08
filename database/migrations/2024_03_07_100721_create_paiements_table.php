@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
+            $table->string('reference_paiement');
+            $table->string('table');
+            $table->string('reference_table');
+            $table->double('price');
+            $table->double('TTC')->nullable();
+            $table->double('TH')->nullable();
+            $table->float('TVA')->nullable();
+            $table->string('methode')->nullable();
+            $table->foreignId('user_id')
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

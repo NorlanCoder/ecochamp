@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -82,4 +83,13 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function panier(): HasOne
+    {
+        return $this->hasOne(Panier::class);
+    }
+
+    public function paiements(): HasMany
+    {
+        return $this->hasMany(Paiement::class);
+    }
 }

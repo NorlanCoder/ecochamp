@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('description');
-            $table->string('description');
-            $table->string('tags');
-            $table->string('devise');
-            $table->string('symbole_devise');
+            $table->string('tags')->nullable();
+            $table->string('devise')->nullable();
+            $table->string('symbole_devise')->nullable();
             $table->double('price');
             $table->string('image');
-            $table->string('target');
+            $table->string('target')->nullable();
             $table->foreignId('user_id')
                     ->constrained()
                     ->onUpdate('cascade')

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->double('quantite');
             $table->double('price');
             $table->double('total_prix');
+            $table->boolean('payer')->default(false);
             $table->foreignId('produit_id')
                     ->constrained()
                     ->onUpdate('cascade')
@@ -24,10 +25,7 @@ return new class extends Migration
                     ->constrained()
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
-            $table->foreignId('paiement_id')
-                    ->constrained()
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+            $table->integer('paiement_id');
             $table->timestamps();
         });
     }

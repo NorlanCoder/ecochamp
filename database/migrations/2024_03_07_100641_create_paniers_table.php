@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('paniers', function (Blueprint $table) {
             $table->id();
             $table->string('devise');
-            $table->string('symbole_devise');
+            $table->string('symbole_devise')->nullable();
             $table->foreignId('user_id')
                     ->constrained()
                     ->onUpdate('cascade')
