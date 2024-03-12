@@ -14,15 +14,15 @@
 
                         <div class="page-heading">
                             
-                            <h1 class="page-title test"> Products </h1>
+                            <h1 class="page-title test"> Produits </h1>
             
                             <nav class="nav__underline">
             
                                 <ul class="group" uk-switcher="connect: #group-tabs ; animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium"> 
                                
                                     <li> <a href="#"> Suggestions  </a> </li>
-                                    <li> <a href="#"> Newest </a> </li>
-                                    <li> <a href="#"> My products </a> </li>
+                                    <li> <a href="#"> Le plus récent </a> </li>
+                                    <li> <a href="#"> Mes produits </a> </li>
         
                                 </ul> 
             
@@ -38,76 +38,26 @@
                             <div class="uk-slider-container pb-1">
                                
                                 <ul class="uk-slider-items w-[calc(100%+14px)]" uk-scrollspy="target: > li; cls: uk-animation-scale-up; delay: 20;repeat:true">
-        
-                                    <li class="pr-3 md:w-1/3 w-1/2" uk-scrollspy-class="uk-animation-fade">
-                                        <div class="card">
-                                            <a href="product-view-1.html">
-                                                <div class="card-media sm:aspect-[2/1.7] h-36">
-                                                    <img src={{asset("images/product/product-1.jpg")}} alt="">
-                                                    <div class="card-overly"></div>
-                                                </div>
-                                            </a>
-                                            <div class="card-body relative">
-                                                <a href="#"><span class="text-teal-600 font-semibold text-xs"> Herbel</span></a>
-                                                <a href="product-view-1.html"><p class="card-text block text-black mt-0.5"> Chill Lotion </p></a>
-                                                <div class="-top-3 absolute bg-blue-100 font-medium px-2  py-0.5 right-2 rounded-full text text-blue-500 text-sm z-20">
-                                                    $19
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="pr-3 md:w-1/3 w-1/2">
-                                        <div class="card">
-                                            <a href="product-view-1.html">
-                                                <div class="card-media sm:aspect-[2/1.7] h-36">
-                                                    <img src={{asset("images/product/product-3.jpg")}} alt="">
-                                                    <div class="card-overly"></div>
-                                                </div>
-                                            </a>
-                                            <div class="card-body relative">
-                                                <a href="#"><span class="text-teal-600 font-semibold text-xs"> Electronic </span></a>
-                                                <a href="product-view-1.html"><p class="card-text block text-black mt-0.5"> Gaming Mouse </p></a>
-                                                <div class="-top-3 absolute bg-blue-100 font-medium px-2  py-0.5 right-2 rounded-full text text-blue-500 text-sm z-20">
-                                                    $19
+                                    
+                                    @foreach ($produit_suggestion as $item)
+                                        <li class="pr-3 md:w-1/3 w-1/2" uk-scrollspy-class="uk-animation-fade">
+                                            <div class="card">
+                                                <a href="{{ route('produit.show', $item->id)}}">
+                                                    <div class="card-media sm:aspect-[2/1.7] h-36">
+                                                        <img src={{asset($item->image)}} alt="">
+                                                        <div class="card-overly"></div>
+                                                    </div>
+                                                </a>
+                                                <div class="card-body relative">
+                                                    <a href="#"><span class="text-teal-600 font-semibold text-xs"> {{$item->categories->nom}}</span></a>
+                                                    <a href="{{ url('produit.show', $item->id)}}"><p class="card-text block text-black mt-0.5"> {{$item->nom}} </p></a>
+                                                    <div class="-top-3 absolute bg-blue-100 font-medium px-2  py-0.5 right-2 rounded-full text text-blue-500 text-sm z-20">
+                                                        {{$item->price}} {{$item->devise}}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li class="pr-3 md:w-1/3 w-1/2">
-                                        <div class="card">
-                                            <a href="product-view-1.html">
-                                                <div class="card-media sm:aspect-[2/1.7] h-36">
-                                                    <img src={{asset("images/product/product-6.jpg")}} alt="">
-                                                    <div class="card-overly"></div>
-                                                </div>
-                                            </a>
-                                            <div class="card-body relative">
-                                                <a href="#"><span class="text-teal-600 font-semibold text-xs"> Fruit </span></a>
-                                                <a href="product-view-1.html"><p class="card-text block text-black mt-0.5">  Strawbery Fresh   </p></a>
-                                                <div class="-top-3 absolute bg-blue-100 font-medium px-2  py-0.5 right-2 rounded-full text text-blue-500 text-sm z-20">
-                                                    $19
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="pr-3 md:w-1/3 w-1/2">
-                                        <div class="card">
-                                            <a href="product-view-1.html">
-                                                <div class="card-media sm:aspect-[2/1.7] h-36">
-                                                    <img src={{asset("images/product/product-5.jpg")}} alt="">
-                                                    <div class="card-overly"></div>
-                                                </div>
-                                            </a>
-                                            <div class="card-body relative">
-                                                <a href="#"><span class="text-teal-600 font-semibold text-xs"> Herbel </span></a>
-                                                <a href="product-view-1.html"><p class="card-text block text-black mt-0.5"> Chill Lotion </p></a>
-                                                <div class="-top-3 absolute bg-blue-100 font-medium px-2  py-0.5 right-2 rounded-full text text-blue-500 text-sm z-20">
-                                                    $19
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                     
+                                        </li>
+                                    @endforeach
         
                                 </ul>
                         
@@ -136,94 +86,47 @@
         
                             <div class="sm:my-6 my-3 flex items-center justify-between border-t pt-3 dark:border-slate-800">
                                 <div>
-                                    <h2 class="text-xl font-semibold text-black"> Featured </h2>
-                                    <p class="font-normal text-sm text-gray-500 leading-6 hidden"> Find a group by browsing top categories. </p>
+                                    <h2 class="text-xl font-semibold text-black"> En vedette </h2>
+                                    <p class="font-normal text-sm text-gray-500 leading-6 hidden"> Trouvez un groupe en parcourant les catégories supérieures. </p>
                                 </div>
                                 <div class="flex items-center gap-2 [&:has(a.uk-invisible)][&*>a]:bg-red-600">
                                     <a href="#" class="!block [&:has(.uk-invisible)]:opacity-20" uk-slider-item="previous"><ion-icon name="chevron-back-outline"></ion-icon> </a> 
                                     <a href="#" class="!block" uk-slider-item="next"><ion-icon name="chevron-forward-outline"></ion-icon> </a> 
-                                    <a href="#" class="text-blue-500 sm:block hidden text-sm"> See all </a>
+                                    <a href="#" class="text-blue-500 sm:block hidden text-sm"> Voir tous</a>
                                 </div>
                             </div>
         
                             <div class="uk-slider-container pb-1">
                                
                                 <ul class="uk-slider-items w-[calc(100%+14px)]" uk-scrollspy="target: > li; cls: uk-animation-scale-up; delay: 20;repeat:true">
-                                    <li class="pr-4 sm:w-1/2 w-full" uk-scrollspy-class="uk-animation-fade">
-                                        <div class="card flex gap-1">
-                                            <a href="product-view-2.html">
-                                               <div class="card-media w-32 max-h-full h-full shrink-0">
-                                                    <img src={{asset("images/product/product-9.jpg")}} alt="">
-                                                    <div class="card-overly"></div>
-                                                </div> 
-                                            </a> 
-                                            <div class="card-body flex-1 py-4">
-                                                <a href="product-view-2.html"> <h4 class="card-title">  Wood Chair </h4> </a>
-                                                <a href="#"> <p class="card-text">  Furniture </p></a>
-                                                <div class="text-xl flex items-center justify-between mt-2"> 
-                                                    <h4 class="card-title"> 26$ </h4>
-                                                    <button type="button" class="button bg-secondery !w-auto rounded-fulld hidden">View</button>
-                                                </div>
-                                                <div class="flex gap-2">
-                                                    <button type="button" class="button bg-primary-soft text-primary dark:text-white flex-1">Chat</button>
-                                                    <button type="button" class="button bg-secondery !w-auto"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                                      </svg>
-                                                       </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="pr-4 sm:w-1/2 w-full">
-                                        <div class="card flex gap-1">
-                                            <a href="product-view-2.html">
-                                               <div class="card-media w-32 max-h-full h-full shrink-0">
-                                                    <img src={{asset("images/product/product-1.jpg")}} alt="">
-                                                    <div class="card-overly"></div>
-                                                </div> 
-                                            </a> 
-                                            <div class="card-body flex-1 py-4">
-                                                <a href="product-view-2.html"> <h4 class="card-title"> Chill Lotion</h4> </a>
-                                                <a href="#"> <p class="card-text"> Herbel </p></a>
-                                                <div class="text-xl flex items-center justify-between mt-2"> 
-                                                    <h4 class="card-title"> 39$ </h4>
-                                                    <button type="button" class="button bg-secondery !w-auto rounded-fulld hidden">View</button>
-                                                </div>
-                                                <div class="flex gap-2">
-                                                    <button type="button" class="button bg-primary-soft text-primary dark:text-white flex-1">Chat</button>
-                                                    <button type="button" class="button bg-secondery !w-auto"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                                      </svg>
-                                                       </button>
+                                    @foreach ($produits_recent as $item)
+                                        <li class="pr-4 sm:w-1/2 w-full" uk-scrollspy-class="uk-animation-fade">
+                                            <div class="card flex gap-1">
+                                                <a href="product-view-2.html">
+                                                <div class="card-media w-32 max-h-full h-full shrink-0">
+                                                        <img src={{asset($iten->image)}} alt="">
+                                                        <div class="card-overly"></div>
+                                                    </div> 
+                                                </a> 
+                                                <div class="card-body flex-1 py-4">
+                                                    <a href="product-view-2.html"> <h4 class="card-title">  {{$item->nom}}</h4> </a>
+                                                    <a href="#"> <p class="card-text">  {{$item->categorie->nom}} </p></a>
+                                                    <div class="text-xl flex items-center justify-between mt-2"> 
+                                                        <h4 class="card-title"> {{$item->price}}{{$item->divise}} </h4>
+                                                        <button type="button" class="button bg-secondery !w-auto rounded-fulld hidden">Voir</button>
+                                                    </div>
+                                                    <div class="flex gap-2">
+                                                        <button type="button" class="button bg-primary-soft text-primary dark:text-white flex-1">Chat</button>
+                                                        <button type="button" class="button bg-secondery !w-auto"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                                        </svg>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li class="pr-4 sm:w-1/2 w-full">
-                                        <div class="card flex gap-1">
-                                            <a href="product-view-2.html">
-                                               <div class="card-media w-32 max-h-full h-full shrink-0">
-                                                    <img src={{asset("images/product/product-3.jpg")}} alt="">
-                                                    <div class="card-overly"></div>
-                                                </div> 
-                                            </a> 
-                                            <div class="card-body flex-1 py-4">
-                                                <a href="product-view-2.html"> <h4 class="card-title"> Gaming Mouse </h4> </a>
-                                                <a href="#"> <p class="card-text">  Electronic </p></a>
-                                                <div class="text-xl flex items-center justify-between mt-2"> 
-                                                    <h4 class="card-title"> 14$ </h4>
-                                                    <button type="button" class="button bg-secondery !w-auto rounded-fulld hidden">View</button>
-                                                </div>
-                                                <div class="flex gap-2">
-                                                    <button type="button" class="button bg-primary-soft text-primary dark:text-white flex-1">Chat</button>
-                                                    <button type="button" class="button bg-secondery !w-auto"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                                      </svg>
-                                                       </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li> 
+                                        </li>
+                                    @endforeach
+                                    
                                 </ul>
                         
                             </div>
@@ -233,8 +136,8 @@
                         <!-- categories -->
                         <div class="sm:mt-6 mt-3 flex items-center justify-between border-t pt-3 dark:border-slate-800">
                             <div>
-                                <h2 class="text-xl font-semibold text-black"> Categories
-                                <p class="font-normal text-sm text-gray-500 leading-6"> Find a group by browsing top categories. </p>
+                                <h2 class="text-xl font-semibold text-black"> Catégories
+                                <p class="font-normal text-sm text-gray-500 leading-6"> Trouvez un groupe en parcourant les catégories supérieures. </p>
                             </div> 
                         </div>
                         
@@ -334,133 +237,30 @@
                         <!-- list products -->
                         <div class="grid sm:grid-cols-3 grid-cols-2 gap-3" uk-scrollspy="target: > div; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
                             
-                            <div class="card uk-transition-toggle">
-                                <a href="product-view-1.html">
-                                    <div class="card-media sm:aspect-[2/1.7] h-36">
-                                        <img src={{asset("images/product/product-10.jpg")}} alt="">
-                                        <div class="card-overly"></div> 
+                            @foreach ($produits as $item)
+                                <div class="card uk-transition-toggle">
+                                    <a href="{{ url('/produits', $item->id)}}">
+                                        <div class="card-media sm:aspect-[2/1.7] h-36">
+                                            <img src={{asset($item->image)}} alt="">
+                                            <div class="card-overly"></div> 
+                                        </div> 
+                                    </a>
+                                    <div class="card-body flex justify-between">
+                                        <div class="flex-1">
+                                            <p class="card-text text-black font-medium line-clamp-1"> {{$item->categories->nom}} </p>
+                                            <div class="text-xs line-clamp-1 mt-1"> {{$item->nom}} </div>
+                                        </div>
+                                        <h4 class="card-title"> {{$item->price}}{{$item->devise}} </h4>
+                                    </div>  
+                                    <div class="absolute w-full bottom-0 bg-white/20 backdrop-blur-sm uk-transition-slide-bottom-small max-xl:h-full z-[2] flex flex-col justify-center">
+                                        <div class="flex gap-3 py-4 px-3">
+                                            <button type="button" class="button bg-primary text-white flex-1">Chat</button>
+                                            <button type="button" class="button border bg-white !w-auto">Veiw</button>
+                                        </div>
                                     </div> 
-                                </a>
-                                <div class="card-body flex justify-between">
-                                    <div class="flex-1">
-                                        <p class="card-text text-black font-medium line-clamp-1"> Herbel </p>
-                                        <div class="text-xs line-clamp-1 mt-1"> Herbal Shampoo </div>
-                                    </div>
-                                    <h4 class="card-title"> 19$ </h4>
-                                </div>  
-                                <div class="absolute w-full bottom-0 bg-white/20 backdrop-blur-sm uk-transition-slide-bottom-small max-xl:h-full z-[2] flex flex-col justify-center">
-                                    <div class="flex gap-3 py-4 px-3">
-                                        <button type="button" class="button bg-primary text-white flex-1">Chat</button>
-                                        <button type="button" class="button border bg-white !w-auto">Veiw</button>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="card uk-transition-toggle">
-                                <a href="product-view-1.html">
-                                    <div class="card-media sm:aspect-[2/1.7] h-36">
-                                        <img src={{asset("images/product/product-8.jpg")}} alt="">
-                                        <div class="card-overly"></div> 
-                                    </div> 
-                                </a>
-                                <div class="card-body flex justify-between">
-                                    <div class="flex-1">
-                                        <p class="card-text text-black font-medium line-clamp-1">   Parfum  </p>
-                                        <div class="text-xs line-clamp-1 mt-1">  Parfum Spray </div>
-                                    </div>
-                                    <h4 class="card-title"> 20$ </h4>
-                                </div> 
-                                <div class="absolute w-full bottom-0 bg-white/20 backdrop-blur-sm uk-transition-slide-bottom-small max-xl:h-full z-[2] flex flex-col justify-center">
-                                    <div class="flex gap-3 py-4 px-3">
-                                        <button type="button" class="button bg-primary text-white flex-1">Chat</button>
-                                        <button type="button" class="button border bg-white !w-auto">Veiw</button>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="card uk-transition-toggle">
-                                <a href="product-view-1.html">
-                                    <div class="card-media sm:aspect-[2/1.7] h-36">
-                                        <img src={{asset("images/product/product-9.jpg")}} alt="">
-                                        <div class="card-overly"></div> 
-                                    </div> 
-                                </a>
-                                <div class="card-body flex justify-between">
-                                    <div class="flex-1">
-                                        <p class="card-text text-black font-medium line-clamp-1">  Furniture</p>
-                                        <div class="text-xs line-clamp-1 mt-1">   Wood Chair  </div>
-                                    </div>
-                                    <h4 class="card-title"> 34$ </h4>
-                                </div> 
-                                <div class="absolute w-full bottom-0 bg-white/20 backdrop-blur-sm uk-transition-slide-bottom-small max-xl:h-full z-[2] flex flex-col justify-center">
-                                    <div class="flex gap-3 py-4 px-3">
-                                        <button type="button" class="button bg-primary text-white flex-1">Chat</button>
-                                        <button type="button" class="button border bg-white !w-auto">Veiw</button>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="card uk-transition-toggle">
-                                <a href="product-view-1.html">
-                                    <div class="card-media sm:aspect-[2/1.7] h-36">
-                                        <img src={{asset("images/product/product-3.jpg")}} alt="">
-                                        <div class="card-overly"></div> 
-                                    </div> 
-                                </a>
-                                <div class="card-body flex justify-between">
-                                    <div class="flex-1">
-                                        <p class="card-text text-black font-medium line-clamp-1">  Electronic </p>
-                                        <div class="text-xs line-clamp-1 mt-1">  Gaming Mouse </div>
-                                    </div>
-                                    <h4 class="card-title"> 26$ </h4>
-                                </div> 
-                                <div class="absolute w-full bottom-0 bg-white/20 backdrop-blur-sm uk-transition-slide-bottom-small max-xl:h-full z-[2] flex flex-col justify-center">
-                                    <div class="flex gap-3 py-4 px-3">
-                                        <button type="button" class="button bg-primary text-white flex-1">Chat</button>
-                                        <button type="button" class="button border bg-white !w-auto">Veiw</button>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="card uk-transition-toggle">
-                                <a href="product-view-1.html">
-                                    <div class="card-media sm:aspect-[2/1.7] h-36">
-                                        <img src={{asset("images/product/product-1.jpg")}} alt="">
-                                        <div class="card-overly"></div> 
-                                    </div> 
-                                </a>
-                                <div class="card-body flex justify-between">
-                                    <div class="flex-1">
-                                        <p class="card-text text-black font-medium line-clamp-1">  Shampo </p>
-                                        <div class="text-xs line-clamp-1 mt-1">  Deep Cleanse </div>
-                                    </div>
-                                    <h4 class="card-title"> 12$ </h4>
-                                </div> 
-                                <div class="absolute w-full bottom-0 bg-white/20 backdrop-blur-sm uk-transition-slide-bottom-small max-xl:h-full z-[2] flex flex-col justify-center">
-                                    <div class="flex gap-3 py-4 px-3">
-                                        <button type="button" class="button bg-primary text-white flex-1">Chat</button>
-                                        <button type="button" class="button border bg-white !w-auto">Veiw</button>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="card uk-transition-toggle">
-                                <a href="product-view-1.html">
-                                    <div class="card-media sm:aspect-[2/1.7] h-36">
-                                        <img src={{asset("images/product/product-10.jpg")}} alt="">
-                                        <div class="card-overly"></div> 
-                                    </div> 
-                                </a>
-                                <div class="card-body flex justify-between">
-                                    <div class="flex-1">
-                                        <p class="card-text text-black font-medium line-clamp-1"> Herbel </p>
-                                        <div class="text-xs line-clamp-1 mt-1"> Herbal Shampoo </div>
-                                    </div>
-                                    <h4 class="card-title"> 19$ </h4>
-                                </div> 
-                                <div class="absolute w-full bottom-0 bg-white/20 backdrop-blur-sm uk-transition-slide-bottom-small max-xl:h-full z-[2] flex flex-col justify-center">
-                                    <div class="flex gap-3 py-4 px-3">
-                                        <button type="button" class="button bg-primary text-white flex-1">Chat</button>
-                                        <button type="button" class="button border bg-white !w-auto">Veiw</button>
-                                    </div>
-                                </div> 
-                            </div>
-        
+                                </div>    
+                            @endforeach
+                            
                         </div>
     
                         <div class="flex justify-center my-6">
@@ -607,7 +407,7 @@
                             </li> 
 
                             <!-- settings -->
-                            <li class="w-full !relative">
+                            {{-- <li class="w-full !relative">
                             
                                 <div  class="lg:!h-[460px] overflow-y-auto">
 
@@ -709,7 +509,7 @@
                                     
                                 </div>
 
-                            </li>
+                            </li> --}}
                                 
                             <!-- final steop -->
                             <li class="w-full">
@@ -760,5 +560,5 @@
         </div>
 
     @endisset
-    
+
 @endsection

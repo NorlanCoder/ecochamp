@@ -1,5 +1,5 @@
-$(".submit-form-post").click(function(e){
-    var formDataCreate = document.getElementById('form-data-post_create');
+$(".submit-form-produit").click(function(e){
+    var formDataCreate = document.getElementById('form-data-produit_create');
     form = $('#'+formDataCreate.id);
     form.validate();
    
@@ -8,6 +8,35 @@ $(".submit-form-post").click(function(e){
             activite: "required",
         }
       });
+    console.log(form)
+    var formData = new FormData(form[0]);
+
+    console.log(formData)
+    $.ajax({
+        type: formDataCreate.method,
+        url: formDataCreate.action,
+        enctype: 'multipart/form-data',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response){
+            alert(response.success);
+            console.log(response)
+            document.location.reload();
+        },
+    });
+});
+
+$(".submit-form-post").click(function(e){
+    var formDataCreate = document.getElementById('form-data-post_create');
+    form = $('#'+formDataCreate.id);
+
+    var validator = $(".submit-form-post").validate();
+
     console.log(form)
     var formData = new FormData(form[0]);
 

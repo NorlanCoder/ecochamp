@@ -2,32 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Boutique;
-use App\Models\Categorie;
-use App\Models\Produit;
+use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class BoutiqueController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $page = "market";
-        $user = Auth::user();
-        $produits = Produit::paginate(15);
-        $produit_suggestion = Produit::all();
-        $produits_recent = Produit::all();
-        $my_produits = [];
-        if($user){
-            $my_produits = Produit::where('user_id', $user->id)->paginate(15);
-        }
-        $categories = Categorie::all();
- 
-        return view('pages.boutique', compact('user', 'produits', 'categories', 'page', 'my_produits', 'produit_suggestion', 'produits_recent'));
-    
+        $content = Cart::getContent();
+        $total = Cart::getTotal();
+        return view('cart.index', compact('content', 'total'));
     }
 
     /**
@@ -51,11 +38,7 @@ class BoutiqueController extends Controller
      */
     public function show(string $id)
     {
-        // dd($id);
-        $user = Auth::user();
-        // $produit = Boutique::where('id', $id)->firstOrFail();
-        return view('pages.produit_detail');
-    
+        //
     }
 
     /**
@@ -71,7 +54,10 @@ class BoutiqueController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Cart::update($id, [
+            'quantity' => ['relative' => false, 'value' => $request->quantity],
+        ]);
+        return redirect(route('panier.index'));
     }
 
     /**
@@ -79,6 +65,7 @@ class BoutiqueController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Cart::remove($id);
+        return redirect(route('panier.index'));
     }
 }

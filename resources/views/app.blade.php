@@ -33,6 +33,7 @@
         @yield('content')
 
         <!-- Javascript  -->
+        @yield('javascript')
         <script src="{{asset('js/uikit.min.js')}}"></script>
         <script src="{{asset('js/simplebar.js')}}"></script>
         <script src="{{asset('js/script.js')}}"></script>

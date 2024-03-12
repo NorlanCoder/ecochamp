@@ -69,6 +69,12 @@
 
                 <!-- header icons -->
                 @auth
+                    @if($cartCount)
+                        <li>
+                            <a class="tooltipped" href="{{ route('panier.index') }}" data-position="bottom" data-tooltip="Voir mon panier">Panier({{ $cartCount }})</a>
+                        </li>
+                    @endif
+
                     <div class="flex items-center sm:gap-4 gap-2 absolute right-5 top-1/2 -translate-y-1/2 text-black">
                         <!-- create -->
                         <button type="button" class="sm:p-2 p-1 rounded-full relative sm:bg-secondery dark:text-white">

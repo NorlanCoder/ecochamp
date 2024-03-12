@@ -42,7 +42,7 @@ Route::get('/logout', [Logoutcontroller::class, 'destroy'])->name('logout')
     ->middleware('auth');
 
 Route::get('/market', [BoutiqueController::class, 'index']);
-Route::get('/market/{id}', [BoutiqueController::class, 'show']);
+Route::get('/produit/{id}', [BoutiqueController::class, 'show'])->name('produit.show');
 
 Route::get('/activity', [ActivityController::class, 'index']);
 Route::get('/alert', [AlertController::class, 'index']);
@@ -72,5 +72,6 @@ Route::middleware(['web'])->group(function () {
     Route::post('/photo/profile', [UserController::class, 'photoProfile']);
     Route::post('/photo/couverture', [UserController::class, 'photoCouverture']);
     Route::post('/list/tag', [HomeController::class, 'ListTag']);
+    Route::resource('panier', 'CartController')->only(['index', 'store', 'update', 'destroy']);
 });
 

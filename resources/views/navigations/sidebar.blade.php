@@ -302,7 +302,7 @@
     <div class="box p-5 px-6 border1 dark:bg-dark2">
                         
         <div class="flex justify-between text-black dark:text-white">
-            <h3 class="font-bold text-base"> Premium Photos </h3>
+            <h3 class="font-bold text-base"> Produit Premium </h3>
             <button type="button"> <ion-icon name="sync-outline" class="text-xl"></ion-icon> </button>
         </div>
 
