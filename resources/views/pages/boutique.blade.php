@@ -237,7 +237,7 @@
                         <!-- list products -->
                         <div class="grid sm:grid-cols-3 grid-cols-2 gap-3" uk-scrollspy="target: > div; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
                             
-                            @foreach ($produits as $item)
+                            @foreach ($produits_all as $item)
                                 <div class="card uk-transition-toggle">
                                     <a href="{{ url('/produits', $item->id)}}">
                                         <div class="card-media sm:aspect-[2/1.7] h-36">

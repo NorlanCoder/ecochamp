@@ -23,7 +23,7 @@
                         @endif
                     </a>
                     <div class="flex-1">
-                        <a href="{{url('profile', $alert->user->id)}}"><h4 class="side-list-title">  {{$item->user->lastname }} {{$item->user->firstname }} </h4></a>
+                        <a href="{{url('profile', $alert->user->id)}}"><h4 class="side-list-title">  {{$alert->user->lastname }} {{$alert->user->firstname }} </h4></a>
                         <div class="side-list-info">  
                             @if(count($alert->alertfollows) >= 100)
                                 {{count($alert->alertfollows) / 100}} K vues
@@ -311,47 +311,23 @@
             <div class="overflow-hidden uk-slider-container">
             
                 <ul class="-ml-2 uk-slider-items w-[calc(100%+0.5rem)]">
-                    
-                    <li class="w-1/2 pr-2">
-                       
-                         <a href="#">
+
+                    @foreach ($produits as $item)
+                        <li class="w-1/2 pr-2">
+                        
+                            <a href="{{url('/produit', $item->id)}}">
                             <div class="relative overflow-hidden rounded-lg">
                                 <div class="relative w-full h-40">
-                                    <img src={{asset("images/product/product-1.jpg")}} alt="" class="object-cover w-full h-full inset-0">
+                                    <img src={{asset($item->image)}} alt="" class="object-cover w-full h-full inset-0">
                                 </div> 
-                                <div class="absolute right-0 top-0 m-2 bg-white/60 rounded-full py-0.5 px-2 text-sm font-semibold dark:bg-slate-800/60"> $12 </div>
+                                <div class="absolute right-0 top-0 m-2 bg-white/60 rounded-full py-0.5 px-2 text-sm font-semibold dark:bg-slate-800/60"> {{$item->price}} {{$item->devise}} </div>
                             </div>
-                            <div class="mt-3 w-full"> Chill Lotion </div>
+                            <div class="mt-3 w-full"> {{$item->nom}} </div>
                         </a>
                         
-                    </li>
-                    <li class="w-1/2 pr-2">
-
-                         <a href="#">
-                            <div class="relative overflow-hidden rounded-lg">
-                                <div class="relative w-full h-40">
-                                    <img src={{asset("images/product/product-3.jpg")}} alt="" class="object-cover w-full h-full inset-0">
-                                </div> 
-                                <div class="absolute right-0 top-0 m-2 bg-white/60 rounded-full py-0.5 px-2 text-sm font-semibold dark:bg-slate-800/60"> $18 </div>
-                            </div>
-                            <div class="mt-3 w-full">  Gaming mouse </div>
-                        </a>
-
-                    </li>
-                    <li class="w-1/2 pr-2">
-
-                        <a href="#">
-                            <div class="relative overflow-hidden rounded-lg">
-                                <div class="relative w-full h-40">
-                                    <img src={{asset("images/product/product-5.jpg")}} alt="" class="object-cover w-full h-full inset-0">
-                                </div> 
-                                <div class="absolute right-0 top-0 m-2 bg-white/60 rounded-full py-0.5 px-2 text-sm font-semibold dark:bg-slate-800/60"> $12 </div>
-                            </div>
-                            <div class="mt-3 w-full">  Herbal Shampoo </div>
-                        </a> 
-
-                    </li>
-
+                        </li>    
+                    @endforeach
+                   
                 </ul>
 
                 <button type="button" class="absolute bg-white rounded-full top-16 -left-4 grid w-9 h-9 place-items-center shadow dark:bg-dark3"  uk-slider-item="previous"> <ion-icon name="chevron-back" class="text-2xl"></ion-icon></button>

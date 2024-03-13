@@ -9,7 +9,7 @@
            
                 <li> <a href="#" > Campagne  </a> </li>
                 <li> <a href="#"> Evénement </a> </li>
-                <li> <a href="#"> Activité </a> </li>
+                <li> <a href="#"> Projet </a> </li>
                 
             </ul> 
 

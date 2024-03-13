@@ -23,10 +23,25 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $zone = array(
+            "Cotonou",
+            "Abomey-Calavi",
+            "Porto-novo",
+            "Parakou",
+            "Bohicon",
+            "Djougou",
+            "Abomey",
+            "Adjohoun",
+        );
+        $statut = array("Activiste", "OSC");
+        $nzone = rand(0, 7);
         return [
-            'name' => fake()->name(),
+            'firstname' => fake()->firstname,
+            'lastname' => fake()->lastname,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'intervations' => $zone[$nzone],
+            'statut' => $statut[rand(0, 1)],
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];

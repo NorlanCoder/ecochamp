@@ -44,8 +44,8 @@ class UserController extends Controller
 
     public function show(string $id)
     {
-        $user_auth = Auth::user();
-        $user = User::where('id', $id)->firstorfail();
+        $user_aut = User::where('id', $id)->firstorfail();
+        $user = Auth::user();
         $activities = Activite::where('user_id', "!=", $user->id)->paginate(5);
         $alerts = Alert::where('user_id', $user->id)->paginate(5);
         $postes = Post::where('user_id', $id)->paginate(5);
@@ -59,7 +59,7 @@ class UserController extends Controller
             }
             // dd($joins);
         }
-        return view('pages.profil', compact('user', 'user_auth', 'postes', 'activities', 'alerts', 'joins'));
+        return view('pages.profil', compact('user', 'user_aut', 'postes', 'activities', 'alerts', 'joins'));
     }
 
     public function update(Request $request, string $id)

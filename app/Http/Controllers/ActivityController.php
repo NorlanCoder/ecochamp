@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Activite;
 use App\Models\Activityjoin;
 use App\Models\Alertfollow;
+use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
@@ -21,6 +22,7 @@ class ActivityController extends Controller
         $user = Auth::user();
         $activities_pops = Activityjoin::where('participation', '>=', 30)->get();
         $activities_pop = [];
+        $produits = Produit::orderByDesc('creted_at')->paginate(5);
         foreach ($activities_pops as $item)
         {
             array_push($activities_pop, $item->activite);
@@ -28,7 +30,7 @@ class ActivityController extends Controller
         // dd($activities_pop);
         $activities_campagne = Activite::where('activite_type', 'Campagne')->get();
         $activities_evenement = Activite::where('debut', '>=', date('Y-m-d H:i:s'))->where('activite_type', 'Evénement')->orderby('debut', 'desc')->get();
-        $activities_activite = Activite::where('activite_type', 'Activite')->get();
+        $activities_activite = Activite::where('activite_type', 'Projet')->get();
 
         $joins = [];
         $activities_my = [];
@@ -45,7 +47,8 @@ class ActivityController extends Controller
             $activities_my = Activite::where('user_id', $user->id)->paginate(10);
         }
 
-        return view('pages.activity', compact('user', 'activities_campagne', 'activities_evenement', 'activities_activite', 'activities_pop', 'activities_sugestion', 'activities_my', 'page', 'joins'));
+        return view('pages.activity', compact('user', 'activities_campagne', 'activities_evenement', 'activities_activite', 'activities_pop', 'activities_sugestion', 
+                'activities_my', 'page', 'joins', 'produits'));
     }
 
     /**

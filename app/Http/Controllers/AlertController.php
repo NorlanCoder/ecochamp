@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alert;
 use App\Models\Alertfollow;
+use App\Models\Produit;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,12 +21,13 @@ class AlertController extends Controller
         $page = "alert";
         $user = Auth::user();
         $alerts = Alert::paginate(15);
+        $produits = Produit::orderByDesc('creted_at')->paginate(5);
         $alert_user = [];
         if($user){
             $alert_user = Alert::where('user_id', $user->id)->paginate(15);
         }
 
-        return view('pages.alert', compact('user', 'alerts', 'page', 'alert_user'));
+        return view('pages.alert', compact('user', 'alerts', 'page', 'alert_user', 'produits'));
     }
 
     /**

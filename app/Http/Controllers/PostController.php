@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alert;
 use App\Models\Post;
+use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,9 +20,10 @@ class PostController extends Controller
         $user = Auth::user();
         $alerts = Alert::paginate(5);
         $postes = Post::paginate(5);
+        $produits = Produit::orderByDesc('creted_at')->paginate(5);
         $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->limit(5)->get();
         //dd($postes[2]->postLikeds);
-        return view('pages.post', compact('user', 'alerts', 'postes', 'page', 'tendance'));
+        return view('pages.post', compact('user', 'alerts', 'postes', 'page', 'tendance', 'produits'));
 
     }
 

@@ -11,10 +11,10 @@
     
                     <!-- cover -->
                     <div class="relative overflow-hidden w-full lg:h-60 h-40">
-                        @if(empty($user->couverture))
+                        @if(empty($user_aut->couverture))
                             <img src={{asset("images/demos/beams.jpg")}} alt="" class="h-full w-full object-cover inset-0"> 
                         @else
-                            <img src={{asset(Storage::url($user->couverture))}} alt="" class="h-full w-full object-cover inset-0"> 
+                            <img src={{asset(Storage::url($user_aut->couverture))}} alt="" class="h-full w-full object-cover inset-0"> 
                         @endif
     
                         <!-- overly -->
@@ -24,7 +24,7 @@
                             <div class="flex items-center gap-3">
                                 {{-- <button class="button bg-white/20 text-white flex items-center gap-2 backdrop-blur-small">Crop</button> --}}
                                 <a href="{{url('/parametre')}}">
-                                    @if($user_auth && $user->id == $user_auth->id)
+                                    @if($user && $user->id == $user_aut->id)
                                         <button class="button bg-black/10 text-white flex items-center gap-2 backdrop-blur-small">Editer</button>
                                     @endif
                                 </a>
@@ -39,10 +39,10 @@
     
                             <div class="relative h-20 w-20 mb-4 z-10">
                                 <div class="relative overflow-hidden rounded-full md:border-[2px] border-gray-100 shrink-0 dark:border-slate-900 shadow">
-                                    @if(empty($user->profile))
+                                    @if(empty($user_aut->profile))
                                         <img src={{asset("/images/avatars/avatar.png")}} alt="" class="h-full w-full object-cover inset-0"> 
                                     @else
-                                        <img src={{asset(Storage::url($user->profile))}} alt="" class="h-full w-full object-cover inset-0"> 
+                                        <img src={{asset(Storage::url($user_aut->profile))}} alt="" class="h-full w-full object-cover inset-0"> 
                                     @endif
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                             <div class="flex lg:items-center justify-between max-md:flex-col max-md:gap-3">
     
                                 <div class="flex-1"> 
-                                    <h3 class="md:text-2xl text-lg font-bold text-black dark:text-white"> {{$user->lastname}} {{$user->firstname}} </h3>
+                                    <h3 class="md:text-2xl text-lg font-bold text-black dark:text-white"> {{$user_aut->lastname}} {{$user_aut->firstname}} </h3>
                                     <p  class=" font-normal text-gray-500 mt-2 flex gap-2 dark:text-white/80">
                                         {{-- <span> <b class="font-medium text-black dark:text-white">1.2K</b> likes </span>
                                         <span> • </span>
@@ -217,7 +217,7 @@
                             
                                 <div class="flex items-ce justify-between text-black dark:text-white">
                                     <h3 class="font-bold text-lg"> Intro   </h3>
-                                    @if($user_auth && $user->id == $user_auth->id)
+                                    @if($user && $user->id == $user_aut->id)
                                         <a href="{{url('/parametre')}}" class="text-sm text-blue-500">Editer</a>
                                     @endif
                                 </div>
@@ -241,14 +241,14 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                                           </svg>
                                           
-                                        <div>  {{$user->phone}} </div>
+                                        <div>  {{$user_aut->phone}} </div>
                                     </li>
                                     <li class="flex items-center gap-3"> 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                                         </svg>
                                           
-                                        <div> {{$user->email}}</div>
+                                        <div> {{$user_aut->email}}</div>
                                     </li>
                                     {{-- <li class="flex items-center gap-3"> 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -293,7 +293,7 @@
                                 </div>
                                 
                             </div> --}}
-                            @if($user_auth && $user->id == $user_auth->id)
+                            @if($user && $user->id == $user_aut->id)
                                 <!-- related pages  -->
                                 <div class="box p-5 px-6">
                 
@@ -306,24 +306,30 @@
         
                                         @foreach($alerts as $alert)
 
-                                            <div class="side-list-item">
-                                                <a href="{{url('profile', $alert->user->id)}}">
-                                                    @if(empty($alert->user->profile))
-                                                        <img src={{asset("/images/avatars/avatar.png")}} alt="" class="side-list-image rounded-full"> 
+                                        <div class="side-list-item">
+                                            <a href="{{url('profile', $alert->user->id)}}">
+                                                @if(empty($alert->user->profile))
+                                                    <img src={{asset("/images/avatars/avatar.png")}} alt="" class="side-list-image rounded-full"> 
+                                                @else
+                                                    <img src={{asset(Storage::url($alert->user->profile))}} alt="" class="side-list-image rounded-full"> 
+                                                @endif
+                                            </a>
+                                            <div class="flex-1">
+                                                <a href="{{url('profile', $alert->user->id)}}"><h4 class="side-list-title">  {{$alert->user->lastname }} {{$alert->user->firstname }} </h4></a>
+                                                <div class="side-list-info">  
+                                                    @if(count($alert->alertfollows) >= 100)
+                                                        {{count($alert->alertfollows) / 100}} K vues
                                                     @else
-                                                        <img src={{asset(Storage::url($alert->user->profile))}} alt="" class="side-list-image rounded-full"> 
-                                                    @endif
-                                                </a>
-                                                <div class="flex-1">
-                                                    <a href="timeline.html"><h4 class="side-list-title">  {{$item->user->lastname }} {{$item->user->firstname }} </h4></a>
-                                                    <div class="side-list-info"> 125k vue </div>
+                                                        {{count($alert->alertfollows)}} vues
+                                                    @endif  
                                                 </div>
-                                                <a href="{{url('alert', $alert->id)}}">
-                                                    <button class="button bg-primary-soft text-primary dark:text-white">voir</button>
-                                                </a>
                                             </div>
-
-                                        @endforeach
+                                            <a href="{{url('alert', $alert->id)}}">
+                                                <button class="button bg-primary text-white dark:text-white">voir</button>
+                                            </a>
+                                        </div>
+                        
+                                    @endforeach
                                         
                                     </div>
         

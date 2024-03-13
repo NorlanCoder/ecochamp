@@ -6,6 +6,7 @@ use App\Models\Activite;
 use App\Models\Activityjoin;
 use App\Models\Alert;
 use App\Models\Post;
+use App\Models\Produit;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,7 +27,8 @@ class HomeController extends Controller
         $postes = Post::paginate(4);
         $activities_campagne = Activite::where('activite_type', 'Campagne')->paginate(5);
         $activities_evenement = Activite::where('activite_type', 'Evénement')->paginate(5);
-        $activities_activite = Activite::where('activite_type', 'Activite')->paginate(5);
+        $activities_activite = Activite::where('activite_type', 'Projet')->paginate(5);
+        $produits = Produit::orderByDesc('creted_at')->paginate(5);
         $joins = [];
         $tags = [];
         if($user){
@@ -44,7 +46,7 @@ class HomeController extends Controller
         // dd($tendance);
 
         return view('layouts.index', compact('user', 'alerts', 'postes', 'activities_campagne',
-         'activities_evenement', 'activities_activite', 'joins', 'page', 'tendance', 'tags'));
+         'activities_evenement', 'activities_activite', 'joins', 'page', 'tendance', 'tags', 'produits'));
     }
 
     // Login Page

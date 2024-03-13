@@ -69,15 +69,10 @@
 
                 <!-- header icons -->
                 @auth
-                    @if($cartCount)
-                        <li>
-                            <a class="tooltipped" href="{{ route('panier.index') }}" data-position="bottom" data-tooltip="Voir mon panier">Panier({{ $cartCount }})</a>
-                        </li>
-                    @endif
 
                     <div class="flex items-center sm:gap-4 gap-2 absolute right-5 top-1/2 -translate-y-1/2 text-black">
                         <!-- create -->
-                        <button type="button" class="sm:p-2 p-1 rounded-full relative sm:bg-secondery dark:text-white">
+                        <button type="button" class="sm:p-2 p-1 rounded-full relative sm:bg-secondery dark:text-white" uk-tooltip="title: Créer; pos: bottom; offset:6">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 max-sm:hidden">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
                             </svg>
@@ -172,6 +167,18 @@
 
                         </div>
 
+                        <!-- Panier -->
+                        @if($cartCount)
+                            <a class="tooltipped" href="{{ route('panier.index') }}" data-position="bottom" data-tooltip="Voir mon panier">
+                                <button type="button" class="sm:p-2 p-1 rounded-full relative sm:bg-secondery dark:text-white" uk-tooltip="title: Panier; pos: bottom; offset:6">
+                                    {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 max-sm:hidden">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+                                    </svg> --}}
+                                    <div class="absolute top-0 right-0 -m-1 bg-red-600 text-white text-xs px-1 rounded-full">{{$cartCount}}</div>
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                </button>
+                            </a>
+                        @endif
                         <!-- notification -->
                         {{-- <button type="button" class="sm:p-2 p-1 rounded-full relative sm:bg-secondery dark:text-white" uk-tooltip="title: Notification; pos: bottom; offset:6">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 max-sm:hidden">
