@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produit;
+use Darryldecode\Cart\Cart;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -13,9 +15,11 @@ class CartController extends Controller
      */
     public function index()
     {
+        $page = "panier";
+        $user = Auth::user();
         $content = CartFacade::getContent();
         $total = CartFacade::getTotal();
-        return view('cart.index', compact('content', 'total'));
+        return view('cart.index', compact('content', 'total', 'user'));
     }
 
     /**
@@ -32,13 +36,18 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $product = Produit::findOrFail($request->id);
-        
+        $validated = $request->validate([
+            'id' => 'required',
+            'quantity' => 'required',
+        ]);
+        // dd($request);
         CartFacade::add([
             'id' => $product->id,
             'name' => $product->name,
-            'price' => $product->price,
+            'price' => intval($product->price),
             'quantity' => $request->quantity,
             'attributes' => [],
+            'conditions' => [],
             'associatedModel' => $product,
         ]
         );

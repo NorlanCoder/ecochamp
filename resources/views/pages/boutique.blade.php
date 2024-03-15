@@ -42,7 +42,7 @@
                                     @foreach ($produit_suggestion as $item)
                                         <li class="pr-3 md:w-1/3 w-1/2" uk-scrollspy-class="uk-animation-fade">
                                             <div class="card">
-                                                <a href="{{ route('produit.show', $item->id)}}">
+                                                <a href="{{ url('/produit', $item->id)}}">
                                                     <div class="card-media sm:aspect-[2/1.7] h-36">
                                                         <img src={{asset(Storage::url($item->image))}} alt="">
                                                         <div class="card-overly"></div>
@@ -50,7 +50,7 @@
                                                 </a>
                                                 <div class="card-body relative">
                                                     <a href="#"><span class="text-teal-600 font-semibold text-xs"> {{$item->categorie->nom}}</span></a>
-                                                    <a href="{{ url('produit.show', $item->id)}}"><p class="card-text block text-black mt-0.5"> {{$item->nom}} </p></a>
+                                                    <a href="{{ url('/produit', $item->id)}}"><p class="card-text block text-black mt-0.5"> {{$item->nom}} </p></a>
                                                     <div class="-top-3 absolute bg-blue-100 font-medium px-2  py-0.5 right-2 rounded-full text text-blue-500 text-sm z-20">
                                                         {{$item->price}} {{$item->devise}}
                                                     </div>
@@ -102,18 +102,18 @@
                                     @foreach ($produits_recent as $item)
                                         <li class="pr-4 sm:w-1/2 w-full" uk-scrollspy-class="uk-animation-fade">
                                             <div class="card flex gap-1">
-                                                <a href="{{ url('produit.show', $item->id)}}">
+                                                <a href="{{ url('/produit', $item->id)}}">
                                                 <div class="card-media w-32 max-h-full h-full shrink-0">
                                                         <img src={{asset(Storage::url($item->image))}} alt="">
                                                         <div class="card-overly"></div>
                                                     </div> 
                                                 </a> 
                                                 <div class="card-body flex-1 py-4">
-                                                    <a href="{{ url('produit.show', $item->id)}}"> <h4 class="card-title">  {{$item->nom}}</h4> </a>
+                                                    <a href="{{ url('/produit', $item->id)}}"> <h4 class="card-title">  {{$item->nom}}</h4> </a>
                                                     <a href="#"> <p class="card-text">  {{$item->categorie->nom}} </p></a>
                                                     <div class="text-xl flex items-center justify-between mt-2"> 
                                                         <h4 class="card-title"> {{$item->price}}{{$item->divise}} </h4>
-                                                        <a href="{{ url('produit.show', $item->id)}}"> <button type="button" class="button bg-secondery !w-auto rounded-fulld hidden">Voir</button> </a>
+                                                        <a href="{{ url('/produit', $item->id)}}"> <button type="button" class="button bg-secondery !w-auto rounded-fulld hidden">Voir</button> </a>
                                                     </div>
                                                     <div class="flex gap-2">
                                                         <button type="button" class="button bg-primary-soft text-primary dark:text-white flex-1">Chat</button>
@@ -239,7 +239,7 @@
                             
                             @foreach ($produits_all as $item)
                                 <div class="card uk-transition-toggle">
-                                    <a href="{{ url('/produits', $item->id)}}">
+                                    <a href="{{ url('/produit', $item->id)}}">
                                         <div class="card-media sm:aspect-[2/1.7] h-36">
                                             <img src={{asset(Storage::url($item->image))}} alt="">
                                             <div class="card-overly"></div> 
@@ -255,7 +255,7 @@
                                     <div class="absolute w-full bottom-0 bg-white/20 backdrop-blur-sm uk-transition-slide-bottom-small max-xl:h-full z-[2] flex flex-col justify-center">
                                         <div class="flex gap-3 py-4 px-3">
                                             <button type="button" class="button bg-primary text-white flex-1">Chat</button>
-                                            <a href="{{ url('produit.show', $item->id)}}"> <button type="button" class="button border bg-white !w-auto">Veiw</button> </a>
+                                            <a href="{{ url('/produit', $item->id)}}"> <button type="button" class="button border bg-white !w-auto">Veiw</button> </a>
                                         </div>
                                     </div> 
                                 </div>    

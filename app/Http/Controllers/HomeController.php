@@ -28,7 +28,7 @@ class HomeController extends Controller
         $activities_campagne = Activite::where('activite_type', 'Campagne')->paginate(5);
         $activities_evenement = Activite::where('activite_type', 'Evénement')->paginate(5);
         $activities_activite = Activite::where('activite_type', 'Projet')->paginate(5);
-        $produits = Produit::orderByDesc('creted_at')->paginate(5);
+        $produits = Produit::orderByDesc('created_at')->paginate(5);
         $joins = [];
         $tags = [];
         if($user){

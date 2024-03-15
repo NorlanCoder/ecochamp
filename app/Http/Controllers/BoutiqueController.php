@@ -55,7 +55,8 @@ class BoutiqueController extends Controller
         // dd($id);
         $user = Auth::user();
         $produit = Produit::where('id', $id)->first();
-        return view('pages.produit_detail', compact('user', 'produit'));
+        $produits = Produit::paginate(15);
+        return view('pages.produit_detail', compact('user', 'produit', 'produits'));
     
     }
 

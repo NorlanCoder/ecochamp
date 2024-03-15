@@ -18,6 +18,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikedController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -74,6 +75,9 @@ Route::middleware(['web'])->group(function () {
     Route::post('/photo/profile', [UserController::class, 'photoProfile']);
     Route::post('/photo/couverture', [UserController::class, 'photoCouverture']);
     Route::post('/list/tag', [HomeController::class, 'ListTag']);
-    Route::resource('panier', 'CartController')->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('panier', CartController::class)->only([
+        'index', 'store', 'update', 'destroy'
+    ]);;
+    // Route::resource('panier', 'CartController')->only(['index', 'store', 'update', 'destroy']);
 });
 

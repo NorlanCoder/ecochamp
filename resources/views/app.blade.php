@@ -33,7 +33,6 @@
         @yield('content')
 
         <!-- Javascript  -->
-        @yield('javascript')
         <script src="{{asset('js/uikit.min.js')}}"></script>
         <script src="{{asset('js/simplebar.js')}}"></script>
         <script src="{{asset('js/script.js')}}"></script>
@@ -46,6 +45,42 @@
         <script src="{{ asset('js/share.js') }}"></script>
         <script src="{{ asset('js/profil.js') }}"></script>
         <script src="{{ asset('js/script_create.js') }}"></script>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', () => {
+              const quantities = document.querySelectorAll('input[name="quantity"]');
+              quantities.forEach( input => {
+                input.addEventListener('input', e => {
+                  if(e.target.value < 1) {
+                    e.target.value = 1;
+                  } else {
+                    e.target.parentNode.parentNode.submit();
+                    document.querySelector('#wrapper').classList.add('hide');
+                    document.querySelector('#action').classList.add('hide');
+                    document.querySelector('#loader').classList.remove('hide');
+                  }
+                });
+              }); 
+        
+              const deletes = document.querySelectorAll('.deleteItem');
+              deletes.forEach( icon => {
+                icon.addEventListener('click', e => {
+                  e.target.parentNode.parentNode.submit();
+                  document.querySelector('#wrapper').classList.add('hide');
+                  document.querySelector('#loader').classList.remove('hide');
+                });
+              }); 
+            });
+            
+        </script>
+        <script>
+            @if(session()->has('cart'))
+              document.addEventListener('DOMContentLoaded', () => {      
+                const instance = M.Modal.init(document.querySelector('.modal'));
+                instance.open();    
+              });
+            @endif    
+        </script>
         <script type="text/javascript">
             function routeUrlStorage(file) {
                 val routeUrlStorage = "{{url('/storage', "+ file +")}}";
