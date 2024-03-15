@@ -14,10 +14,6 @@ return new class extends Migration
         Schema::create('type_alerts', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->foreignId('alert_id')
-                    ->constrained()
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

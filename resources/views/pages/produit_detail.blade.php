@@ -3,6 +3,26 @@
 
     <div id="wrapper">
 
+        @if(session()->has('cart'))
+            <div class="modal">
+                <div class="modal-content center-align">
+                    <h5>Produit ajouté au panier avec succès</h5>
+                    <hr>
+                    <p>Il y a {{ $cartCount }} @if($cartCount > 1) articles @else article @endif dans votre panier pour un total de <strong>{{ number_format($cartTotal, 2, ',', ' ') }} € TTC</strong> hors frais de port.</p>
+                    <p><em>Vous avez la possibilité de venir chercher vos produits sur place, dans ce cas vous cocherez la case correspondante lors de la confirmation de votre commande et aucun frais de port ne vous sera facturé.</em></p>
+                    <div class="modal-footer">     
+                    <button class="modal-close btn waves-effect waves-light left" id="continue">
+                        Continuer mes achats
+                    </button>
+                    <a href="{{ route('panier.index') }}" class="btn waves-effect waves-light">
+                        <i class="material-icons left">check</i>
+                        Commander          
+                    </a>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <!-- main contents -->
         <main id="site__main" class="2xl:ml-[--w-side]  xl:ml-[--w-side-sm] p-2.5 h-[calc(100vh-var(--m-top))] mt-[--m-top]">
 
@@ -58,23 +78,23 @@
                         <div class="md:space-y-5 space-y-3 p-5 max-md:pt-0 md:pr-2">
                             
                             <div>
-                                <h3 class="text-lg font-semibold"> Long evening dress with beatuful neckline </h3>
-                                <p class="text-xs mt-2 font-light text-gray-900 dark:text-white"> Listed on 2 weeeks ago in Turkey</p>
+                                <h3 class="text-lg font-semibold"> {{$produit->nom}} </h3>
+                                <p class="text-xs mt-2 font-light text-gray-900 dark:text-white"> Republiée le {{date('j F Y', strtotime($produit->created_at)) }}</p>
                             </div>
 
-                            <h1 class="text-2xl font-semibold"> $12.99 </h1>
+                            <h1 class="text-2xl font-semibold"> {{$produit->price}} {{$produit->devise}} </h1>
                         
                             <div>
                                 <h4 class="text-sm font-medium"> Details </h4>
                                 <div class="grid grid-cols-2 gap-2 mt-2 text-sm">
                                     <div>  Status </div>
-                                    <div class="text-teal-600">  Instock </div> 
+                                    <div class="text-teal-600">  En stock </div> 
                                 </div>
                             </div>
 
                             <div class="flex gap-2 py-2">
-                                <button class="button bg-primary text-white flex-1 py-1">Add to cart </button>
-                                <button class="button bg-secondery px-3" uk-tooltip="title: Hello World; offset: 8"> 
+                                <button class="button bg-primary text-white flex-1 py-1" type="submit" id="addcart">Ajouter au panier </button>
+                                {{-- <button class="button bg-secondery px-3" uk-tooltip="title: Hello World; offset: 8"> 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
                                     </svg>
@@ -83,17 +103,17 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                                     </svg>
-                                </button>
+                                </button> --}}
                             </div>
 
-                            <p class="text-sm text-black font-light dark:text-white"> sed diam nonummy nibh euismod tincidunt volutpat laoreet dolore magna aliquam erat volutpat  </p>
+                            <p class="text-sm text-black font-light dark:text-white"> {{$produit->description}}  </p>
         
                             <div>
-                                <h4 class="text-sm font-medium"> Seller </h4>
+                                <h4 class="text-sm font-medium"> {{$produit->nom}} </h4>
                                 <div class="flex gap-3 py-2 text-sm font-medium mt-2">
-                                    <a href="timeline.html"> <img src={{asset("images/avatars/avatar-3.jpg")}} alt="" class="w-9 h-9 rounded-full"> </a>  
+                                    <a href="{{url('/profile', $produit->user->id)}}"> <img src={{asset(Storage::url($produit->user->image))}} alt="" class="w-9 h-9 rounded-full"> </a>  
                                     <div class="flex-1">
-                                        <a href="timeline.html"> <h4 class="text-black dark:text-white"> Monroe Parker </h4> </a>  
+                                        <a href="timeline.html"> <h4 class="text-black dark:text-white"> {{$produit->user->lastname}} {{$produit->user->firstname}} </h4> </a>  
                                         <div class="text-xs text-gray-500 dark:text-white/80"> 2 hours ago </div>
                                     </div>
 
@@ -111,10 +131,10 @@
                 <!-- related items title -->
                 <div class="sm:my-6 my-3 flex items-center justify-between">
                     <div>
-                        <h2 class="text-xl font-semibold text-black"> Related items </h2>
-                        <p class="font-normal text-sm text-gray-500 leading-6 hidden"> Find a group by browsing top categories. </p>
+                        <h2 class="text-xl font-semibold text-black"> Autres articles </h2>
+                        <p class="font-normal text-sm text-gray-500 leading-6 hidden"> Trouvez un groupe en parcourant les catégories supérieures. </p>
                     </div>
-                    <a href="#" class="text-blue-500 sm:block hidden text-sm"> See all </a>
+                    <a href="#" class="text-blue-500 sm:block hidden text-sm"> Voir tout </a>
                 </div>
 
                 <!-- related items slider -->

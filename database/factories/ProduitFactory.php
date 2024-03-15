@@ -16,8 +16,18 @@ class ProduitFactory extends Factory
      */
     public function definition(): array
     {
+        $nbWord = rand(6, 30);
+        $nbImage = rand(1, 10);
+        $user_id = rand(1, 15);
+        $categorie_id = rand(1, 3);
+
         return [
-            //
+            'nom' => fake()->name(),
+            'description' => fake()->sentence($nbWord),
+            'price' => rand(120, 2500),
+            'image' => '/images/product-'. $nbImage .'.jpg',
+            'user_id' => $user_id,
+            'categorie_id' => $categorie_id,
         ];
     }
 }

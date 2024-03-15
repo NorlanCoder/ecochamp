@@ -20,9 +20,9 @@ class AlertFactory extends Factory
         $nbImage = rand(1, 9);
         $user_id = rand(1, 15);
         $type = array(
-            "Campagne",
-            "Evénement",
-            "Activité",
+            "Ordure",
+            "Feu de brousse",
+            "Autre pollution",
         );
         $zone = array(
             "Cotonou",

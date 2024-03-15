@@ -20,7 +20,7 @@ class BoutiqueController extends Controller
         $produits = Produit::paginate(15);
         $produit_suggestion = Produit::all();
         $produits_recent = Produit::all();
-        $produits_all = Produit::orderByDesc('creted_at')->paginate(5);
+        $produits_all = Produit::orderByDesc('created_at')->paginate(5);
         $my_produits = [];
         if($user){
             $my_produits = Produit::where('user_id', $user->id)->paginate(15);
@@ -54,8 +54,8 @@ class BoutiqueController extends Controller
     {
         // dd($id);
         $user = Auth::user();
-        // $produit = Boutique::where('id', $id)->firstOrFail();
-        return view('pages.produit_detail');
+        $produit = Produit::where('id', $id)->first();
+        return view('pages.produit_detail', compact('user', 'produit'));
     
     }
 

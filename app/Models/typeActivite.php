@@ -10,7 +10,6 @@ class typeActivite extends Model
     use HasFactory;
 
     protected $fillable = [
-        'activite_id',
         'nom',
     ];
     

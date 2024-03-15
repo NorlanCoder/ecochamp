@@ -16,6 +16,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ParametreController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikedController;
+use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,6 +44,7 @@ Route::get('/logout', [Logoutcontroller::class, 'destroy'])->name('logout')
 
 Route::get('/market', [BoutiqueController::class, 'index']);
 Route::get('/produit/{id}', [BoutiqueController::class, 'show'])->name('produit.show');
+Route::post('/produit', [ProduitController::class, 'store'])->name('produit.store');
 
 Route::get('/activity', [ActivityController::class, 'index']);
 Route::get('/alert', [AlertController::class, 'index']);

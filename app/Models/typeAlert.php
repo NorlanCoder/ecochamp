@@ -10,7 +10,6 @@ class typeAlert extends Model
     use HasFactory;
 
     protected $fillable = [
-        'alert_id',
         'nom',
     ];
     

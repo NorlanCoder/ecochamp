@@ -23,3 +23,15 @@ if (this.files[0] ) {
     });
 }
 });
+
+// Create Produit upload image 
+document.getElementById('createProductUrl').addEventListener('load', function(){
+    if (this.files[0] ) {
+        var picture = new FileReader();
+        picture.readAsDataURL(this.files[0]);
+        picture.addEventListener('load', function(event) {
+        document.getElementById('createProductImage').setAttribute('src', event.target.result);
+        document.getElementById('createProductImage').style.display = 'block';
+        });
+    }
+    });

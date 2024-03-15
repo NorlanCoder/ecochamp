@@ -32,17 +32,12 @@ class ProduitController extends Controller
         $user = Auth::user();
 
         $request->validate([
-
-            'nom' => 'required',
+            'titre' => 'required',
             'description' => 'required',
-            'devise' => 'required',
-            // 'symbole_devise' => 'required',
+            // 'devise' => 'required',
             'price' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'target' => 'required',
-            'user_id' => 'required',
-            'categorie_id' => 'required',
-
+            'categorie' => 'required',
         ]);
 
         if(!empty($request->image)){
@@ -71,14 +66,12 @@ class ProduitController extends Controller
         $produit = Produit::create([
             'nom' => $request->nom,
             'description' => $request->description,
-            // 'tags' => $request->nom,
-            'devise' => $request->devise,
-            // 'symbole_devise' => $request->nom,
+            'tags' => isset($request->tags) ? $request->tags : null,
+            'devise' => "XOF",
             'price' => $request->price,
-            'image' => isset($imageName) ? $imageName: "",
-            'target' => $request->target,
+            'image' => isset($imageName) ? $imageName: null,
             'user_id' => $user->id,
-            'categorie_id' => $request->categorie_id,
+            'categorie_id' => $request->categorie,
         ]);
         $produit->tag($tags);
         return response(

@@ -15,13 +15,17 @@ return new class extends Migration
         Schema::create('produits', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('description');
+            $table->text('description');
             $table->string('tags')->nullable();
-            $table->string('devise')->nullable();
+            $table->string('devise')->default('XOF');
             $table->string('symbole_devise')->nullable();
             $table->double('price');
             $table->string('image');
+            $table->string('image2')->nullable();
+            $table->string('image3')->nullable();
+            $table->string('image4')->nullable();
             $table->string('target')->nullable();
+            $table->enum('status', ['En stock', 'Pas de stock'])->default('En stock');
             $table->foreignId('user_id')
                     ->constrained()
                     ->onUpdate('cascade')

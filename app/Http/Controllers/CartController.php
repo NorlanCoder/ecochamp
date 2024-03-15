@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Darryldecode\Cart\Cart;
+use App\Models\Produit;
+use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -12,8 +13,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        $content = Cart::getContent();
-        $total = Cart::getTotal();
+        $content = CartFacade::getContent();
+        $total = CartFacade::getTotal();
         return view('cart.index', compact('content', 'total'));
     }
 
@@ -30,7 +31,18 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = Produit::findOrFail($request->id);
+        
+        CartFacade::add([
+            'id' => $product->id,
+            'name' => $product->name,
+            'price' => $product->price,
+            'quantity' => $request->quantity,
+            'attributes' => [],
+            'associatedModel' => $product,
+        ]
+        );
+        return redirect()->back()->with('cart', 'ok');
     }
 
     /**
@@ -54,7 +66,7 @@ class CartController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Cart::update($id, [
+        CartFacade::update($id, [
             'quantity' => ['relative' => false, 'value' => $request->quantity],
         ]);
         return redirect(route('panier.index'));
@@ -65,7 +77,7 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
-        Cart::remove($id);
+        CartFacade::remove($id);
         return redirect(route('panier.index'));
     }
 }

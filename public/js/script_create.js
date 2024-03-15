@@ -1,13 +1,13 @@
 $(".submit-form-produit").click(function(e){
     var formDataCreate = document.getElementById('form-data-produit_create');
     form = $('#'+formDataCreate.id);
-    form.validate();
+    // form.validate();
    
-    form.validate({
-        rules: {
-            activite: "required",
-        }
-      });
+    // form.validate({
+    //     rules: {
+    //         titre: "required",
+    //     }
+    //   });
     console.log(form)
     var formData = new FormData(form[0]);
 
