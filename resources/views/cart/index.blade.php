@@ -40,7 +40,7 @@
                               Total TTC (hors livraison)
                             </div>
                             <div class="col s6">
-                              <strong>{{ number_format($total, 2, ',', ' ') }} €</strong>
+                              <strong>{{ number_format($total, 2, ',', ' ') }} XOF</strong>
                             </div>
                           </div>
                         @else
@@ -55,7 +55,13 @@
                       <p>
                         <a  href="{{ url('/market') }}">Continuer mes achats</a>
                         @if($total)
-                          <a href="#">Commander</a>
+                          <kkiapay-widget amount="{{$total}}" 
+                                          key="7b118ecddbdc2acf01a095ea1b56bca076e75913"
+                                          position="center"
+                                          sandbox="true"
+                                          data=""
+                                          callback="https://kkiapay-redirect.com">
+                          </kkiapay-widget>
                         @endif
                       </p>
                     </div>

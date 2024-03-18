@@ -19,6 +19,7 @@
         <!-- Ionicons -->
         <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.2.2/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.2.2/ionicons/ionicons.js"></script>
+        <script src="https://cdn.kkiapay.me/k.js"></script>
         <style> #social-links > ul { list-style: none; }
 
             #social-links > ul > li { float: left; margin-right: 1em; font-size: 1em; }
