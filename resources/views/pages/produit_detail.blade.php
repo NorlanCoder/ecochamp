@@ -111,19 +111,19 @@
                             <p class="text-sm text-black font-light dark:text-white"> {{$produit->description}}  </p>
         
                             <div>
-                                <h4 class="text-sm font-medium"> {{$produit->nom}} </h4>
+                                <h4 class="text-sm font-medium"> Vendeur </h4>
                                 <div class="flex gap-3 py-2 text-sm font-medium mt-2">
-                                    @if(empty($item->user->profile))
+                                    @if(empty($produit->user->profile))
                                         <a href="{{url('/profile', $produit->user->id)}}"> <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-9 h-9 rounded-full"> </a>  
                                     @else
-                                    <a href="{{url('/profile', $produit->user->id)}}"> <img src={{asset(Storage::url($produit->user->image))}} alt="" class="w-9 h-9 rounded-full"> </a>  
+                                    <a href="{{url('/profile', $produit->user->id)}}"> <img src={{asset(Storage::url($produit->user->profile))}} alt="" class="w-9 h-9 rounded-full"> </a>  
                                     @endif
                                     <div class="flex-1">
                                         <a href="timeline.html"> <h4 class="text-black dark:text-white"> {{$produit->user->lastname}} {{$produit->user->firstname}} </h4> </a>  
                                         <div class="text-xs text-gray-500 dark:text-white/80"> 2 hours ago </div>
                                     </div>
 
-                                    <button type="button" class="button border2 px-3"> Follow </button>
+                                    {{-- <button type="button" class="button border2 px-3"> Follow </button> --}}
                                 
                                 </div>
                             </div>

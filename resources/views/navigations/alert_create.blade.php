@@ -70,9 +70,9 @@
                     <div id="tag_alert">
                         @isset($tags)
 
-                            @foreach ($tags as $key => $item)
-                                <input type="checkbox" class="btn-check" id="btn-check-tag-{{$key}}" autocomplete="off" name="btn_check_tag_{{$key}}" value="{{$item->name}}">
-                                <label  class="btn btn-primary" for="btn-check-tag-{{$key}}">{{$item->name}}</label>
+                            @foreach ($tags as $item)
+                                <input type="checkbox" class="btn-check" id="btn-check-tag-{{$item->id}}" autocomplete="off" name="btn_check_tag_{{$item->id}}" value="{{$item->nom}}">
+                                <label  class="btn btn-primary" for="btn-check-tag-{{$item->id}}">{{$item->nom}}</label>
                             @endforeach
 
                         @endisset

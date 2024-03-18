@@ -41,7 +41,7 @@
           <div class="flex items-center justify-between">
 
             <div class="flex items-center gap-2.5">
-              <input id="rememberme" name="rememberme" type="checkbox">
+              <input id="rememberme" name="rememberme" type="checkbox" value="true">
               <label for="rememberme" class="font-normal">Se souvenir de moi</label>
             </div>
             <a href="{{route('forgot.create')}}" class="text-blue-700"> Mot de passe oublié </a>

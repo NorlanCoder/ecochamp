@@ -35,6 +35,7 @@ class UserFactory extends Factory
         );
         $statut = array("Activiste", "OSC");
         $nzone = rand(0, 7);
+        $nbImage = rand(1, 11);
         return [
             'firstname' => fake()->firstname,
             'lastname' => fake()->lastname,
@@ -42,6 +43,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'intervations' => $zone[$nzone],
             'statut' => $statut[rand(0, 1)],
+            'profile' => '/images/avatar-'. $nbImage .'.jpg',
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
