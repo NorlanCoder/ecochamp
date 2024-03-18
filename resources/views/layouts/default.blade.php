@@ -1,40 +1,40 @@
 @extends('app')
 @section('content')
 
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- header -->
-        @include('navigations.navigation')
-        
-        <!-- sidebar -->
-        @include('navigations.menu')
+    <!-- header -->
+    @include('navigations.navigation')
 
-        <!-- main contents -->
-        @yield('index')
+    <!-- sidebar -->
+    @include('navigations.menu')
 
-    </div>
+    <!-- main contents -->
+    @yield('index')
 
-
-    <!-- open chat box -->
-    {{-- @include('navigations.chat') --}}
+</div>
 
 
-    {{-- <!-- post preview modal --> 
+<!-- open chat box -->
+{{-- @include('navigations.chat') --}}
+
+
+{{-- <!-- post preview modal --> 
     @include('navigations.post_create') --}}
 
-    <!-- create post -->
-    @include('navigations.post_create')
+<!-- create post -->
+@include('navigations.post_create')
 
 
-    <!-- create activity -->
-    @include('navigations.activity_create')
+<!-- create activity -->
+@include('navigations.activity_create')
 
-    <!-- create alert -->
-    @include('navigations.alert_create')
+<!-- create alert -->
+@include('navigations.alert_create')
 
-    <!-- create besoin -->
-    @include('composants.devenir')
-    @include('composants.share')
+<!-- create besoin -->
+@include('composants.devenir')
+@include('composants.share')
 
 
 @endsection
