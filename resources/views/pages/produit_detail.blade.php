@@ -50,17 +50,6 @@
 
                             <a class="nav-prev m-6" href="#" uk-slideshow-item="previous"> <ion-icon name="chevron-back" class="text-2xl"></ion-icon> </a>
                             <a class="nav-next m-6" href="#" uk-slideshow-item="next"> <ion-icon name="chevron-forward" class="text-2xl"></ion-icon></a>
-
-            @if(session()->has('cart'))
-
-                <div class="p-4 mb-4 text-sm text-gray-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-                    <span class="font-medium text-green-700 text-xl">Produit ajouté au panier avec succès</span> <br>
-                    <p>Il y a {{ $cartCount }} @if($cartCount > 1) articles @else article @endif dans votre panier pour un total de <strong>{{ number_format($cartTotal, 2, ',', ' ') }} {{$produit->devise}} TTC</strong> hors frais de port.</p>
-                    <p><em>Vous avez la possibilité de venir chercher vos produits sur place, dans ce cas vous cocherez la case correspondante lors de la confirmation de votre commande et aucun frais de port ne vous sera facturé.</em></p>
-                </div>
-
-
-            @endif
                         </div>
 
                         <ul class="flex justify-center gap-4 py-4 absolute w-full bottom-0">

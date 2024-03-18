@@ -100,31 +100,42 @@
                                
                                 <ul class="uk-slider-items w-[calc(100%+14px)]" uk-scrollspy="target: > li; cls: uk-animation-scale-up; delay: 20;repeat:true">
                                     @foreach ($produits_recent as $item)
-                                        <li class="pr-4 sm:w-1/2 w-full" uk-scrollspy-class="uk-animation-fade">
-                                            <div class="card flex gap-1">
-                                                <a href="{{ url('/produit', $item->id)}}">
-                                                <div class="card-media w-32 max-h-full h-full shrink-0">
-                                                        <img src={{asset(Storage::url($item->image))}} alt="">
-                                                        <div class="card-overly"></div>
-                                                    </div> 
-                                                </a> 
-                                                <div class="card-body flex-1 py-4">
-                                                    <a href="{{ url('/produit', $item->id)}}"> <h4 class="card-title">  {{$item->nom}}</h4> </a>
-                                                    <a href="#"> <p class="card-text">  {{$item->categorie->nom}} </p></a>
-                                                    <div class="text-xl flex items-center justify-between mt-2"> 
-                                                        <h4 class="card-title"> {{$item->price}}{{$item->divise}} </h4>
-                                                        <a href="{{ url('/produit', $item->id)}}"> <button type="button" class="button bg-secondery !w-auto rounded-fulld hidden">Voir</button> </a>
-                                                    </div>
-                                                    <div class="flex gap-2">
-                                                        <button type="button" class="button bg-primary-soft text-primary dark:text-white flex-1">Chat</button>
-                                                        <button type="button" class="button bg-secondery !w-auto"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                                        </svg>
-                                                        </button>
+
+                                        <form method="POST" action="{{ route('panier.store') }}">
+                                            @csrf
+
+                                            <li class="pr-4 sm:w-1/2 w-full" uk-scrollspy-class="uk-animation-fade">
+                                                <div>
+                                                    <input type="hidden" id="id" name="id" value="{{ $item->id }}">
+                                                    <input type="hidden" name="quantity" type="number" value="1" min="1">
+                                                </div>
+                                                <div class="card flex gap-1">
+                                                    <a href="{{ url('/produit', $item->id)}}">
+                                                        <div class="card-media w-32 max-h-full h-full shrink-0">
+                                                            <img src={{asset(Storage::url($item->image))}} alt="">
+                                                            <div class="card-overly"></div>
+                                                        </div> 
+                                                    </a> 
+                                                    <div class="card-body flex-1 py-4">
+                                                        <a href="{{ url('/produit', $item->id)}}"> <h4 class="card-title">  {{$item->nom}}</h4> </a>
+                                                        <a href="#"> <p class="card-text">  {{$item->categorie->nom}} </p></a>
+                                                        <div class="text-xl flex items-center justify-between mt-2"> 
+                                                            <h4 class="card-title"> {{$item->price}}{{$item->divise}} </h4>
+                                                            <a href="{{ url('/produit', $item->id)}}"> <button type="button" class="button bg-secondery !w-auto rounded-fulld hidden">Voir</button> </a>
+                                                        </div>
+                                                        <div class="flex gap-2">
+                                                            <button type="submit" class="button bg-primary-soft text-primary dark:text-white flex-1">Chat</button>
+                                                            <button type="button" class="button bg-secondery !w-auto"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                                            </svg>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </li>
+
+                                        </form>
+
                                     @endforeach
                                     
                                 </ul>
@@ -238,27 +249,35 @@
                         <div class="grid sm:grid-cols-3 grid-cols-2 gap-3" uk-scrollspy="target: > div; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
                             
                             @foreach ($produits_all as $item)
-                                <div class="card uk-transition-toggle">
-                                    <a href="{{ url('/produit', $item->id)}}">
-                                        <div class="card-media sm:aspect-[2/1.7] h-36">
-                                            <img src={{asset(Storage::url($item->image))}} alt="">
-                                            <div class="card-overly"></div> 
+                                <form method="POST" action="{{ route('panier.store') }}">
+                                    @csrf
+                                    <div>
+                                        <input type="hidden" id="id" name="id" value="{{ $item->id }}">
+                                        <input type="hidden" name="quantity" type="number" value="1" min="1">
+                                    </div>
+                                    <div class="card uk-transition-toggle">
+                                        <a href="{{ url('/produit', $item->id)}}">
+                                            <div class="card-media sm:aspect-[2/1.7] h-36">
+                                                <img src={{asset(Storage::url($item->image))}} alt="">
+                                                <div class="card-overly"></div> 
+                                            </div> 
+                                        </a>
+                                        <div class="card-body flex justify-between">
+                                            <div class="flex-1">
+                                                <p class="card-text text-black font-medium line-clamp-1"> {{$item->categorie->nom}} </p>
+                                                <div class="text-xs line-clamp-1 mt-1"> {{$item->nom}} </div>
+                                            </div>
+                                            <h4 class="card-title"> {{$item->price}}{{$item->devise}} </h4>
+                                        </div>  
+                                        <div class="absolute w-full bottom-0 bg-white/20 backdrop-blur-sm uk-transition-slide-bottom-small max-xl:h-full z-[2] flex flex-col justify-center">
+                                            <div class="flex gap-3 py-4 px-3">
+                                                <button type="submit" class="button bg-primary text-white flex-1">Panier</button>
+                                                <a href="{{ url('/produit', $item->id)}}"> <button type="button" class="button border bg-white !w-auto">Veiw</button> </a>
+                                            </div>
                                         </div> 
-                                    </a>
-                                    <div class="card-body flex justify-between">
-                                        <div class="flex-1">
-                                            <p class="card-text text-black font-medium line-clamp-1"> {{$item->categorie->nom}} </p>
-                                            <div class="text-xs line-clamp-1 mt-1"> {{$item->nom}} </div>
-                                        </div>
-                                        <h4 class="card-title"> {{$item->price}}{{$item->devise}} </h4>
-                                    </div>  
-                                    <div class="absolute w-full bottom-0 bg-white/20 backdrop-blur-sm uk-transition-slide-bottom-small max-xl:h-full z-[2] flex flex-col justify-center">
-                                        <div class="flex gap-3 py-4 px-3">
-                                            <button type="button" class="button bg-primary text-white flex-1">Chat</button>
-                                            <a href="{{ url('/produit', $item->id)}}"> <button type="button" class="button border bg-white !w-auto">Veiw</button> </a>
-                                        </div>
-                                    </div> 
-                                </div>    
+                                    </div>
+
+                                </form>    
                             @endforeach
                             
                         </div>

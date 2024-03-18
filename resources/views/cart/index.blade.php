@@ -11,16 +11,12 @@
         <div class="container">
           <div class="row">
 
-
-
             <div id="">
               @if($total)
               <div class="title flex items-center">
                 <ion-icon name="arrow-back-outline" class="text-2xl mr-2"></ion-icon>
                 <span class="card-title">Panier</span>
               </div>
-
-
 
               <div class="relative overflow-x-auto">
                 <table class="w-full border-separate border-spacing-y-2 text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
@@ -33,10 +29,10 @@
                         Description
                       </th>
                       <th scope="col" class="px-6 py-3">
-                        Quantité
+                        Prix unitaire
                       </th>
                       <th scope="col" class="px-6 py-3">
-                        Prix unitaire
+                        Quantité
                       </th>
                       <th scope="col" class="px-6 py-3 rounded-e-lg">
                         Total
@@ -56,13 +52,21 @@
                         {{ $item->price }} XOF
                       </td>
                       <td class="px-6 py-4">
-                        <input type="number" class="w-20 bg-gray-600" min=0 value="{{ $item->quantity }}">
-
-                        <button type="button" class="flex m-2 text-center items-center">
-                          <ion-icon class="inline-block text-xl" name="trash"></ion-icon>
-                          <h1 class="inline-block ml-3">Delete</h1>
-                        </button>
-
+                        <form action="{{ route('panier.update', $item->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input name="quantity" type="number" class="w-20 bg-gray-600" min=1 value="{{ $item->quantity }}"> 
+                            <button type="submit">
+                            </input>
+                          </form>
+                          <form action="{{ route('panier.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="flex m-2 text-center items-center">
+                              <ion-icon class="inline-block text-xl" name="trash"></ion-icon>
+                              <h1 class="inline-block ml-3">Delete</h1>
+                            </button>
+                          </form>
                       </td>
                       <td class="px-6 py-4">
                         {{ number_format($item->quantity * $item->price, 2, ',', ' ') }} XOF
@@ -78,11 +82,19 @@
 
               <div class="total-container">
                 <div class="mt-12">
-                  <h1 class="font-bold ">Le cout total: $ {{ number_format($total, 2, ',', ' ') }}</h1> </strong>
->>>>>>> 7ec1fe6 (fix)
+                  <h1 class="font-bold ">Le cout total: XOF {{ number_format($total, 2, ',', ' ') }}</h1> </strong>
                 </div>
               </div>
-
+            <div>
+              <kkiapay-widget amount="{{$total}}" 
+                  key="7b118ecddbdc2acf01a095ea1b56bca076e75913"
+                  position="center"
+                  sandbox="true"
+                  data=""
+                  callback="https://kkiapay-redirect.com">
+              </kkiapay-widget>  
+            </div>
+            @endif
         </div>
       </div>
 
