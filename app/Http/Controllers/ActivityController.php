@@ -23,7 +23,7 @@ class ActivityController extends Controller
         $user = Auth::user();
         $activities_pops = Activityjoin::where('participation', '>=', 30)->get();
         $activities_pop = [];
-        $produits = Produit::orderByDesc('creted_at')->paginate(5);
+        $produits = Produit::orderByDesc('created_at')->paginate(5);
         foreach ($activities_pops as $item)
         {
             array_push($activities_pop, $item->activite);

@@ -110,7 +110,7 @@
             <div class="col-span-2">
 
                 <label for="accept" class="inline-flex items-center" id="rememberme">
-                <input type="checkbox" name="accept" id="accept-terms" class="@error('accept-terms') is-invalid @enderror !rounded-md accent-red-800" />
+                <input required type="checkbox" name="accept" id="accept-terms" class="@error('accept-terms') is-invalid @enderror !rounded-md accent-red-800" />
                 <span class="ml-2">J'accepte <a href="#" class="text-blue-700 hover:underline">les termes et coditions d'utilisations </a> </span>
                 </label>
             
