@@ -8,6 +8,7 @@ use App\Models\Produit;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Jorenvh\Share\Share;
 
 class AlertController extends Controller
@@ -23,11 +24,13 @@ class AlertController extends Controller
         $alerts = Alert::paginate(15);
         $produits = Produit::orderByDesc('creted_at')->paginate(5);
         $alert_user = [];
+        $tags = [];
         if($user){
             $alert_user = Alert::where('user_id', $user->id)->paginate(15);
+            $tags = DB::table('tags')->orderByDesc('id')->limit(5)->get();
         }
 
-        return view('pages.alert', compact('user', 'alerts', 'page', 'alert_user', 'produits'));
+        return view('pages.alert', compact('user', 'alerts', 'page', 'alert_user', 'produits', 'tags'));
     }
 
     /**

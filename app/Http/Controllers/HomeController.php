@@ -39,7 +39,7 @@ class HomeController extends Controller
                 // dd($item->activite->id);
             }
             // dd($joins);
-            $tags = DB::table('tagging_tags')->orderByDesc('id')->limit(5)->get();
+            $tags = DB::table('tags')->orderByDesc('id')->limit(5)->get();
         }
         $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->limit(5)->get();
         // dd(DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->get());

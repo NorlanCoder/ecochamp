@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Categorie;
+use App\Models\Tag;
 use App\Models\typeActivite;
 use Illuminate\Database\Seeder;
 
@@ -64,6 +65,17 @@ class DatabaseSeeder extends Seeder
         );
         foreach($categories as $type){
             Categorie::create([
+                'nom' => $type,
+            ]);
+        }
+
+        $tags = array(
+            "Environnement",
+            "Vie",
+            "Pollution",
+        );
+        foreach($tags as $type){
+            Tag::create([
                 'nom' => $type,
             ]);
         }

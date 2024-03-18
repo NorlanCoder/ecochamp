@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->boolean('remove');
+            $table->boolean('remove')->default(false);
             $table->timestamps();
         });
     }

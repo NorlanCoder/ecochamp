@@ -9,6 +9,7 @@ use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Jorenvh\Share\Share;
 
 class ActivityController extends Controller
@@ -35,6 +36,7 @@ class ActivityController extends Controller
         $joins = [];
         $activities_my = [];
         $activities_sugestion = [];
+        $tags = [];
         if($user){
             $activities_sugestion = Activite::where('debut', '>=', date('Y-m-d H:i:s'))->where('user_id', "!=", $user->id)->orderby('debut', 'desc')->get();
             $activityJoins = Activityjoin::where('user_id', $user->id)->get();
@@ -44,11 +46,12 @@ class ActivityController extends Controller
                 // dd($item->activite->id);
             }
             // dd($joins);
+            $tags = DB::table('tags')->orderByDesc('id')->limit(5)->get();
             $activities_my = Activite::where('user_id', $user->id)->paginate(10);
         }
 
         return view('pages.activity', compact('user', 'activities_campagne', 'activities_evenement', 'activities_activite', 'activities_pop', 'activities_sugestion', 
-                'activities_my', 'page', 'joins', 'produits'));
+                'activities_my', 'page', 'joins', 'produits', 'tags'));
     }
 
     /**

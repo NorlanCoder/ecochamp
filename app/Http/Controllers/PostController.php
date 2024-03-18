@@ -20,10 +20,14 @@ class PostController extends Controller
         $user = Auth::user();
         $alerts = Alert::paginate(5);
         $postes = Post::paginate(5);
-        $produits = Produit::orderByDesc('creted_at')->paginate(5);
+        $produits = Produit::orderByDesc('created_at')->paginate(5);
         $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->limit(5)->get();
+        $tags = [];
+        if($user){
+            $tags = DB::table('tags')->orderByDesc('id')->limit(5)->get();
+        }
         //dd($postes[2]->postLikeds);
-        return view('pages.post', compact('user', 'alerts', 'postes', 'page', 'tendance', 'produits'));
+        return view('pages.post', compact('user', 'alerts', 'postes', 'page', 'tendance', 'produits', 'tags'));
 
     }
 

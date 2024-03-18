@@ -7,6 +7,7 @@ use App\Models\Categorie;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BoutiqueController extends Controller
 {
@@ -56,7 +57,11 @@ class BoutiqueController extends Controller
         $user = Auth::user();
         $produit = Produit::where('id', $id)->first();
         $produits = Produit::paginate(15);
-        return view('pages.produit_detail', compact('user', 'produit', 'produits'));
+        $tags = [];
+        if($user){
+            $tags = DB::table('tags')->orderByDesc('id')->limit(5)->get();
+        }
+        return view('pages.produit_detail', compact('user', 'produit', 'produits', 'tags'));
     
     }
 
