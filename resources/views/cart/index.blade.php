@@ -44,7 +44,7 @@
                   </thead>
                   <tbody>
                     @foreach ($content as $item)
-                    <tr class="odd:bg-gray-100 odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <tr class="bg-gray-100  even:dark:bg-gray-800 border-b dark:border-gray-700">
                       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                         {{$item->name->nom}}
                       </th>
@@ -55,7 +55,7 @@
                         {{ $item->price }} XOF
                       </td>
                       <td class="px-6 py-4">
-                        <input type="number" class="w-20 bg-gray-600" min=0 max="{{ $item->quantity }}" value="{{ $item->quantity }}">
+                        <input type="number" class="w-20 bg-gray-600" min=0 value="{{ $item->quantity }}">
 
                         <button type="button" class="flex m-2 text-center items-center">
                           <ion-icon class="inline-block text-xl" name="trash"></ion-icon>
