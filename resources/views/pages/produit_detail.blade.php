@@ -7,23 +7,14 @@
         <main id="site__main" class="2xl:ml-[--w-side]  xl:ml-[--w-side-sm] p-2.5 h-[calc(100vh-var(--m-top))] mt-[--m-top]">
 
             @if(session()->has('cart'))
-                <div class="modal">
-                    <div class="modal-content center-align">
-                        <h5>Produit ajouté au panier avec succès</h5>
-                        <hr>
-                        <p>Il y a {{ $cartCount }} @if($cartCount > 1) articles @else article @endif dans votre panier pour un total de <strong>{{ number_format($cartTotal, 2, ',', ' ') }} {{$produit->devise}} TTC</strong> hors frais de port.</p>
-                        <p><em>Vous avez la possibilité de venir chercher vos produits sur place, dans ce cas vous cocherez la case correspondante lors de la confirmation de votre commande et aucun frais de port ne vous sera facturé.</em></p>
-                        <div class="modal-footer">     
-                        <button class="modal-close btn waves-effect waves-light left" id="continue">
-                            Continuer mes achats
-                        </button>
-                        <a href="{{ route('panier.index') }}" class="btn waves-effect waves-light">
-                            <i class="material-icons left">check</i>
-                            Commander          
-                        </a>
-                        </div>
-                    </div>
+
+                <div class="p-4 mb-4 text-sm text-gray-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                    <span class="font-medium text-green-700 text-xl">Produit ajouté au panier avec succès</span> <br>
+                    <p>Il y a {{ $cartCount }} @if($cartCount > 1) articles @else article @endif dans votre panier pour un total de <strong>{{ number_format($cartTotal, 2, ',', ' ') }} {{$produit->devise}} TTC</strong> hors frais de port.</p>
+                    <p><em>Vous avez la possibilité de venir chercher vos produits sur place, dans ce cas vous cocherez la case correspondante lors de la confirmation de votre commande et aucun frais de port ne vous sera facturé.</em></p>
                 </div>
+
+
             @endif
 
             <div class="max-w-[1065px] mx-auto -mt-7">

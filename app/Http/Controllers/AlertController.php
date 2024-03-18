@@ -22,7 +22,7 @@ class AlertController extends Controller
         $page = "alert";
         $user = Auth::user();
         $alerts = Alert::paginate(15);
-        $produits = Produit::orderByDesc('creted_at')->paginate(5);
+        $produits = Produit::orderByDesc('created_at')->paginate(5);
         $alert_user = [];
         $tags = [];
         if($user){

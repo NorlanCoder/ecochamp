@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer(['layouts.index', 'pages.boutique', 'pages.profil',
          'pages.parametre', 'pages.produit_detail', 'cart.index', 'pages.post',
-         'pages.alert', 'pages.activity'], function ($view) {
+         'pages.alert', 'pages.activity', 'pages.activite_detail', 'pages.alert_detail'], function ($view) {
             
             $view->with([
                 'cartCount' => \Darryldecode\Cart\Facades\CartFacade::getTotalQuantity(), 
