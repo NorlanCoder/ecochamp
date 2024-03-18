@@ -41,15 +41,16 @@ class CartController extends Controller
             'quantity' => 'required',
         ]);
         // dd($request);
-        CartFacade::add([
-            'id' => $product->id,
-            'name' => $product->name,
-            'price' => intval($product->price),
-            'quantity' => $request->quantity,
-            'attributes' => [],
-            'conditions' => [],
-            'associatedModel' => $product,
-        ]
+        CartFacade::add(
+            [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => intval($product->price),
+                'quantity' => $request->quantity,
+                'attributes' => [],
+                'conditions' => [],
+                'associatedModel' => $product,
+            ]
         );
         return redirect()->back()->with('cart', 'ok');
     }
