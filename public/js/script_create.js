@@ -1,4 +1,8 @@
 $(".submit-form-produit").click(function(e){
+    const popup = Notification({
+        position: 'top-left',
+        duration: 7000
+      });
     var formDataCreate = document.getElementById('form-data-produit_create');
     form = $('#'+formDataCreate.id);
     // form.validate();
@@ -24,7 +28,11 @@ $(".submit-form-produit").click(function(e){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response){
-            alert(response.success);
+            popup.success({
+                title: 'Success',
+                message: response.success
+              });
+            // alert(response.success);
             console.log(response)
             document.location.reload();
         },
@@ -32,6 +40,11 @@ $(".submit-form-produit").click(function(e){
 });
 
 $(".submit-form-post").click(function(e){
+    const popup = Notification({
+        position: 'top-left',
+        duration: 7000
+      });
+      
     var formDataCreate = document.getElementById('form-data-post_create');
     form = $('#'+formDataCreate.id);
 
@@ -53,7 +66,11 @@ $(".submit-form-post").click(function(e){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response){
-            alert(response.success);
+            popup.success({
+                title: 'Success',
+                message: response.success
+              });
+            // alert(response.success);
             console.log(response)
             // addpost(response.post);
             document.getElementById('activite').value = "";
@@ -66,6 +83,11 @@ $(".submit-form-post").click(function(e){
 });
 
 $(".submit-form-activite").click(function(e){
+    const popup = Notification({
+        position: 'top-left',
+        duration: 7000
+      });
+      
     var formDataCreate = document.getElementById('form-data-activite_create');
     form = $('#'+formDataCreate.id);
 
@@ -85,7 +107,11 @@ $(".submit-form-activite").click(function(e){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response){
-            alert(response.success);
+            // alert(response.success);
+            popup.success({
+                title: 'Success',
+                message: response.success
+              });
             console.log(response)
             document.getElementById('nom').value = "";
             document.getElementById('date_debut').value = "";
@@ -101,6 +127,11 @@ $(".submit-form-activite").click(function(e){
 });
 
 $(".submit-form-alert").click(function(e){
+    const popup = Notification({
+        position: 'top-left',
+        duration: 7000
+      });
+      
     var formDataCreate = document.getElementById('form-data-alert_create');
     form = $('#'+formDataCreate.id);
 
@@ -120,7 +151,11 @@ $(".submit-form-alert").click(function(e){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response){
-            alert(response.success);
+            popup.success({
+                title: 'Success',
+                message: response.success
+              });
+            // alert(response.success);
             console.log(response)
             document.getElementById('nom').value = "";
             document.getElementById('debut').value = "";
@@ -195,6 +230,11 @@ function aadPost(post) {
 }
 
 search.oninput = (function () {
+    const popup = Notification({
+        position: 'top-left',
+        duration: 7000
+      });
+      
         $(this).css("background-color", "#7FFF00");
 
         var name_search = $("input[name=search]").val();
@@ -220,6 +260,10 @@ search.oninput = (function () {
                console.log(formData)
             },
             success: function(response){
+                popup.success({
+                    title: 'Success',
+                    message: response.success
+                  });
                 // alert(response.success);
                 console.log(response)
                 aadSearch(response.search);

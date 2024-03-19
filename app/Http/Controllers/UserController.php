@@ -127,6 +127,7 @@ class UserController extends Controller
             [
                 'success' => "true",
                 "entre" => $user_update,
+                "code" => 200
             ]);
     }
 
@@ -150,6 +151,7 @@ class UserController extends Controller
             [
                 'success' => "true",
                 "entre" => $user_update,
+                "code" => 200
             ]);
     }
     

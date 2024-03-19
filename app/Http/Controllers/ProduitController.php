@@ -78,6 +78,7 @@ class ProduitController extends Controller
             [
                 'success' => "Produit créé avec success!",
                 "data" => $produit,
+                "code" => 200
             ]);
         return redirect()->back()->with('status',"Produit créé avec success!");
     

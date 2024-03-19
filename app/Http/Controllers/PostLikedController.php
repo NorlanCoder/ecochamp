@@ -19,6 +19,7 @@ class PostLikedController extends Controller
                     "action" => "liked",
                     'success' => "Connectez vous pour continuer",
                     'connect' => false,
+                    "code" => 401
                 ]);
         }
         
@@ -45,6 +46,7 @@ class PostLikedController extends Controller
                         "action" => "liked",
                         'success' => "like annulé!",
                         'connect' => true,
+                        "code" => 200
                     ]);
             }
         }
@@ -62,6 +64,7 @@ class PostLikedController extends Controller
                 'success' => "liked!",
                 "action" => "liked",
                 'connect' => true,
+                "code" => 200
             ]);
     }
 

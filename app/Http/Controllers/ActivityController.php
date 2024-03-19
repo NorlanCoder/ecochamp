@@ -141,6 +141,7 @@ class ActivityController extends Controller
             [
                 'success' => "Activité créée avec success!",
                 "data" => $activite,
+                "code" => 200
             ]);
         return redirect()->back()->with('status',"Activité créée avec success!");
     }

@@ -106,6 +106,7 @@ class AlertController extends Controller
             [
                 'success' => "Alert créée avec success!",
                 "data" => $alert,
+                "code" => 200
             ]);
         return redirect()->back()->with('status',"Alert créée avec success!");
     }

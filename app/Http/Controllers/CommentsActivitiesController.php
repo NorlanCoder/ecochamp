@@ -39,6 +39,7 @@ class CommentsActivitiesController extends Controller
                     "action" => "addComment",
                     'success' => "Connectez vous pour continuer",
                     'connect' => false,
+                    "code" => 401
                 ]);
         }
         
@@ -66,6 +67,7 @@ class CommentsActivitiesController extends Controller
                 'success' => "commenté",
                 "comment" => $addComment,
                 'connect' => true,
+                "code" => 200
             ]);
     
     }

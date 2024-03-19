@@ -174,6 +174,7 @@ class HomeController extends Controller
         return response([
             'success' => "true",
             "search" => $search,
+            "code" => 200
         ]);
         
     }
@@ -201,6 +202,7 @@ class HomeController extends Controller
         return response([
             'success' => "true",
             "tags" => $tags,
+            "code" => 200
         ]);
     }
 }

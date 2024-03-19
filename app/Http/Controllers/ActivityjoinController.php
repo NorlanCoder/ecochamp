@@ -41,6 +41,7 @@ class ActivityjoinController extends Controller
                     "action" => "joinActivity",
                     'success' => "Connectez vous pour rejoindre l'activité",
                     'connect' => false,
+                    "code" => 401
                 ]);
             // return redirect()->back()->with(
             //     "status", "Connectez vous pour rejoindre l'activité");
@@ -66,6 +67,7 @@ class ActivityjoinController extends Controller
                 "action" => "joinActivity",
                 'success' => "activite jointe!",
                 'connect' => true,
+                "code" => 200
             ]);
         // return redirect()->back()->with([
         //     "status" => "Vous avez rejoint l'activité avec success!",
@@ -83,6 +85,7 @@ class ActivityjoinController extends Controller
                     "action" => "devenirActivity",
                     'success' => "Connectez vous pour continuer",
                     'connect' => false,
+                    "code" => 401
                 ]);
         }
 
@@ -117,6 +120,7 @@ class ActivityjoinController extends Controller
                 "action" => "devenirActivity",
                 'success' => "Partitipation à l'activité!",
                 'connect' => true,
+                "code" => 200
             ]);
     }
     /**

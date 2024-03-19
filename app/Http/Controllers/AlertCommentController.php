@@ -39,6 +39,7 @@ class AlertCommentController extends Controller
                     "action" => "addComment",
                     'success' => "Connectez vous pour continuer",
                     'connect' => false,
+                    "code" => 401
                 ]);
         }
         
@@ -65,6 +66,7 @@ class AlertCommentController extends Controller
                 'success' => "commenté",
                 "comment" => $addComment,
                 'connect' => true,
+                "code" => 200
             ]);
             // json_encode()
         // return redirect()->back()->with('status',"Commentaire créé avec success!");

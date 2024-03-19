@@ -11,6 +11,7 @@
     <!-- css files -->
     <link rel="stylesheet" href="{{asset('css/tailwind.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link href="{{asset('css/notification.css')}}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> --}}
 
@@ -56,6 +57,7 @@
     <script src="{{ asset('js/share.js') }}"></script>
     <script src="{{ asset('js/profil.js') }}"></script>
     <script src="{{ asset('js/script_create.js') }}"></script>
+    <script src="{{ asset('js/notification.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const quantities = document.querySelectorAll('input[name="quantity"]');
@@ -90,7 +92,12 @@
         }
     </script>
     <script type="text/javascript">
+    
         $(".submit-form").click(function(e) {
+            const popup = Notification({
+            position: 'top-left',
+            duration: 7000
+            });
             e.preventDefault();
             var formLike = e.target;
             var comment = '';
@@ -131,6 +138,7 @@
             }
 
             $.ajax({
+        
                 type: formLike.method,
                 url: formLike.action,
                 data: data,
@@ -143,7 +151,21 @@
                 success: function(response) {
                     res = response;
                     console.log(response);
-                    alert(response.success);
+                    if (response.code == 200){
+                        popup.success({
+                        title: 'Success',
+                        message: response.success
+                        });
+                    }
+                    else
+                    {
+                        popup.warning({
+                        title: 'Warning',
+                        message: response.success
+                        });
+                    }
+                   
+                    // alert(response.success);
                     if (!response.connect) {
                         return;
                     }
@@ -210,7 +232,11 @@
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     if (xhr.status === 422) {
-                        alert("contenu vide");
+                        popup.error({
+                        title: 'Error',
+                        message: "contenu vide"
+                        });
+                        // alert("contenu vide");
                     }
                     // alert(xhr.status);
                     // alert(thrownError);

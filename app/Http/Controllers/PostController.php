@@ -95,6 +95,7 @@ class PostController extends Controller
                 'success' => "Poste créé avec success!",
                 "data" => $post,
                 "request" => $request,
+                "code" => 200
             ]);
 
         return redirect()->back()->with('status',"Poste créé avec success!");
