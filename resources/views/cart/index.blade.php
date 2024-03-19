@@ -85,10 +85,14 @@
                   <h1 class="font-bold ">Le cout total: XOF {{ number_format($total, 2, ',', ' ') }}</h1> </strong>
                 </div>
               </div>
-              <form action="#" class="flex justify-center" method="post">
-                <button class="text-center font-semibold m-6 text-white py-3 px-8 rounded-xl bg-green-600">Lancer votre commande</button>
-              </form>
-            @endif
+              <div class="flex gap-2 justify-center">
+                <button class="kkiapay-button text-center sm:p-2 p-1 rounded-full relative bg-primary text-white">Lancer votre commande</button>
+              </div>
+            @else
+              <span class="card-title center-align">Le panier est vide</span>
+              @endif
+            </div>
+          </div>
         </div>
       </div>
 

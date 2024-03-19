@@ -419,7 +419,7 @@
                                                 <span class="text-white mt-2">Télécharger l'image </span>
                                             </label>
                     
-                                            <img id="createProductImage" src="#" alt="Uploaded Image" accept="image/png, image/jpeg" style="display:none;" class="w-full h-full absolute object-cover">
+                                            <img id="createProductImage" src="#" alt="Uploaded Image" style="display:none;" class="w-full h-full absolute object-cover">
                     
                                         </div> 
 

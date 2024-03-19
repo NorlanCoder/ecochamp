@@ -18,7 +18,7 @@
         <!-- Ionicons -->
         <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.2.2/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.2.2/ionicons/ionicons.js"></script>
-        <script src="https://cdn.kkiapay.me/k.js"></script>
+        {{-- <script src="https://cdn.kkiapay.me/k.js"></script> --}}
 
     <!-- Ionicons -->
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.2.2/ionicons/ionicons.esm.js"></script>
@@ -58,6 +58,17 @@
     <script src="{{ asset('js/profil.js') }}"></script>
     <script src="{{ asset('js/script_create.js') }}"></script>
     <script src="{{ asset('js/notification.js') }}"></script>
+    @isset($total)
+        <script amount="{{$total}}" 
+        callback="{{url('/market')}}"
+        data=""
+        position="center" 
+        theme="#0095ff"
+        {{-- sandbox="true" --}}
+        key="7b118ecddbdc2acf01a095ea1b56bca076e75913"
+        src="https://cdn.kkiapay.me/k.js"></script>
+    @endisset
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const quantities = document.querySelectorAll('input[name="quantity"]');

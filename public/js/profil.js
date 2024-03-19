@@ -92,3 +92,16 @@ document.getElementById('createpostusUrl').addEventListener('change', function()
                 // }
             });
         });
+
+// Create Produit upload image 
+document.getElementById('createProductUrl').addEventListener('change', function(){
+    console.log('yes')
+    if (this.files[0] ) {
+        var picture = new FileReader();
+        picture.readAsDataURL(this.files[0]);
+        picture.addEventListener('load', function(event) {
+        document.getElementById('createProductImage').setAttribute('src', event.target.result);
+        document.getElementById('createProductImage').style.display = 'block';
+        });
+    }
+    });
