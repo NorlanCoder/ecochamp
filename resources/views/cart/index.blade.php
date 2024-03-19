@@ -43,7 +43,7 @@
                     @foreach ($content as $item)
                     <tr class="bg-gray-100  even:dark:bg-gray-800 border-b dark:border-gray-700">
                       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        <img src={{asset($item->image)}} alt="" class="object-cover w-full h-40">
+                        <img src={{asset(Storage::url($item->name->image))}} alt="" class="object-cover w-full h-40">
                       </th>
                       <td class="px-6 py-4 text-justify">
                         {{ $item->name->description }}
@@ -55,9 +55,9 @@
                         <form action="{{ route('panier.update', $item->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <input name="quantity" type="number" class="w-20 bg-gray-600" min=1 value="{{ $item->quantity }}"> 
-                            <button type="submit">
-                            </input>
+                            <div class="col m2 s12">
+                              <input name="quantity" type="number" class="w-20 bg-gray-600" style="height: 2rem" min="1" value="{{ $item->quantity }}"> 
+                            </div>
                           </form>
                           <form action="{{ route('panier.destroy', $item->id) }}" method="POST">
                             @csrf
@@ -85,15 +85,9 @@
                   <h1 class="font-bold ">Le cout total: XOF {{ number_format($total, 2, ',', ' ') }}</h1> </strong>
                 </div>
               </div>
-            <div>
-              <kkiapay-widget amount="{{$total}}" 
-                  key="7b118ecddbdc2acf01a095ea1b56bca076e75913"
-                  position="center"
-                  sandbox="true"
-                  data=""
-                  callback="https://kkiapay-redirect.com">
-              </kkiapay-widget>  
-            </div>
+              <form action="#" class="flex justify-center" method="post">
+                <button class="text-center font-semibold m-6 text-white py-3 px-8 rounded-xl bg-green-600">Lancer votre commande</button>
+              </form>
             @endif
         </div>
       </div>

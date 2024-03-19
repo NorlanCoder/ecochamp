@@ -25,7 +25,7 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        $user_auth = Auth::user();
+        $user_aut = Auth::user();
         $activities = Activite::where('user_id', "!=" , $user->id)->paginate(5);
         $alerts = Alert::where('user_id', $user->id)->paginate(5);
         $postes = Post::where('user_id', $user->id)->paginate(5);
@@ -39,7 +39,7 @@ class UserController extends Controller
             }
             // dd($joins);
         }
-        return view('pages.profil', compact('user', 'user_auth', 'postes', 'activities', 'alerts', 'joins'));
+        return view('pages.profil', compact('user', 'user_aut', 'postes', 'activities', 'alerts', 'joins'));
     }
 
     public function show(string $id)

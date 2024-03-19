@@ -356,7 +356,7 @@
                                                 @endif
                                             </a>
                                             <div class="flex-1">
-                                                <a href="{{url('/profile', $item->user->id)}}"><h4 class="side-list-title"> {{$item->user->lastname}} {{$item->user->firstname}}  </h4></a>
+                                                <a href="{{url('/activite', $item->id)}}"><h4 class="side-list-title"> {{$item->user->lastname}} {{$item->user->firstname}}  </h4></a>
                                                 <div class="side-list-info"> 
                                                     @if(isset($item->activityJoins) && count($item->activityJoins) >= 100)
                                                         {{count($item->activityJoins) / 100}}k membres 
@@ -365,11 +365,11 @@
                                                     @endif
                                                  </div>
                                             </div>
-                                            <form action="{{ url('/activite/join') }}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{ url('/activite/join') }}" method="POST" enctype="multipart/form-data" id="form-data-join-activite{{$item->id}}">
                                                 @csrf
                                                 <input id="activite_id" type="text" class="hidden" name="activite_id" value="{{$item->id}}"/>
                                                 @if(!array_search($item->id, $joins))
-                                                    <button type="submit" class="button bg-primary text-white flex-1">Rejoindre</button>
+                                                <button type="button" class="button bg-primary text-white flex-1 submit-form" id="create_new">Rejoindre</button>
                                                 @endif
                                             </form>
                                         </div>

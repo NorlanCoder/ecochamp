@@ -58,7 +58,7 @@
                                                         <form action="{{ url('/activite/join') }}" method="POST" enctype="multipart/form-data" id="form-data-join-activite{{$item->id}}">
                                                             @csrf
                                                             <input id="activite_id" type="text" class="hidden" name="activite_id" value="{{$item->id}}"/>
-                                                            <button type="button" class="button bg-primary text-white flex-1">Intéressé</button>
+                                                            <button type="button" class="button bg-primary text-white flex-1 submit-form" id="create_new">Intéressé</button>
                                                         </form>
                                                     @else
                                                         <a href="{{url('/activite', $item->id)}}"> <button type="button" class="button bg-primary text-white flex-1">  Voir  </button> </a>
@@ -112,7 +112,7 @@
                                                         <form action="{{ url('/activite/join') }}" method="POST" enctype="multipart/form-data" id="form-data-join-activite{{$item->id}}">
                                                             @csrf
                                                             <input id="activite_id" type="text" class="hidden" name="activite_id" value="{{$item->id}}"/>
-                                                            <button type="button" class="button bg-primary text-white flex-1">Intéressé</button>
+                                                            <button type="button" class="button bg-primary text-white flex-1 submit-form" id="create_new">Intéressé</button>
                                                         </form>
                                                     @else
                                                         <a href="{{url('/activite', $item->id)}}"> <button type="button" class="button bg-primary text-white flex-1">  Voir  </button> </a>
@@ -166,7 +166,7 @@
                                                         <form action="{{ url('/activite/join') }}" method="POST" enctype="multipart/form-data" id="form-data-join-activite{{$item->id}}">
                                                             @csrf
                                                             <input id="activite_id" type="text" class="hidden" name="activite_id" value="{{$item->id}}"/>
-                                                            <button type="button" class="button bg-primary text-white flex-1">Intéressé</button>
+                                                            <button type="button" class="button bg-primary text-white flex-1 submit-form" id="create_new">Intéressé</button>
                                                         </form>
                                                     @else
                                                         <a href="{{url('/activite', $item->id)}}"> <button type="button" class="button bg-primary text-white flex-1">  Voir  </button> </a>
@@ -264,7 +264,7 @@
                                             <form action="{{ url('/activite/join') }}" method="POST" enctype="multipart/form-data" id="form-data-join-activite{{$item->id}}">
                                                 @csrf
                                                 <input id="activite_id" type="text" class="hidden" name="activite_id" value="{{$item->id}}"/>
-                                                <button type="button" class="button bg-primary text-white flex-1">Intéressé</button>
+                                                <button type="button" class="button bg-primary text-white flex-1 submit-form" id="create_new">Intéressé</button>
                                             </form>
                                         @else
                                             <a href="{{url('/activite', $item->id)}}"> <button type="button" class="button bg-primary text-white flex-1">  Voir  </button> </a>
