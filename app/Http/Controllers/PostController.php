@@ -19,7 +19,7 @@ class PostController extends Controller
         $page = 'post';
         $user = Auth::user();
         $alerts = Alert::paginate(5);
-        $postes = Post::paginate(5);
+        $postes = Post::paginate(15);
         $produits = Produit::orderByDesc('created_at')->paginate(5);
         $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->limit(5)->get();
         $tags = [];

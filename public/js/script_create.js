@@ -28,13 +28,13 @@ $(".submit-form-produit").click(function(e){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response){
+            console.log(response)
+            document.location.reload();
             popup.success({
                 title: 'Success',
                 message: response.success
               });
             // alert(response.success);
-            console.log(response)
-            document.location.reload();
         },
     });
 });
@@ -66,6 +66,8 @@ $(".submit-form-post").click(function(e){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response){
+            document.location.reload();
+
             popup.success({
                 title: 'Success',
                 message: response.success
@@ -73,11 +75,10 @@ $(".submit-form-post").click(function(e){
             // alert(response.success);
             console.log(response)
             // addpost(response.post);
-            document.getElementById('activite').value = "";
-            document.getElementById('description').value = "";
-            document.getElementById('createpostusUrl').value = "";
+            // document.getElementById('activite').value = "";
+            // document.getElementById('description').value = "";
+            // document.getElementById('createpostusUrl').value = "";
             // document.getElementById('tags').value = "";
-            document.location.reload();
         },
     });
 });
@@ -108,20 +109,20 @@ $(".submit-form-activite").click(function(e){
         },
         success: function(response){
             // alert(response.success);
+            document.location.reload();
             popup.success({
                 title: 'Success',
                 message: response.success
               });
             console.log(response)
-            document.getElementById('nom').value = "";
-            document.getElementById('date_debut').value = "";
-            document.getElementById('date_fin').value = "";
-            document.getElementById('activite_type').value = "";
-            document.getElementById('localite').value = "";
-            document.getElementById('description').value = "";
-            document.getElementById('image').value = "";
+            // document.getElementById('nom').value = "";
+            // document.getElementById('date_debut').value = "";
+            // document.getElementById('date_fin').value = "";
+            // document.getElementById('activite_type').value = "";
+            // document.getElementById('localite').value = "";
+            // document.getElementById('description').value = "";
+            // document.getElementById('image').value = "";
             // document.getElementById('tags').value = "";
-            document.location.reload();
         },
     });
 });
@@ -151,20 +152,21 @@ $(".submit-form-alert").click(function(e){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response){
+            document.location.reload();
+
             popup.success({
                 title: 'Success',
                 message: response.success
               });
             // alert(response.success);
             console.log(response)
-            document.getElementById('nom').value = "";
-            document.getElementById('debut').value = "";
-            document.getElementById('type_alert').value = "";
-            document.getElementById('localite').value = "";
-            document.getElementById('description').value = "";
-            document.getElementById('image').value = "";
+            // document.getElementById('nom').value = "";
+            // document.getElementById('debut').value = "";
+            // document.getElementById('type_alert').value = "";
+            // document.getElementById('localite').value = "";
+            // document.getElementById('description').value = "";
+            // document.getElementById('image').value = "";
             // document.getElementById('tags').value = "";
-            document.location.reload();
         },
     });
 });

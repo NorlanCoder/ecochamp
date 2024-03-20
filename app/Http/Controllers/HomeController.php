@@ -23,8 +23,8 @@ class HomeController extends Controller
     public function index() {
         $page = "home";
         $user = Auth::user();
-        $alerts = Alert::paginate(4);
-        $postes = Post::paginate(4);
+        $alerts = Alert::paginate(5);
+        $postes = Post::paginate(10);
         $activities_campagne = Activite::where('activite_type', 'Campagne')->paginate(5);
         $activities_evenement = Activite::where('activite_type', 'Evénement')->paginate(5);
         $activities_activite = Activite::where('activite_type', 'Projet')->paginate(5);

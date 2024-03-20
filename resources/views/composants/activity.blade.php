@@ -41,12 +41,12 @@
                         <div class="card-body relative z-10">
 
                                 @if(empty($item->user->profile))
-                                    <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-10 rounded-full mb-2 shadow -mt-8 relative border-2 border-white dark:border-slate-800"> 
+                                    <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-10 h-10  rounded-full mb-2 shadow -mt-8 relative border-2 border-white dark:border-slate-800"> 
                                 @else
-                                    <img src={{asset(Storage::url($item->user->profile))}} alt="" class="w-10 rounded-full mb-2 shadow -mt-8 relative border-2 border-white dark:border-slate-800"> 
+                                    <img src={{asset(Storage::url($item->user->profile))}} alt="" class="w-10 h-10  rounded-full mb-2 shadow -mt-8 relative border-2 border-white dark:border-slate-800"> 
                                 @endif
 
-                            <a href="{{url('/activite', $item->id)}}"><h4 class="card-title"> {{$item->user->lastname}} {{$item->user->firstname}}  </h4></a>
+                            <a href="{{url('/activite', $item->id)}}"><h4 class="card-title"> {{substr($item->user->lastname . " ". $item->user->firstname, 0, 15)}}... </h4></a>
                             <div class="card-list-info font-normal mt-1">
                                 <a href="{{url('/activite', $item->id)}}">
                                     {{substr($item->nom, 0, 7)}}...
@@ -114,9 +114,9 @@
                                 {{-- <div class="flex items-center gap-3 mt-3">
                                     <div class="flex -space-x-2">
                                        @if(empty($friend->profile))
-                                            <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-10 rounded-full mb-2 shadow -mt-8 relative border-2 border-white dark:border-slate-800"> 
+                                            <img src={{asset("/images/avatars/avatar.png")}} alt="" class="w-10 h-10  rounded-full mb-2 shadow -mt-8 relative border-2 border-white dark:border-slate-800"> 
                                         @else
-                                            <img src={{asset(Storage::url($item->user->profile))}} alt="" class="w-10 rounded-full mb-2 shadow -mt-8 relative border-2 border-white dark:border-slate-800"> 
+                                            <img src={{asset(Storage::url($item->user->profile))}} alt="" class="w-10 h-10  rounded-full mb-2 shadow -mt-8 relative border-2 border-white dark:border-slate-800"> 
                                         @endif
                                     </div>
                                     <p class="card-text"> 6 friend are members </p>

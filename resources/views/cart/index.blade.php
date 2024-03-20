@@ -13,10 +13,10 @@
 
             <div id="">
               @if($total)
-              <div class="title flex items-center">
+              {{-- <div class="title flex items-center">
                 <ion-icon name="arrow-back-outline" class="text-2xl mr-2"></ion-icon>
                 <span class="card-title">Panier</span>
-              </div>
+              </div> --}}
 
               <div class="relative overflow-x-auto">
                 <table class="w-full border-separate border-spacing-y-2 text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">

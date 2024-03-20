@@ -64,8 +64,8 @@
         data=""
         position="center" 
         theme="#0095ff"
-        {{-- sandbox="true" --}}
-        key="7b118ecddbdc2acf01a095ea1b56bca076e75913"
+        sandbox="true"
+        key="2ee121605d3511eea596e938ae1c409a"
         src="https://cdn.kkiapay.me/k.js"></script>
     @endisset
     
