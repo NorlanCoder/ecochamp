@@ -20,19 +20,19 @@ class BoutiqueController extends Controller
     {
         $page = "market";
         $user = Auth::user();
-        $user = User::where('id', $user->id)->frist();
         $produits = Produit::paginate(15);
         $produit_suggestion = Produit::all();
         $produits_recent = Produit::all();
         $produits_all = Produit::orderByDesc('created_at')->paginate(15);
         $my_produits = [];
         if($user){
+            $user = User::where('id', $user->id)->first();
+            // $user->notify(new PanierPaid());
+
             $my_produits = Produit::where('user_id', $user->id)->paginate(15);
         }
         $categories = Categorie::all();
 
- 
-        $user->notify(new PanierPaid());
  
         return view('pages.boutique', compact('user', 'produits', 'categories', 'page', 'my_produits', 'produit_suggestion', 'produits_recent', 'produits_all'));
     

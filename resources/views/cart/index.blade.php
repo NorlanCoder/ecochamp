@@ -76,8 +76,14 @@
                   </tbody>
 
                 </table>
-                <h1 class="text-center mt-12">Vous avez ajouté @foreach($content as $item) {{ $item->quantity }} {{ $item->name->nom }}@if (!$loop->last), @endif
-                  @endforeach</h1>
+                <h1 class="text-center mt-12">Vous avez ajouté 
+                  @foreach($content as $item) 
+                    {{ $item->quantity }} {{ $item->name->nom }}
+                    @if (!$loop->last)
+                      , 
+                    @endif
+                  @endforeach
+                </h1>
               </div>
 
               <div class="total-container">
@@ -86,7 +92,7 @@
                 </div>
               </div>
               <div class="flex gap-2 justify-center">
-                <button class="kkiapay-button text-center sm:p-2 p-1 rounded-full relative bg-primary text-white">Lancer votre commande</button>
+                <button class="kkiapay-button text-center sm:p-2 p-1 rounded-full relative bg-primary text-white" style="padding: 1em">Lancer votre commande</button>
               </div>
             @else
               <span class="card-title center-align">Le panier est vide</span>

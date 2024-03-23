@@ -60,7 +60,7 @@
     <script src="{{ asset('js/notification.js') }}"></script>
     @isset($total)
         <script amount="{{$total}}" 
-        callback="{{url('/market')}}"
+        callback="{{url('/facture')}}"
         data=""
         position="center" 
         theme="#0095ff"

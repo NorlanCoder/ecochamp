@@ -19,6 +19,7 @@ use App\Http\Controllers\PostLikedController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\FactureController;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -77,7 +78,10 @@ Route::middleware(['web'])->group(function () {
     Route::post('/list/tag', [HomeController::class, 'ListTag']);
     Route::resource('panier', CartController::class)->only([
         'index', 'store', 'update', 'destroy'
-    ]);;
+    ]);
+    Route::resource('facture', FactureController::class)->only([
+        'index', 'store', 'update', 'destroy'
+    ]);
     // Route::resource('panier', 'CartController')->only(['index', 'store', 'update', 'destroy']);
 });
 
