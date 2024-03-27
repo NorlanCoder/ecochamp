@@ -12,8 +12,8 @@
 <body>
     <header>
         <h1>Facture</h1>
-        <p>Date: [Date]</p>
-        <p>Numéro de facture: [Numéro de facture]</p>
+        <p>Date: {{$facture->created_at}}</p>
+        <p>Numéro de facture: {{$facture->facture_number}}</p>
         <!-- Ajoutez d'autres informations d'en-tête ici selon vos besoins -->
     </header>
     <main>
@@ -21,7 +21,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Description</th>
+                    <th>Nom</th>
                     <th>Quantité</th>
                     <th>Prix unitaire</th>
                     <th>Total</th>
@@ -30,26 +30,22 @@
             <tbody>
                 <!-- Lignes de la facture -->
                 <!-- Remplacez ces lignes par vos propres données -->
-                <tr>
-                    <td>Produit 1</td>
-                    <td>1</td>
-                    <td>$10.00</td>
-                    <td>$10.00</td>
-                </tr>
-                <tr>
-                    <td>Produit 2</td>
-                    <td>2</td>
-                    <td>$15.00</td>
-                    <td>$30.00</td>
-                </tr>
+                @foreach ($facture->factureItems as $item)
+                    <tr>
+                        <td>{{$item->name}}</td>
+                        <td>{{$item->quantity}}</td>
+                        <td>{{$item->prix / $item->quantity}}</td>
+                        <td>{{$item->prix}}</td>
+                    </tr>
+                @endforeach                
                 <!-- Ajoutez autant de lignes que nécessaire -->
             </tbody>
         </table>
         <!-- Total de la facture -->
-        <p>Total: [Total]</p>
+        <p>Total: {{$fature->prix_tt}}</p>
     </main>
     <footer>
-        <p>Merci pour votre entreprise!</p>
+        <p>Merci pour votre confiance chez Ecochamp!</p>
     </footer>
 </body>
 </html>

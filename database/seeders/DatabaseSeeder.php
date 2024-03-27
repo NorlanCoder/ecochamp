@@ -8,6 +8,9 @@ use App\Models\Categorie;
 use App\Models\Tag;
 use App\Models\typeActivite;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +19,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        \App\Models\User::create([
+            'firstname' => fake()->firstname,
+            'lastname' => fake()->lastname,
+            'email' => 'isboco1@gmail.com',
+            'email_verified_at' => now(),
+            'intervations' => 'milieu',
+            'statut' => 1,
+            'profile' => '/images/avatar-1.jpg',
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
         \App\Models\User::factory(15)->create();
         \App\Models\Post::factory(15)->create();
         \App\Models\Activite::factory(15)->create();

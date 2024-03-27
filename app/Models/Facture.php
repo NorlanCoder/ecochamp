@@ -11,6 +11,8 @@ class Facture extends Model
     use HasFactory;
     protected $fillable = [
         'facture_number',
+        'prix_tt',
+        'prix_tva',
     ];
 
     protected $with = [

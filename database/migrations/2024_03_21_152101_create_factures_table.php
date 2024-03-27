@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('factures', function (Blueprint $table) {
             $table->id();
             $table->string("facture_number");
+            $table->double("prix_tt");
+            $table->double("prix_tva")->nullable();
             $table->timestamps();
         });
     }

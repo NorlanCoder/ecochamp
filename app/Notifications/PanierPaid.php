@@ -11,12 +11,14 @@ class PanierPaid extends Notification
 {
     use Queueable;
 
+    private object $facture;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(object $facture)
     {
-        //
+        $this->facture = $facture;
     }
 
     /**
@@ -35,14 +37,14 @@ class PanierPaid extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         
-        $url = url('/invoice');
+        $url = url("/facture/". $this->facture->id);
  
         return (new MailMessage)
                     ->greeting('Hello!')
-                    ->line('One of your invoices has been paid!')
-                    // ->lineIf($this->amount > 0, "Amount paid: {$this->amount}")
-                    // ->action('View Invoice', $url)
-                    ->line('Thank you for using our application!');
+                    ->line('Une de vos factures a été payée !')
+                    ->lineIf($this->facture->prix_tt > 0, "Montant payé: {$this->facture->prix_tt}")
+                    ->action('Voir la facture', $url)
+                    ->line('Merci d\'avoir utilisé notre application Ecochamp pour vos achats en ligne!');
      }
 
     /**

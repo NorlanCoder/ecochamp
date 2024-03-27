@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('facture_items', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('quantity');
+            $table->double('prix');
+            $table->double('prix_tva');
+            $table->double('tva');
             $table->foreignId('facture_id')
                     ->constrained()
                     ->onUpdate('cascade')

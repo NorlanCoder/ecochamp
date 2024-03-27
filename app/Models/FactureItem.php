@@ -11,9 +11,12 @@ class FactureItem extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
+        'quantity',
         'prix',
         'prix_tva',
         'tva',
+        'facture_id'
     ];
 
     protected $with = [

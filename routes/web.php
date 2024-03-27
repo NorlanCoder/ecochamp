@@ -79,8 +79,8 @@ Route::middleware(['web'])->group(function () {
     Route::resource('panier', CartController::class)->only([
         'index', 'store', 'update', 'destroy'
     ]);
-    Route::resource('facture', FactureController::class)->only([
-        'index', 'store', 'update', 'destroy'
+    Route::name('facture')->resource('facture', FactureController::class)->only([
+        'index', 'store', 'update', 'destroy', 'show',
     ]);
     // Route::resource('panier', 'CartController')->only(['index', 'store', 'update', 'destroy']);
 });
