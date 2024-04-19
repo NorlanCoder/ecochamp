@@ -13,12 +13,13 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link href="{{asset('css/notification.css')}}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> --}}
+    <!-- {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> --}} -->
 
         <!-- Ionicons -->
         <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.2.2/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.2.2/ionicons/ionicons.js"></script>
-        {{-- <script src="https://cdn.kkiapay.me/k.js"></script> --}}
+        <!-- {{-- <script src="https://cdn.kkiapay.me/k.js"></script> --}} -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <!-- Ionicons -->
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.2.2/ionicons/ionicons.esm.js"></script>
@@ -34,11 +35,9 @@
             font-size: 1em;
         }
     </style>
-    {{-- @vite('resources/css/app.css') --}}
 </head>
 
 <body>
-    {{-- {{dd(asset('public/js/script.js'))}} --}}
 
 
     {{-- <div id="app" data-page="{{ json_encode($page) }}"></div> --}}
@@ -98,7 +97,7 @@
 
     <script type="text/javascript">
         function routeUrlStorage(file) {
-            val routeUrlStorage = "{{url('/storage', " + file + ")}}";
+            var routeUrlStorage = "{{url('/storage', " + file + ")}}";
             return routeUrlStorage;
         }
     </script>
@@ -176,7 +175,6 @@
                         });
                     }
                    
-                    // alert(response.success);
                     if (!response.connect) {
                         return;
                     }
@@ -222,7 +220,6 @@
                     }
                 },
                 complete: function(response) {
-                    //alert(response);
                     response = res;
                     console.log(response)
                     if (response.action) {
@@ -247,11 +244,7 @@
                         title: 'Error',
                         message: "contenu vide"
                         });
-                        // alert("contenu vide");
                     }
-                    // alert(xhr.status);
-                    // alert(thrownError);
-                    // document.location.reload();
                 }
             });
         });
@@ -297,7 +290,42 @@
             }
         });
     </script>
-
+<script type="text/javascript">
+    $(window).on('hashchange', function() {
+        if (window.location.hash) {
+            var page = window.location.hash.replace('#', '');
+            if (page == Number.NaN || page <= 0) {
+                return false;
+            }else{
+                getData(page);
+            }
+        }
+    });
+    $(document).ready(function(){
+        $(document).on('click', '.pagination a',function(event){
+            event.preventDefault();
+            $('li').removeClass('active');
+            $(this).parent('li').addClass('active');
+            var myurl = $(this).attr('href');
+            var page=$(this).attr('href').split('page=')[1];
+            getData(page);
+        });
+    });
+        
+    function getData(page){
+        $.ajax(
+        {
+            url: '?page=' + page,
+            type: "get",
+            datatype: "html"
+        }).done(function(data){
+            $("#tag_container").empty().html(data);
+            location.hash = page;
+        }).fail(function(jqXHR, ajaxOptions, thrownError){
+            alert('No response from server');
+        });
+    }
+</script>
 </body>
 
 </html>

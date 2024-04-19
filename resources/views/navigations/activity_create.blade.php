@@ -71,6 +71,10 @@
                         <label class="checkbox">
                             <input type="checkbox" name="participant" value="1">
                                 Participant
+                        </label>    
+                        <label class="checkbox">
+                            <input type="checkbox" name="collecte_fond" value="1">
+                                Collecte de Fonds
                         </label>                   
                     </div>
 

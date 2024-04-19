@@ -89,6 +89,8 @@ class ActivityController extends Controller
         $besoin = "";
         if (!empty($request->partenaire)){
             $besoin .= "Partenaire,";
+        }if (!empty($request->collecte_fond)){
+            $besoin .= "Collecte de Fonds,";
         }
         if (!empty($request->benevolat)){
             $besoin .= "Bénévolat,";
@@ -99,15 +101,9 @@ class ActivityController extends Controller
         if (!empty($request->participant)){
             $besoin .= "Participant,";
         }
-        // dd($besoin);
-        // $tags = explode("[,\s\-:]", $request->tags);
+    
         $tags = [];
-        // for ($i = 0; $i<5; $i++){
-        //     if (!empty($request->btn_check_tag_1)){
-        //         $besoin .= "Partenaire,";
-        //     }
-        //     btn-check-tag-{{$key}}
-        // }
+
         if (!empty($request->btn_check_tag_0)){
             array_push($tags, $request->btn_check_tag_0);
         }
@@ -136,7 +132,6 @@ class ActivityController extends Controller
             'user_id' => $user->id,
         ]);
         $activite->tag($tags);
-        //dd($activite);
         return response(
             [
                 'success' => "Activité créée avec success!",
@@ -157,7 +152,6 @@ class ActivityController extends Controller
         list($annee, $mois, $jour) = explode('-', $activite->debut); 
         
         $besoin = preg_split('/\s*,\s*/', $activite->besoin);
-        // dd($besoin);
         $participant = Activite::where('id', $id)->firstOrFail()->activityJoins->where("participation", "!=", "");
         
         $user_joint = [];

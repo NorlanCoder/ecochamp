@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -96,6 +97,26 @@ class User extends Authenticatable
     public function produits(): HasMany
     {
         return $this->hasMany(Produit::class);
+    }
+
+    public function setting(): HasMany
+    {
+        return $this->hasMany(Setting::class);
+    }
+
+    public function followers(): HasMany
+    {
+        return $this->hasMany(Follower::class);
+    }
+
+    public function chats()
+    {
+        return $this->belongsTo(Chat::class);
+    }
+
+    protected function serializeDate(DateTimeInterface $date) : string
+    {
+        return $date->format('h:i:s a m/d/Y');
     }
 
 }

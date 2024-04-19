@@ -1,5 +1,6 @@
 @extends("layouts.default")
 @section("index")
+
     <main id="site__main" class="2xl:ml-[--w-side]  xl:ml-[--w-side-sm] p-2.5 h-[calc(100vh-var(--m-top))] mt-[--m-top]">
 
         <!-- timeline -->
@@ -8,7 +9,7 @@
             <div class="max-w-[680px] mx-auto">
 
                 <!-- stories -->
-                {{-- <div class="mb-8">
+                <!-- <div class="mb-8">
 
                     <h3 class="font-extrabold text-2xl  text-black dark:text-white hidden"> Stories</h3>
 
@@ -110,12 +111,12 @@
 
                     </div>
 
-                </div> --}}
+                </div>  -->
                 <!-- feed story -->
                 <div class="md:max-w-[580px] mx-auto flex-1 xl:space-y-6 space-y-3"  style="width: 1000px; max-width: 80%;">
 
                     <!-- add story -->
-                    {{-- <div class="bg-white rounded-xl shadow-sm md:p-4 p-2 space-y-4 text-sm font-medium border1 dark:bg-dark2">
+                    <!-- <div class="bg-white rounded-xl shadow-sm md:p-4 p-2 space-y-4 text-sm font-medium border1 dark:bg-dark2">
 
                         <div class="flex items-center md:gap-3 gap-1">
                             <div class="flex-1 bg-slate-100 hover:bg-opacity-80 transition-all rounded-lg cursor-pointer dark:bg-dark3" uk-toggle="target: #create-status"> 
@@ -139,7 +140,7 @@
                             </div> 
                         </div>
                         
-                    </div> --}}
+                    </div>  -->
                     @foreach ($postes as $item)
                     
                         @empty($item->image2)
@@ -169,30 +170,33 @@
                     @endforeach
 
                     <!-- placeholder -->
-                    <div class="rounded-xl shadow-sm p-4 space-y-4 bg-slate-200/40 animate-pulse border1 dark:bg-dark2">
+                    <!-- {{dd($postes)}} -->
+                    @if($postes->next_page)
+                        <div class="rounded-xl shadow-sm p-4 space-y-4 bg-slate-200/40 animate-pulse border1 dark:bg-dark2">
 
-                        <div class="flex gap-3">
-                            <div class="w-9 h-9 rounded-full bg-slate-300/20"></div>
-                            <div class="flex-1 space-y-3">
-                                <div class="w-40 h-5 rounded-md bg-slate-300/20"></div>
-                                <div class="w-24 h-4 rounded-md bg-slate-300/20"></div>
+                            <div class="flex gap-3">
+                                <div class="w-9 h-9 rounded-full bg-slate-300/20"></div>
+                                <div class="flex-1 space-y-3">
+                                    <div class="w-40 h-5 rounded-md bg-slate-300/20"></div>
+                                    <div class="w-24 h-4 rounded-md bg-slate-300/20"></div>
+                                </div>
+                                <div class="w-6 h-6 rounded-full bg-slate-300/20"></div>
                             </div>
-                            <div class="w-6 h-6 rounded-full bg-slate-300/20"></div>
+
+                            <div class="w-full h-52 rounded-lg bg-slate-300/10 my-3"> </div>
+
+                            <div class="flex gap-3">
+
+                                <div class="w-16 h-5 rounded-md bg-slate-300/20"></div>
+
+                                <div class="w-14 h-5 rounded-md bg-slate-300/20"></div>
+
+                                <div class="w-6 h-6 rounded-full bg-slate-300/20 ml-auto"></div>
+                                <div class="w-6 h-6 rounded-full bg-slate-300/20  "></div>
+                            </div>
+
                         </div>
-
-                        <div class="w-full h-52 rounded-lg bg-slate-300/10 my-3"> </div>
-
-                        <div class="flex gap-3">
-
-                            <div class="w-16 h-5 rounded-md bg-slate-300/20"></div>
-
-                            <div class="w-14 h-5 rounded-md bg-slate-300/20"></div>
-
-                            <div class="w-6 h-6 rounded-full bg-slate-300/20 ml-auto"></div>
-                            <div class="w-6 h-6 rounded-full bg-slate-300/20  "></div>
-                        </div>
-
-                    </div>
+                    @endif
 
                 </div>
 

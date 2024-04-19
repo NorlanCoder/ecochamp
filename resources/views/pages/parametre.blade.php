@@ -88,13 +88,14 @@
                             <ul class="uk-slider-items w-[calc(100%+10px)] !overflow-hidden" 
                                 uk-switcher="connect: #setting_tab ; animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium"> 
                                 
-                                <li class="w-auto pr-2.5"> <a href="#"> Description </a> </li>
-                                {{-- <li class="w-auto pr-2.5"> <a href="#"> Paramètres</a> </li> --}}
-                                {{-- <li class="w-auto pr-2.5"> <a href="#"> Avatare</a> </li> --}}
-                                {{-- <li class="w-auto pr-2.5"> <a href="#"> Photo de couverture</a> </li> --}}
-                                {{-- <li class="w-auto pr-2.5"> <a href="#"> Invitations</a> </li> --}}
-                                {{-- <li class="w-auto pr-2.5"> <a href="#"> Finition</a> </li>   --}}
-                                <li class="w-auto pr-2.5"> <a href="#"> Modifier le mot de passe </a> </li>
+                                <li class="w-auto pr-2.5"> <a href="#"> Infos utilisateur </a> </li>
+                                <!-- {{-- <li class="w-auto pr-2.5"> <a href="#"> Paramètres</a> </li> --}} -->
+                                <!-- {{-- <li class="w-auto pr-2.5"> <a href="#"> Avatare</a> </li> --}} -->
+                                <li class="w-auto pr-2.5"> <a href="#"> Notifications </a> </li>
+                                <li class="w-auto pr-2.5"> <a href="#"> Invitations</a> </li>
+                                <li class="w-auto pr-2.5"> <a href="#"> Alerts Notifications </a> </li>
+                                <li class="w-auto pr-2.5"> <a href="#"> Modifier le mot de passe</a> </li>
+
                                 
                             </ul>
                         
@@ -191,7 +192,7 @@
                                     </div>
         
                                     <div class="flex items-center gap-4 mt-16 lg:pl-[10.5rem]">
-                                        {{-- <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancle</button> --}}
+                                        <!-- {{-- <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancle</button> --}} -->
                                         <button type="submit" class="button lg:px-10 bg-primary text-white max-md:flex-1"> Sauvegarder <span class="ripple-overlay"></span></button>
                                     </div>
                                 </form>
@@ -200,7 +201,7 @@
                         </div>
     
                         <!-- tab socialinks -->   
-                        {{-- <div>
+                        <!-- {{-- <div>
     
                             <div class="max-w-md mx-auto">
     
@@ -265,9 +266,9 @@
     
                             </div>
     
-                        </div> --}}
+                        </div> --}} -->
     
-                        {{-- <!-- tab checkbox -->
+                        <!-- tab checkbox -->
                         <div>
     
                             <div>
@@ -336,10 +337,10 @@
     
                             </div>
     
-                        </div>  --}}
+                        </div>
     
                         <!-- tab toggle options-->
-                        {{-- <div>
+                        <!-- <div>
     
                             <div>
     
@@ -457,10 +458,10 @@
     
                             </div>
     
-                        </div>  --}}
+                        </div> -->
     
                         <!-- tab select dropdown-->
-                        {{-- <div>
+                        <div>
     
                             <div>
                                 
@@ -537,10 +538,10 @@
     
                             </div>
                             
-                        </div> --}}
+                        </div>
                         
                         <!-- tab Premision -->   
-                        {{-- <div>
+                        <div>
     
                             <div>
     
@@ -610,7 +611,7 @@
     
                             </div> 
                             
-                        </div> --}}
+                        </div>
                         
                         <!-- tab password-->
                         <div>

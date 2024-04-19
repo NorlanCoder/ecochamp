@@ -19,7 +19,9 @@ use App\Http\Controllers\PostLikedController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FactureController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -66,7 +68,6 @@ Route::middleware(['web'])->group(function () {
     Route::get('/activite/{id}', [ActivityController::class, 'show']);
     Route::post('/activite/join', [ActivityjoinController::class, 'store']);
     Route::post('/activite/devenir', [ActivityjoinController::class, 'devenir']);
-    // Route::get('/alert/{id}', [AlertController::class, 'show']);
     Route::post('/activite/comment', [CommentsActivitiesController::class, 'store'])->name('comment.activite.store');
     Route::get('/parametre', [ParametreController::class, 'index']);
     Route::post('/activity', [ActivityController::class, 'store'])->name('activity.store');
@@ -82,6 +83,12 @@ Route::middleware(['web'])->group(function () {
     Route::name('facture')->resource('facture', FactureController::class)->only([
         'index', 'store', 'update', 'destroy', 'show',
     ]);
-    // Route::resource('panier', 'CartController')->only(['index', 'store', 'update', 'destroy']);
+
+    Route::group(['middleware' => 'auth:sanctum'],function (){
+        Route::post("SendMessage",[ChatController::class,"SendMessage"]);
+        Route::get("load",[MessageController::class,"LoadThePreviousMessages"]);
+    
+    });
+
 });
 

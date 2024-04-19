@@ -1,5 +1,6 @@
 @extends("layouts.default")
 @section("index")
+
     <main id="site__main" class="2xl:ml-[--w-side]  xl:ml-[--w-side-sm] p-2.5 h-[calc(100vh-var(--m-top))] mt-[--m-top]">
         <!-- timeline -->
         <div class="lg:flex 2xl:gap-16 gap-12 max-w-[1065px] mx-auto"  id="js-oversized">
@@ -15,7 +16,7 @@
                 @include('composants.activity')
 
                 <!-- stories -->
-                {{-- <div class="mb-8">
+                <!-- {{-- <div class="mb-8">
 
                     <h3 class="font-extrabold text-2xl  text-black dark:text-white"> Stories</h3>
 
@@ -117,7 +118,7 @@
 
                     </div>
 
-                </div> --}}
+                </div> --}} -->
                 <!-- feed story -->
 
                 <div class="sm:my-6 my-3 flex items-center justify-between border-t pt-3 dark:border-slate-800">
@@ -132,7 +133,7 @@
                 <div id="addPost" class="md:max-w-[580px] mx-auto flex-1 xl:space-y-6 space-y-3">
 
                     <!-- add story -->
-                    {{-- <div class="bg-white rounded-xl shadow-sm md:p-4 p-2 space-y-4 text-sm font-medium border1 dark:bg-dark2">
+                    <!-- {{-- <div class="bg-white rounded-xl shadow-sm md:p-4 p-2 space-y-4 text-sm font-medium border1 dark:bg-dark2">
 
                         <div class="flex items-center md:gap-3 gap-1">
                             <div class="flex-1 bg-slate-100 hover:bg-opacity-80 transition-all rounded-lg cursor-pointer dark:bg-dark3" uk-toggle="target: #create-status"> 
@@ -156,7 +157,7 @@
                             </div> 
                         </div>
                         
-                    </div> --}}
+                    </div> --}} -->
 
                     @foreach ($postes as $item)
                     

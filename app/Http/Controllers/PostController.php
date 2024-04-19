@@ -26,7 +26,6 @@ class PostController extends Controller
         if($user){
             $tags = DB::table('tags')->orderByDesc('id')->limit(5)->get();
         }
-        //dd($postes[2]->postLikeds);
         return view('pages.post', compact('user', 'alerts', 'postes', 'page', 'tendance', 'produits', 'tags'));
 
     }
@@ -50,24 +49,15 @@ class PostController extends Controller
             'activite' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            // 'tags' => 'required',
         ]);
         
         if(!empty($request->image)){
-            // $imageName = $request->file('image')->getClientOriginalName();  
             
             $imageName = $request->file('image')->store('public/images');
         }
         
-        // $tags = explode("[,\s\-:]", $request->tags);
         $tags = [];
-        // for ($i = 0; $i<5; $i++){
-        //     if (!empty($request->btn_check_tag_1)){
-        //         $besoin .= "Partenaire,";
-        //     }
-        //     btn-check-tag-{{$key}}
-        // }
-        // dd($request);
+        
         if (!empty($request->btn_check_tag_0)){
             array_push($tags, $request->btn_check_tag_0);
         }

@@ -20,11 +20,16 @@ use Illuminate\Support\Facades\Storage;
 class HomeController extends Controller
 {
     // Accueil Page
-    public function index() {
+    public function index(Request $request) {
         $page = "home";
         $user = Auth::user();
         $alerts = Alert::paginate(5);
-        $postes = Post::paginate(10);
+        $postes = Post::simplepaginate(10);
+        if($request->ajax()){
+            $alerts = Alert::paginate(5);
+            $postes = Post::simplepaginate(10);
+            return response()->json(['data' => $postes]);
+          }
         $activities_campagne = Activite::where('activite_type', 'Campagne')->paginate(5);
         $activities_evenement = Activite::where('activite_type', 'Evénement')->paginate(5);
         $activities_activite = Activite::where('activite_type', 'Projet')->paginate(5);

@@ -12,15 +12,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-// use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    //
-    // public function show() {
-    //     $user = User::all();
-    //     return Inertia::render('User/Show');
-    // }
+   
 
     public function profile()
     {
@@ -35,9 +30,7 @@ class UserController extends Controller
             foreach ($activityJoins as $item)
             {
                 array_push($joins, $item->activite->id);
-                // dd($item->activite->id);
             }
-            // dd($joins);
         }
         return view('pages.profil', compact('user', 'user_aut', 'postes', 'activities', 'alerts', 'joins'));
     }
@@ -46,8 +39,8 @@ class UserController extends Controller
     {
         $user_aut = User::where('id', $id)->firstorfail();
         $user = Auth::user();
-        $activities = Activite::where('user_id', "!=", $user->id)->paginate(5);
-        $alerts = Alert::where('user_id', $user->id)->paginate(5);
+        $activities = Activite::where('user_id', "!=", $user_aut->id)->paginate(5);
+        $alerts = Alert::where('user_id', $user_aut->id)->paginate(5);
         $postes = Post::where('user_id', $id)->paginate(5);
         $joins = [];
         if($user){
