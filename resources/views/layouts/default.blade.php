@@ -15,26 +15,27 @@
 </div>
 
 
-<!-- open chat box -->
-{{-- @include('navigations.chat') --}}
+    <!-- open chat box -->
+    @guest
+        @include('navigations.chat') 
+    @endguest
+
+    <!-- post preview modal --> 
+    <!-- @include('navigations.post_create')  -->
+
+    <!-- create post -->
+    @include('navigations.post_create')
 
 
-{{-- <!-- post preview modal --> 
-    @include('navigations.post_create') --}}
+    <!-- create activity -->
+    @include('navigations.activity_create')
 
-<!-- create post -->
-@include('navigations.post_create')
+    <!-- create alert -->
+    @include('navigations.alert_create')
 
-
-<!-- create activity -->
-@include('navigations.activity_create')
-
-<!-- create alert -->
-@include('navigations.alert_create')
-
-<!-- create besoin -->
-@include('composants.devenir')
-@include('composants.share')
+    <!-- create besoin -->
+    @include('composants.devenir')
+    @include('composants.share')
 
 
 @endsection

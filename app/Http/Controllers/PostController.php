@@ -8,9 +8,17 @@ use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Services\PostService;
 
 class PostController extends Controller
 {
+
+    protected PostService $postservice;
+
+    public function __construct()
+    {
+        
+    }
     /**
      * Display a listing of the resource.
      */
