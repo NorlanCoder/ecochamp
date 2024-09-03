@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Darryldecode\Cart\Cart;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -21,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Paginator::useBootstrap();
         View::composer(['layouts.index', 'pages.boutique', 'pages.profil',
          'pages.parametre', 'pages.produit_detail', 'cart.index', 'pages.post',
          'pages.alert', 'pages.activity', 'pages.activite_detail', 'pages.alert_detail'], function ($view) {

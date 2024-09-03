@@ -16,20 +16,6 @@
                             
                             <h1 class="page-title test"> Produits </h1>
             
-                            {{-- <nav class="nav__underline">
-            
-                                <ul class="group" uk-switcher="connect: #group-tabs ; animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium"> 
-                               
-                                    <li> <a href="#"> Suggestions  </a> </li>
-                                    <li> <a href="#"> Le plus récent </a> </li>
-                                    <li> <a href="#"> Mes produits </a> </li>
-        
-                                </ul> 
-            
-                            </nav>
-            
-                            <button type="button" class="absolute right-3 bottom-5"> <div class="w-7 h-7 bg-blue-600 rounded-full shadow grid place-items-center">  <ion-icon name="add" class="text-xl text-white"></ion-icon> </div> </button>
-                             --}}
                         </div>
         
                         <!-- feature one slider -->
@@ -82,67 +68,68 @@
                         </div>
          
                         <!-- feature two slider -->
-                        <div class="relative" tabindex="-1" uk-slider="auto play: true;finite: true">
-        
-                            <div class="sm:my-6 my-3 flex items-center justify-between border-t pt-3 dark:border-slate-800">
-                                <div>
-                                    <h2 class="text-xl font-semibold text-black"> En vedette </h2>
-                                    <p class="font-normal text-sm text-gray-500 leading-6 hidden"> Trouvez un groupe en parcourant les catégories supérieures. </p>
-                                </div>
-                                <div class="flex items-center gap-2 [&:has(a.uk-invisible)][&*>a]:bg-red-600">
-                                    <a href="#" class="!block [&:has(.uk-invisible)]:opacity-20" uk-slider-item="previous"><ion-icon name="chevron-back-outline"></ion-icon> </a> 
-                                    <a href="#" class="!block" uk-slider-item="next"><ion-icon name="chevron-forward-outline"></ion-icon> </a> 
-                                    <a href="#" class="text-blue-500 sm:block hidden text-sm"> Voir tous</a>
-                                </div>
-                            </div>
-        
-                            <div class="uk-slider-container pb-1">
-                               
-                                <ul class="uk-slider-items w-[calc(100%+14px)]" uk-scrollspy="target: > li; cls: uk-animation-scale-up; delay: 20;repeat:true">
-                                    @foreach ($produits_recent as $item)
+                        <div class="relative" tabindex="-1" uk-slider="auto; play: true; finite: true">
 
+                        <div class="sm:my-6 my-3 flex items-center justify-between border-t pt-3 dark:border-slate-800">
+                            <div>
+                                <h2 class="text-xl font-semibold text-black">En vedette</h2>
+                                <p class="font-normal text-sm text-gray-500 leading-6 hidden">Trouvez un groupe en parcourant les catégories supérieures.</p>
+                            </div>
+                            <div class="flex items-center gap-2 [&:has(a.uk-invisible)][&*>a]:bg-red-600">
+                                <a href="#" class="!block [&:has(.uk-invisible)]:opacity-20" uk-slider-item="previous">
+                                    <ion-icon name="chevron-back-outline"></ion-icon>
+                                </a>
+                                <a href="#" class="!block" uk-slider-item="next">
+                                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                                </a>
+                                <a href="#" class="text-blue-500 sm:block hidden text-sm">Voir tous</a>
+                            </div>
+                        </div>
+
+                        <div class="uk-slider-container pb-1">
+                            <ul class="uk-slider-items w-[calc(100%+14px)]" uk-scrollspy="target: > li; cls: uk-animation-scale-up; delay: 20; repeat: true">
+                                @foreach ($produits_recent as $item)
+                                    <li class="pr-4 sm:w-1/2 w-full" uk-scrollspy-class="uk-animation-fade">
                                         <form method="POST" action="{{ route('panier.store') }}">
                                             @csrf
-
-                                            <li class="pr-4 sm:w-1/2 w-full" uk-scrollspy-class="uk-animation-fade">
-                                                <div>
-                                                    <input type="hidden" id="id" name="id" value="{{ $item->id }}">
-                                                    <input type="hidden" name="quantity" type="number" value="1" min="1">
-                                                </div>
-                                                <div class="card flex gap-1">
-                                                    <a href="{{ url('/produit', $item->id)}}">
-                                                        <div class="card-media w-32 max-h-full h-full shrink-0">
-                                                            <img src={{asset(Storage::url($item->image))}} alt="">
-                                                            <div class="card-overly"></div>
-                                                        </div> 
-                                                    </a> 
-                                                    <div class="card-body flex-1 py-4">
-                                                        <a href="{{ url('/produit', $item->id)}}"> <h4 class="card-title">  {{$item->nom}}</h4> </a>
-                                                        <a href="#"> <p class="card-text">  {{$item->categorie->nom}} </p></a>
-                                                        <div class="text-xl flex items-center justify-between mt-2"> 
-                                                            <h4 class="card-title"> {{$item->price}}{{$item->divise}} </h4>
-                                                            <a href="{{ url('/produit', $item->id)}}"> <button type="button" class="button bg-secondery !w-auto rounded-fulld hidden">Voir</button> </a>
-                                                        </div>
-                                                        <div class="flex gap-2">
-                                                            <button type="submit" class="button bg-primary-soft text-primary dark:text-white flex-1">Chat</button>
-                                                            <button type="button" class="button bg-secondery !w-auto"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                            <input type="hidden" id="id" name="id" value="{{ $item->id }}">
+                                            <input type="hidden" name="quantity" value="1" min="1">
+                                            <div class="card flex gap-1">
+                                                <a href="{{ url('/produit', $item->id) }}">
+                                                    <div class="card-media w-32 max-h-full h-full shrink-0">
+                                                        <img src="{{ asset(Storage::url($item->image)) }}" alt="">
+                                                        <div class="card-overlay"></div>
+                                                    </div>
+                                                </a>
+                                                <div class="card-body flex-1 py-4">
+                                                    <a href="{{ url('/produit', $item->id) }}">
+                                                        <h4 class="card-title">{{ $item->nom }}</h4>
+                                                    </a>
+                                                    <p class="card-text">{{ $item->categorie->nom }}</p>
+                                                    <div class="text-xl flex items-center justify-between mt-2">
+                                                        <h4 class="card-title">{{ $item->price }}{{ $item->divise }}</h4>
+                                                        <a href="{{ url('/produit', $item->id) }}">
+                                                            <button type="button" class="button bg-secondery !w-auto rounded-full hidden">Voir</button>
+                                                        </a>
+                                                    </div>
+                                                    <div class="flex gap-2">
+                                                        <button type="submit" class="button bg-primary-soft text-primary dark:text-white flex-1">Chat</button>
+                                                        <button type="button" class="button bg-secondery !w-auto">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                                                             </svg>
-                                                            </button>
-                                                        </div>
+                                                        </button>
                                                     </div>
                                                 </div>
-                                            </li>
-
+                                            </div>
                                         </form>
-
-                                    @endforeach
-                                    
-                                </ul>
-                        
-                            </div>
-                            
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
+
+                        </div>
+
         
                         <!-- categories -->
                         <div class="sm:mt-6 mt-3 flex items-center justify-between border-t pt-3 dark:border-slate-800">
@@ -426,112 +413,6 @@
                                     </div>
 
                                 </li> 
-
-                                <!-- settings -->
-                                {{-- <li class="w-full !relative">
-                                
-                                    <div  class="lg:!h-[460px] overflow-y-auto">
-
-                                        <div uk-scrollspy="target: > * >; cls: uk-animation-slide-bottom-small; delay: 100">
-                        
-                                            <div class="p-6">
-        
-
-                                                <ul class="divide-y divide-gray-100 font-normal text-sm dark:divide-slate-700/60" uk-nav="multiple: true">
-                                                    <li class="uk-parent uk-open py-3">
-
-                                                        <a href="#" class="flex items-center justify-between py-2 px-3.5 group" aria-expanded="true"> 
-                                                            <h4 class="font-semibold text-base text-black dark:text-white">Settings</h4>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-aria-expanded:rotate-180 duration-200">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                                                            </svg>
-                                                        </a>
-
-                                                        <ul class="m-4 space-y-3">
-                                                            <li>
-                                                                <div class="md:flex items-center gap-16 justify-between">
-                                                                    <label class="md:w-48"> Who can Buy ? </label>
-                                                                    <div class="flex-1 max-md:mt-4">
-                                                                        <select class="w-full !border-0 !rounded-md">
-                                                                            <option value="1">Everyone</option>
-                                                                            <option value="2">People I Follow</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="md:flex items-center gap-16 justify-between">
-                                                                    <label class="md:w-48"> Who can Comment ? </label>
-                                                                    <div class="flex-1 max-md:mt-4">
-                                                                        <select class="w-full !border-0 !rounded-md">
-                                                                            <option value="1">Everyone</option>
-                                                                            <option value="2">People I Follow</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-
-                                                    </li>
-                                                    
-                                                    <li class="uk-parent uk-open py-3"> 
-
-                                                        <a href="#" class="flex items-center justify-between py-2 px-3.5 group " aria-expanded="true"> 
-                                                            <h4 class="font-semibold text-base text-black dark:text-white"> Advanced settings</h4>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-aria-expanded:rotate-180 duration-200">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                                                            </svg>
-                                                        </a>
-
-                                                        <ul class="divide-y bg-secondery rounded-md dark:divide-slate-700/60"> 
-                                                            <li>
-                                                                <div class="p-4 py-2">
-                                                                    <label class="switch flex justify-between items-center gap-4 cursor-pointer min-h-[30px]">
-                                                                        <div>
-                                                                            <h4> Generate license keys</h4>
-                                                                        </div>
-                                                                        <input type="checkbox" checked><span class="switch-button !relative shrink-0"></span> 
-                                                                    </label> 
-                                                                </div> 
-                                                            </li>
-                                                            <li>
-                                                                <div class="p-4 py-2">
-                                                                    <label class="switch flex justify-between items-center gap-4 cursor-pointer min-h-[30px]">
-                                                                        <div>
-                                                                            <h4> Redirect customers after purchase?</h4>
-                                                                        </div>
-                                                                        <input type="checkbox"><span class="switch-button !relative shrink-0"></span> 
-                                                                    </label> 
-                                                                </div> 
-                                                            </li>
-                                                            <li>
-                                                                <div class="p-4 py-2">
-                                                                    <label class="switch flex justify-between items-center gap-4 cursor-pointer min-h-[30px]">
-                                                                        <div>
-                                                                            <h4> Turn off commenting </h4>
-                                                                        </div>
-                                                                        <input type="checkbox" checked><span class="switch-button !relative shrink-0"></span> 
-                                                                    </label> 
-                                                                </div>  
-                                                            </li>
-                                                        </ul>
-                                                        
-                                                    </li>
-                                                    
-                                                </ul>
-            
-                                                <div class="flex justify-center p-6 pt-0 hidden">
-                                                    <button type="button" class="button bg-blue-600 text-white px-10"> Share </button> 
-                                                </div>
-                                                
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                    </div>
-
-                                </li> --}}
-                                    
                                 <!-- final steop -->
                                 <li class="w-full">
                                     

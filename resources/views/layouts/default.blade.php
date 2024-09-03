@@ -1,4 +1,5 @@
 @extends('app')
+
 @section('content')
 
 <div id="wrapper">
@@ -14,28 +15,24 @@
 
 </div>
 
+<!-- open chat box -->
+@guest
+    @include('navigations.chat') 
+@endguest
 
-    <!-- open chat box -->
-    @guest
-        @include('navigations.chat') 
-    @endguest
+<!-- create post -->
+@include('navigations.post_create')
 
-    <!-- post preview modal --> 
-    <!-- @include('navigations.post_create')  -->
+<!-- create activity -->
+@include('navigations.activity_create')
 
-    <!-- create post -->
-    @include('navigations.post_create')
+<!-- create alert -->
+@include('navigations.alert_create')
 
+<!-- create besoin -->
+@include('composants.devenir')
 
-    <!-- create activity -->
-    @include('navigations.activity_create')
-
-    <!-- create alert -->
-    @include('navigations.alert_create')
-
-    <!-- create besoin -->
-    @include('composants.devenir')
-    @include('composants.share')
-
+<!-- share -->
+@include('composants.share')
 
 @endsection

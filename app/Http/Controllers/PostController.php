@@ -8,16 +8,23 @@ use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Services\PostService;
+use App\Http\Services\PostService;
+use App\Models\User;
 
 class PostController extends Controller
 {
 
-    protected PostService $postservice;
+    protected PostService $postService;
+    protected User $user;
 
     public function __construct()
     {
-        
+        if(Auth::user()){
+            $this->user = User::where('id', Auth::user()->id)->first();
+        }else{
+            $this->user = new User();
+        }
+        $this->postService = new PostService();
     }
     /**
      * Display a listing of the resource.
@@ -25,13 +32,13 @@ class PostController extends Controller
     public function index()
     {
         $page = 'post';
-        $user = Auth::user();
+        $user = $this->user;
         $alerts = Alert::paginate(5);
-        $postes = Post::paginate(15);
-        $produits = Produit::orderByDesc('created_at')->paginate(5);
+        $postes = $this->postService->postes();
+        $produits = Produit::orderByDesc('created_at')->limit(5)->get();
         $tendance = DB::table("tagging_tags")->where("count", ">=", 1)->orderByDesc("count")->limit(5)->get();
         $tags = [];
-        if($user){
+        if($this->user->id){
             $tags = DB::table('tags')->orderByDesc('id')->limit(5)->get();
         }
         return view('pages.post', compact('user', 'alerts', 'postes', 'page', 'tendance', 'produits', 'tags'));
@@ -51,7 +58,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
         
         $request->validate([
             'activite' => 'required',
@@ -85,7 +91,7 @@ class PostController extends Controller
             'activite' => $request->activite,
             'description' => $request->description,
             'image1' => $imageName,
-            'user_id' => $user->id,
+            'user_id' => $this->user->id,
         ]);
         $post->tag($tags);
         return response(

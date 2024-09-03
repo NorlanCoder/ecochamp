@@ -26,8 +26,8 @@
     
                         <div class="absolute bottom-0 right-0 m-4 z-20">
                             <div class="flex items-center gap-3">
-                                {{-- <button class="button bg-white/20 text-white flex items-center gap-2 backdrop-blur-small">Crop</button>
-                                <button class="button bg-black/10 text-white flex items-center gap-2 backdrop-blur-small">Edit</button> --}}
+                                <!-- <button class="button bg-white/20 text-white flex items-center gap-2 backdrop-blur-small">Crop</button>
+                                <button class="button bg-black/10 text-white flex items-center gap-2 backdrop-blur-small">Edit</button> -->
                             </div>
                         </div>
     
@@ -56,9 +56,9 @@
                                         <ul class="list-group list-group-horizontal-sm" id="text_devenir">
                                             @foreach ($est as $item)
                                                 @if ($item != "")
-                                                    {{-- <div class="p-2 inline-flex rounded-full mb-2 bg-primary text-white self-center">  --}}
+                                                    <!-- <div class="p-2 inline-flex rounded-full mb-2 bg-primary text-white self-center">  -->
                                                         <li class="list-group-item p-2 inline-flex rounded-full mb-2 bg-primary text-white self-center" style="margin-right: 20px;"><span> {{$item}} </span></li>
-                                                    {{-- </div> --}}
+                                                    <!-- </div> -->
                                                 @endif
                                             @endforeach
                                         </ul>
@@ -103,17 +103,17 @@
                     <div class="flex items-center justify-between px-2 max-md:flex-col">
     
                         <div class="flex items-center gap-2 text-sm py-2 pr-1 lg:order-1">
-                            {{-- <button type="button" class="button bg-secondery flex items-center gap-2 py-2 px-3.5 dark:bg-dark3">  
+                            <!-- <button type="button" class="button bg-secondery flex items-center gap-2 py-2 px-3.5 dark:bg-dark3">  
                                 <ion-icon name="star-outline" class="text-xl"></ion-icon> 
                                 <span class="text-sm"> Go Now </span>
                             </button>
                             <button type="button" class="button bg-secondery flex items-center gap-2 py-2 px-3.5 dark:bg-dark3"> 
                                 <ion-icon name="checkmark-circle-outline" class="text-xl"></ion-icon> 
                                 <span class="text-sm"> Going </span>
-                            </button> --}}
-                            {{-- <button type="button" class="rounded-lg bg-secondery flex px-2.5 py-2 dark:bg-dark3"> 
+                            </button> -->
+                            <!-- <button type="button" class="rounded-lg bg-secondery flex px-2.5 py-2 dark:bg-dark3"> 
                                 <ion-icon name="arrow-redo-outline" class="text-xl">
-                            </button> --}}
+                            </button> -->
                             {!! $multipleSharing !!}
     
                             <div> 
@@ -122,11 +122,11 @@
                                 </button>
                                 <div  class="w-[240px]" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click;offset:10"> 
                                     <nav>
-                                        {{-- <a href="#"> <ion-icon class="text-xl" name="bookmark-outline"></ion-icon> Save </a>  
+                                        <!-- <a href="#"> <ion-icon class="text-xl" name="bookmark-outline"></ion-icon> Save </a>  
                                         <a href="#"> <ion-icon class="text-xl" name="flag-outline"></ion-icon>  Add to page </a>  
-                                        <a href="#"> <ion-icon class="text-xl" name="calendar-number-outline"></ion-icon> Add to calender </a>   --}}
+                                        <a href="#"> <ion-icon class="text-xl" name="calendar-number-outline"></ion-icon> Add to calender </a>   -->
                                         <a href="#" uk-toggle="target: #share-ecochamp"> <ion-icon class="text-xl" name="share-outline"></ion-icon> Partager le profil </a>  
-                                        {{-- <a href="#"> <ion-icon class="text-xl" name="information-circle-outline"></ion-icon>  Report Event</a>   --}}
+                                        <!-- <a href="#"> <ion-icon class="text-xl" name="information-circle-outline"></ion-icon>  Report Event</a>   -->
                                     </nav>
                                 </div>
                             </div>
@@ -179,13 +179,13 @@
                                     </div>
                                 @endforeach
 
-                                {{-- <div>
+                                <!-- <div>
                                     <button type="button" class="flex items-center gap-1.5 text-blue-500 hover:text-blue-500 my-5">
                                         <ion-icon name="chevron-down-outline" class="ml-auto duration-200 group-aria-expanded:rotate-180"></ion-icon>
                                         Plus de commentaires
                                     </button>
                                 </div>
-     --}}
+                                -->
                             </div>
     
                             <!-- add comment -->
@@ -203,7 +203,7 @@
                                         
                                         <textarea placeholder="ajouter un commentaire...." rows="1" name="comment" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent" id="text_new"></textarea>
                         
-                                        {{-- <div class="!top-2 pr-2" uk-drop="pos: bottom-right; mode: click">
+                                        <!-- <div class="!top-2 pr-2" uk-drop="pos: bottom-right; mode: click">
                                             <div class="flex items-center gap-2" uk-scrollspy="target: > svg; cls: uk-animation-slide-right-small; delay: 100 ;repeat: true">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-sky-600">
                                                     <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
@@ -212,7 +212,7 @@
                                                     <path d="M3.25 4A2.25 2.25 0 001 6.25v7.5A2.25 2.25 0 003.25 16h7.5A2.25 2.25 0 0013 13.75v-7.5A2.25 2.25 0 0010.75 4h-7.5zM19 4.75a.75.75 0 00-1.28-.53l-3 3a.75.75 0 00-.22.53v4.5c0 .199.079.39.22.53l3 3a.75.75 0 001.28-.53V4.75z" />
                                                 </svg>
                                             </div>
-                                        </div> --}}
+                                        </div> -->
                                         <input id="activite_id" type="text" class="hidden" name="activite_id" value="{{$activite->id}}"/>
                         
                                     </div>
@@ -251,7 +251,7 @@
                                         </div>
                                     </div> 
                                 </div> 
-                                {{-- <ul class="mt-6 space-y-4 text-gray-600 text-sm dark:text-white/80">
+                                <!-- <ul class="mt-6 space-y-4 text-gray-600 text-sm dark:text-white/80">
     
                                     <li class="flex items-center gap-3"> 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -266,12 +266,12 @@
                                         <div> on Socialite since  <span class="font-semibold text-black dark:text-white"> 2014</span> </div>
                                     </li>
                                     
-                                </ul> --}}
+                                </ul> -->
     
                                 
                             </div>
     
-                            {{-- <div class="box p-5 px-6">
+                            <!-- <div class="box p-5 px-6">
             
                                 <div class="flex items-baseline justify-between text-black dark:text-white">
                                     <h3 class="font-bold text-base"> Inviter des amis </h3>
@@ -315,7 +315,7 @@
                                     
                                 </div>
             
-                            </div> --}}
+                            </div> -->
                             
                             <div class="box p-5 px-6 space-y-4">
             

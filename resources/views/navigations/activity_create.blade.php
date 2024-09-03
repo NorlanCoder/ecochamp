@@ -54,7 +54,7 @@
                 
 
                     <label class="label is-small">Besoin:</label>
-                    {{-- <label for="" class="text-base">Besoin </label> --}}
+                    <!-- <label for="" class="text-base">Besoin </label> -->
                     <div class="control">
                         <label class="checkbox">
                             <input type="checkbox" name="partenaire" value="1" wire:model.defer="state.football">
@@ -98,10 +98,10 @@
 
                 <div >
                     <label for="tags" class="text-base">Tag:</label>
-                    {{-- <input class="form-control" id="tags" type="text" data-role="tagsinput" name="tags">
+                    <!-- <input class="form-control" id="tags" type="text" data-role="tagsinput" name="tags">
                     @if ($errors->has('tags'))
                         <span class="text-danger">{{ $errors->first('tags') }}</span>
-                    @endif --}}
+                    @endif -->
                     <div id="tag_activite">
                         @isset($tags)
 
@@ -135,10 +135,10 @@
                         @enderror
                     </div>
 
-                    {{-- <button type="button" class="flex items-center gap-1.5 bg-teal-50 text-teal-600 rounded-full py-1 px-2 border-2 border-teal-100 dark:bg-teal-950 dark:border-teal-900">  
+                    <!-- <button type="button" class="flex items-center gap-1.5 bg-teal-50 text-teal-600 rounded-full py-1 px-2 border-2 border-teal-100 dark:bg-teal-950 dark:border-teal-900">  
                         <ion-icon name="videocam" class="text-base"></ion-icon>  
                         Video 
-                    </button> --}}
+                    </button> -->
                 </div>     
             
                 <div class="flex justify-between items-center"> 

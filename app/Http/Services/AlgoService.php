@@ -8,7 +8,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class AlgService
+class AlgoService
 {
 
 
@@ -16,7 +16,12 @@ class AlgService
 
     public function __construct()
     {
-        $this->user = Auth::user();
+        if(Auth::user()){
+            $this->user = User::where('id', Auth::user()->id)->first();
+        }
+        else{
+            $this->user = new User();
+        }
     }
 
 

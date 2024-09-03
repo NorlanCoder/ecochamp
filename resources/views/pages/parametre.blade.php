@@ -16,16 +16,11 @@
                             @csrf
                             <div class="relative md:w-20 md:h-20 w-12 h-12 shrink-0" style="width: 10rem; height: 5rem;"> 
         
-                                {{-- <label for="couverture" class="cursor-pointer"> --}}
-                                    
                                     @if(empty($user->couverture))
                                         <img id="createCouverture" src={{asset("images/demos/beams.jpg")}} alt="" class="object-cover w-full h-full rounded-full"> 
                                     @else
                                         <img id="createCouverture" src={{asset(Storage::url($user->couverture))}} alt="" class="object-cover w-full h-full rounded-full"> 
                                     @endif
-                                    
-                                    {{-- <input id="couverture" name="couverture" type="file" class="hidden" />
-                                </label> --}}
         
                                 <label class="md:p-1 p-0.5 rounded-full bg-slate-600 md:border-4 border-white absolute -bottom-2 -right-2 cursor-pointer dark:border-slate-700">
         
@@ -44,17 +39,12 @@
                             @csrf
                             <div class="relative md:w-20 md:h-20 w-12 h-12 shrink-0"> 
         
-                                {{-- <label for="profile" class="cursor-pointer"> --}}
-                                    
                                     @if(empty($user->profile))
                                         <img id="createProfile" src={{asset("/images/avatars/avatar.png")}} alt="" class="object-cover w-full h-full rounded-full"> 
                                     @else
                                         <img id="createProfile" src={{asset(Storage::url($user->profile))}} alt="" class="object-cover w-full h-full rounded-full"> 
                                     @endif
                                     
-                                    {{-- <input id="profile" name="profile" type="file" class="hidden" />
-                                </label> --}}
-        
                                 <label for="profile" class="md:p-1 p-0.5 rounded-full bg-slate-600 md:border-4 border-white absolute -bottom-2 -right-2 cursor-pointer dark:border-slate-700">
         
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-4 md:h-4 w-3 h-3 fill-white">
@@ -74,10 +64,6 @@
                             <p class="text-sm text-blue-600 mt-1 font-normal">{{$user->email}}</p>
                         </div>
     
-                        {{-- <button class="inline-flex items-center gap-1 py-1 pl-2.5 pr-3 rounded-full bg-slate-50 border-2 border-slate-100 dark:text-white dark:bg-slate-700" type="button" aria-haspopup="true" aria-expanded="false"> 
-                            <ion-icon name="flash-outline" class="text-base duration-500 group-aria-expanded:rotate-180 md hydrated" role="img" aria-label="chevron down outline"></ion-icon> 
-                           <span class="font-medium text-sm"> Upgrade  </span> 
-                        </button> --}}
                     </div>
     
                     <!-- nav tabs -->
@@ -89,8 +75,6 @@
                                 uk-switcher="connect: #setting_tab ; animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium"> 
                                 
                                 <li class="w-auto pr-2.5"> <a href="#"> Infos utilisateur </a> </li>
-                                <!-- {{-- <li class="w-auto pr-2.5"> <a href="#"> Paramètres</a> </li> --}} -->
-                                <!-- {{-- <li class="w-auto pr-2.5"> <a href="#"> Avatare</a> </li> --}} -->
                                 <li class="w-auto pr-2.5"> <a href="#"> Notifications </a> </li>
                                 <li class="w-auto pr-2.5"> <a href="#"> Invitations</a> </li>
                                 <li class="w-auto pr-2.5"> <a href="#"> Alerts Notifications </a> </li>
@@ -149,13 +133,6 @@
                                             <div class="text-primary" role="alert">{{ $message }}</div>
                                         @enderror
                 
-                                        {{-- <div class="md:flex items-start gap-10">
-                                            <label class="md:w-32 text-right"> Bio </label>
-                                            <div class="flex-1 max-md:mt-4">
-                                                <textarea class="w-full" rows="5" placeholder="Inter your Bio"></textarea>
-                                            </div>
-                                        </div>  --}}
-            
                                         <div class="md:flex items-center gap-10">
                                             <label class="md:w-32 text-right"> Sexe </label>
                                             <div class="flex-1 max-md:mt-4">
@@ -168,18 +145,6 @@
                                         @error('sexe')
                                             <div class="text-primary" role="alert">{{ $message }}</div>
                                         @enderror
-                                        {{-- <div class="md:flex items-center gap-10">
-                                            <label class="md:w-32 text-right"> Relationship </label>
-                                            <div class="flex-1 max-md:mt-4">
-                                                <select class="!border-0 !rounded-md lg:w-1/2 w-full">
-                                                    <option value="0">None</option>
-                                                    <option value="1"  >Single</option>
-                                                    <option value="2"  >In a relationship</option>
-                                                    <option value="3"  >Married</option>
-                                                    <option value="4"  >Engaged</option>
-                                                </select>
-                                            </div>
-                                        </div> --}}
                                         
                                         <div class="md:flex items-start gap-10 " hidden>
                                             <label class="md:w-32 text-right"> Avatar </label>
@@ -192,82 +157,12 @@
                                     </div>
         
                                     <div class="flex items-center gap-4 mt-16 lg:pl-[10.5rem]">
-                                        <!-- {{-- <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancle</button> --}} -->
                                         <button type="submit" class="button lg:px-10 bg-primary text-white max-md:flex-1"> Sauvegarder <span class="ripple-overlay"></span></button>
                                     </div>
                                 </form>
                             </div> 
     
                         </div>
-    
-                        <!-- tab socialinks -->   
-                        <!-- {{-- <div>
-    
-                            <div class="max-w-md mx-auto">
-    
-                                <div class="font-normal text-gray-400">
-                                
-                                    <div>
-                                        <h4 class="text-xl font-medium text-black dark:text-white"> Liens sociaux </h4>
-                                        <p class="mt-3 font-normal text-gray-600 dark:text-white">Nous pouvons toujours vous envoyer des notifications importantes concernant votre compte et son contenu en dehors de vos paramètres de notification préférés.</p>
-                                    </div>
-    
-                                    <div class="space-y-6 mt-8">
-    
-                                        <div class="flex items-center gap-3">
-                                            <div class="bg-blue-50 rounded-full p-2 flex ">
-                                                <ion-icon name="logo-facebook" class="text-2xl text-blue-600"></ion-icon> 
-                                            </div>
-                                            <div class="flex-1">
-                                                <input type="text" class="w-full" placeholder="http://www.facebook.com/myname">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-3">
-                                            <div class="bg-pink-50 rounded-full p-2 flex ">
-                                                <ion-icon name="logo-instagram" class="text-2xl text-pink-600"></ion-icon> 
-                                            </div>
-                                            <div class="flex-1">
-                                                <input type="text" class="w-full" placeholder="http://www.instagram.com/myname">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-3">
-                                            <div class="bg-sky-50 rounded-full p-2 flex ">
-                                                <ion-icon name="logo-twitter" class="text-2xl text-sky-600"></ion-icon> 
-                                            </div>
-                                            <div class="flex-1">
-                                                <input type="text" class="w-full" placeholder="http://www.twitter.com/myname">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-3">
-                                            <div class="bg-red-50 rounded-full p-2 flex ">
-                                                <ion-icon name="logo-youtube" class="text-2xl text-red-600"></ion-icon> 
-                                            </div>
-                                            <div class="flex-1">
-                                                <input type="text" class="w-full" placeholder="http://www.youtube.com/myname">
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-3">
-                                            <div class="bg-slate-50 rounded-full p-2 flex ">
-                                                <ion-icon name="logo-github" class="text-2xl text-black"></ion-icon> 
-                                            </div>
-                                            <div class="flex-1">
-                                                <input type="text" class="w-full" placeholder="http://www.github.com/myname">
-                                            </div>
-                                        </div>
-    
-                                    </div> 
-                                   
-                                </div> 
-                                
-                                <div class="flex items-center justify-center gap-4 mt-16">
-                                    <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancle</button>
-                                    <button type="submit" class="button lg:px-10 bg-primary text-white max-md:flex-1"> Enrégistre</button>
-                                </div>
-    
-                            </div>
-    
-                        </div> --}} -->
-    
                         <!-- tab checkbox -->
                         <div>
     
@@ -338,128 +233,7 @@
                             </div>
     
                         </div>
-    
-                        <!-- tab toggle options-->
-                        <!-- <div>
-    
-                            <div>
-    
-                                <div class="space-y-6">
-    
-                                    <div class="md:flex items-start gap-10">
-    
-                                        <label class="w-40 text-right font-semibold"> Who can follow me ? </label>
-                                        
-                                        <div class="flex-1 space-y-2 interactive-effect max-md:mt-3">
-                                            
-                                            <div>
-                                                <label class="inline-flex items-center">
-                                                  <input type="radio" name="radio-s1" checked value="1" />
-                                                  <span class="ml-3"> Everyone</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="inline-flex items-center">
-                                                  <input type="radio" name="radio-s1" value="2" />
-                                                  <span class="ml-3"> The People I Follow</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="inline-flex items-center">
-                                                  <input type="radio" name="radio-s1" value="3" />
-                                                  <span class="ml-3"> No body</span>
-                                                </label>
-                                            </div>
-            
-                                        </div>
-        
-                                    </div> 
-    
-                                    <div class="md:flex items-start gap-10">
-    
-                                        <label class="md:w-40 text-right font-semibold"> Who can message me ? </label>
-                                        
-                                        <div class="flex-1 space-y-2 interactive-effect max-md:mt-3">
-                                             
-                                            <div>
-                                                <label class="inline-flex items-center">
-                                                  <input type="radio" name="radio-s2" checked value="1" />
-                                                  <span class="ml-3"> Everyone</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="inline-flex items-center">
-                                                  <input type="radio" name="radio-s2" value="2" />
-                                                  <span class="ml-3"> The People I Follow</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="inline-flex items-center">
-                                                  <input type="radio" name="radio-s2" value="3" />
-                                                  <span class="ml-3"> No body</span>
-                                                </label>
-                                            </div>
-            
-                                        </div>
-        
-                                    </div> 
-    
-                                    <div class="md:flex items-start gap-10">
-                                        
-                                        <label class="md:w-40 text-right font-semibold">Status</label>
-                                        
-                                        <div class="flex-1 space-y-2 interactive-effect max-md:mt-3">
-                                             
-                                            <div>
-                                                <label class="inline-flex items-center">
-                                                  <input type="radio" name="radio-s3" checked value="3" />
-                                                  <span class="ml-3"> Yes</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="inline-flex items-center">
-                                                  <input type="radio" name="radio-s3" value="3" />
-                                                  <span class="ml-3"> No</span>
-                                                </label>
-                                            </div>
-    
-                                        </div>
-        
-                                    </div> 
-                                    <div class="md:flex items-start gap-10">
-                                        
-                                        <label class="md:w-40 text-right font-semibold">Show my activities ?</label>
-                                        
-                                        <div class="flex-1 space-y-2 interactive-effect max-md:mt-3">
-                                             
-                                            <div>
-                                                <label class="inline-flex items-center">
-                                                  <input type="radio" name="radio-s4" checked value="3" />
-                                                  <span class="ml-3"> Public</span>
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label class="inline-flex items-center">
-                                                  <input type="radio" name="radio-s4" value="3" />
-                                                  <span class="ml-3"> Hide</span>
-                                                </label>
-                                            </div>
-    
-                                        </div>
-        
-                                    </div> 
-     
-                                </div>
-    
-                                <div class="flex items-center justify-center gap-4 mt-16">
-                                    <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancle</button>
-                                    <button type="submit" class="button lg:px-10 bg-primary text-white max-md:flex-1"> Sauvegarder</button>
-                                </div>
-    
-                            </div>
-    
-                        </div> -->
-    
+
                         <!-- tab select dropdown-->
                         <div>
     
@@ -653,21 +427,11 @@
         
                                         <hr class="border-gray-100 dark:border-gray-700">
         
-                                        {{-- <div class="md:flex items-center gap-16 justify-between">
-                                            <label class="md:w-40 text-right"> Two-factor authentication </label>
-                                            <div class="flex-1 max-md:mt-4">
-                                                <select class="w-full !border-0 !rounded-md">
-                                                    <option value="1">Enable</option>
-                                                    <option value="2">Disable</option> 
-                                                </select>
-                                            </div>
-                                        </div> --}}
         
         
                                     </div>
                                     
                                     <div class="flex items-center justify-center gap-4 mt-16">
-                                        {{-- <button type="submit" class="button lg:px-6 bg-secondery max-md:flex-1"> Cancle</button> --}}
                                         <button type="submit" class="button lg:px-10 bg-primary text-white max-md:flex-1"> Enrégistre</button>
                                     </div>
                                 </form>

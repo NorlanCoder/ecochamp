@@ -7,7 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class PostService
+class ActivityService
 {
 
 
@@ -17,14 +17,15 @@ class PostService
     {
         if(Auth::user()){
             $this->user = User::where('id', Auth::user()->id)->first();
-        }else{
+        }else
+        {
             $this->user = new User();
         }
     }
 
 
-    public function postes(){
-        return Post::paginate(5);
+    public function activites(){
+        
     }
     
 }
