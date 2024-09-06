@@ -31,14 +31,14 @@
                     </div>
                 </form>
                 <!-- search dropdown -->
-                <div class="hidden uk-open z-10" uk-drop="pos: bottom-center; animation: uk-animation-slide-bottom-small;mode:click">
+                <div class="hidden z-10" uk-drop="pos: bottom-center; animation: uk-animation-slide-bottom-small;mode:click">
                     <div class="xl:w-[694px] sm:w-96 bg-white dark:bg-dark3 w-screen p-2 rounded-lg shadow-lg -mt-14 pt-14">
                         <div class="flex justify-between px-2 py-2.5 text-sm font-medium">
                             <div class="text-black dark:text-white">Récents</div>
                         </div>
                         <nav id="nav_search" class="text-sm font-medium text-black dark:text-white">
                         </nav>
-                        <hr class="-mx-2 mt-2 hidden">
+                        <hr class="mx-2 mt-2 hidden">
                         <div class="flex justify-end pr-2 text-sm font-medium text-red-500 hidden">
                         </div>
                     </div>
@@ -133,9 +133,9 @@
                         <ion-icon name="notifications-outline" class="sm:hidden text-2xl"></ion-icon>
                     </button>
                     <!-- profile -->
-                    <a href="#" class="sm:p-2 p-1 rounded-full relative sm:bg-secondery dark:text-white" uk-tooltip="title: Profil; pos: bottom; offset:6">
-                        <img class="w-6 h-6 rounded-full sm:hidden" src="{{ asset('images/user.png') }}" alt="">
-                        <ion-icon name="person-outline" class="text-2xl hidden sm:block"></ion-icon>
+                    <a href="{{url('/profile')}}" class="sm:p-2 p-1 rounded-full relative sm:bg-secondery dark:text-white" uk-tooltip="title: Profil; pos: bottom; offset:6">
+                        <img class="w-6 h-6 rounded-full @if(!$user->profile) sm:hidden @endif" src="{{ !isset($user->profile) ? '' : asset(Storage::url($user->profile)) }}" alt="">
+                        @if(!$user->profile) <ion-icon name="person-outline" class="text-2xl hidden sm:block"></ion-icon> @endif
                     </a>
                 </div>
                 @else
